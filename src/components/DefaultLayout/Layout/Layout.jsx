@@ -6,9 +6,11 @@ import Footer from "../Footer/Footer";
 const Layout = () => {
   return (
     <div>
-      <Header />
+      <div className="sticky top-0 left-0 right-0 z-50">
+        <Header />
+      </div>
 
-      <div className="container mx-auto pb-6">
+      <div>
         <Outlet />
       </div>
 
