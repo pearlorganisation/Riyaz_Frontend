@@ -23,7 +23,7 @@ const Hero = () => {
               #Exploring the World With Greet Guest Tourism
             </h2>
 
-            <div className="space-y-4 ml-[1%] bg-primary rounded-md p-[5px] relative w-[98%] items-center justify-center">
+            <div className="space-y-4 px-4 bg-primary rounded-md p-[5px] relative w-[98%] items-center justify-center">
               <div className="grid grid-cols-1  sm:grid-cols-5 py-1 gap-1">
                 <div className="rounded-full relative ">
                   <input
@@ -31,7 +31,7 @@ const Hero = () => {
                     name="destination"
                     id="destination"
                     placeholder="Arrival Airport"
-                    className="rounded-s-lg w-full h-[50px] pl-[50px]"
+                    className="rounded-s-lg lg:w-[90%]  h-[50px] pl-[50px]"
                   />
 
                   <img
@@ -47,7 +47,7 @@ const Hero = () => {
                     name="destination"
                     id="destination"
                     placeholder="Location"
-                    className="rounded-e-lg  h-[50px] pl-[50px]"
+                    className="rounded-e-lg w-[100%] h-[50px] pl-[50px]"
                   />
 
                   <img
@@ -103,10 +103,10 @@ const Hero = () => {
               </div>
             </div>
 
-            <div className="space-y-4 items-center justify-center mt-5">
+            <div className="space-y-4 items-center justify-center mt-10">
               <a
                 style={{ boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px" }}
-                className="inline-block w-full md:w-auto mb-4 md:mr-6 py-5 px-8 text-sm font-bold uppercase border-2 border-transparent bg-gray-200 rounded hover:bg-gray-100 text-gray-800 transition duration-200"
+                className="w-auto md:w-auto mb-4 md:mr-6 py-5 px-8 text-sm font-bold uppercase border-2 border-transparent bg-gray-200 rounded hover:bg-gray-100 text-gray-800 transition duration-200"
                 href="#"
               >
                 Book Now

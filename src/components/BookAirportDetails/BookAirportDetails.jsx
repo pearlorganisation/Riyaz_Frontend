@@ -1,4 +1,3 @@
-import React from "react";
 import Vehicle1 from "../../assets/images/vehicles/1.png";
 import Vehicle2 from "../../assets/images/vehicles/2.png";
 import Vehicle3 from "../../assets/images/vehicles/3.png";
@@ -65,13 +64,10 @@ const BookAirportDetails = () => {
           </div>
         </div>
 
-        <div className="bg-gradient-to-r from-teal-200 to-lime-100 h-[200px]">
-          <div className="flex items-center justify-evenly ">
+        <div className="bg-gradient-to-r from-teal-200 to-lime-100">
+          <div className="grid grid-cols-2 gap-8 text-gray-500 sm:gap-12 md:grid-cols-3 lg:grid-cols-6 p-12">
             {vehicles.map((vehicle) => (
-              <div
-                key={vehicle.id}
-                className=" grid grid-cols-1   items-center justify-center mt-8"
-              >
+              <div key={vehicle.id} className="">
                 <div className="">
                   <img
                     src={vehicle.image}

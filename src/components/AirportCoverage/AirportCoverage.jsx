@@ -1,5 +1,3 @@
-import React from "react";
-
 import Car from "../../assets/images/features/Car.png";
 import Country from "../../assets/images/features/Country.png";
 import Airplane from "../../assets/images/features/Airplane.png";
@@ -28,7 +26,7 @@ const AirportCoverage = () => {
       <div className="text-center">
         <div className="">
           <span className="bg-gradient-to-l from-teal-200 to-lime-400 bg-clip-text text-transparent font-bold uppercase text-2xl tracking-widest">
-            GREET GUEST'S AIRPORT COVERAGE
+            GREET GUESTS AIRPORT COVERAGE
           </span>
         </div>
 

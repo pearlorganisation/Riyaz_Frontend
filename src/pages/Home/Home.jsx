@@ -1,4 +1,3 @@
-import React from "react";
 import Hero from "../../components/Hero/Hero";
 import BookAirportDetails from "../../components/BookAirportDetails/BookAirportDetails";
 import WhyBookUs from "../../components/WhyBookUs/WhyBookUs";
@@ -8,6 +7,7 @@ import Banner from "../../components/Banner/Banner";
 import Partners from "../../components/Partners/Partners";
 import Help from "../../components/Help/Help";
 import GetInTouch from "../../components/GetInTouch/GetInTouch";
+import Feedback from "../../components/Feedback/Feedback";
 
 const Home = () => {
   return (
@@ -31,6 +31,7 @@ const Home = () => {
       <Help />
 
       <GetInTouch />
+      <Feedback />
     </div>
   );
 };

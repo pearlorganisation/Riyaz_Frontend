@@ -1,4 +1,3 @@
-import React from "react";
 import Easy from "../../assets/images/features/Easy.png";
 import Hand from "../../assets/images/features/Hand.png";
 import Secure from "../../assets/images/features/Secure.png";
@@ -69,7 +68,7 @@ const WhyBookUs = () => {
           <div className="w-[50%]">
             <span className="text-black  uppercase text-md ">
               Get to and from airport with no fuss. Compare, choose and book a
-              reliable transport service. GreetGuest's global reach gets you
+              reliable transport service. GreetGuests global reach gets you
               where you need to be.
             </span>
           </div>

@@ -1,4 +1,3 @@
-import React from "react";
 import Dubai from "../../assets/images/Dubai.png";
 
 const blogsData = [
@@ -55,14 +54,17 @@ const blogsData = [
 const FeaturedDestinations = () => {
   return (
     <div className="font-[sans-serif] lg:max-w-full md:max-w-full  bg-white w-full mt-8">
-      <div className="flex items-center justify-center">
+      <div className="flex items-center justify-center md:px-0 px-4">
         <h2 className="text-4xl  mb-12 bg-gradient-to-l from-teal-200 to-lime-400 bg-clip-text text-transparent font-bold uppercase  tracking-widest ">
           Featured Destinations
         </h2>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 bg-gradient-to-r from-teal-200 to-lime-100 py-16 px-10">
         {blogsData.map((blogs) => (
-          <div className="bg-white  cursor-pointer hover:shadow-lg  rounded-md">
+          <div
+            key={blogs.id}
+            className="bg-white  cursor-pointer hover:shadow-lg  rounded-md"
+          >
             <div className="w-full  overflow-hidden mx-auto aspect-w-16 aspect-h-8 p-4">
               <img
                 src={blogs.image}
@@ -98,7 +100,7 @@ const FeaturedDestinations = () => {
       <div className="flex items-center justify-center  bg-gradient-to-r from-teal-200 to-lime-100">
         <a
           style={{ boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px" }}
-          className="inline-block w-full md:w-auto mb-4 md:mr-6 py-5 px-8 text-sm font-bold uppercase border-2 border-transparent bg-gray-200 rounded hover:bg-gray-100 text-gray-800 transition duration-200"
+          className="w-auto md:w-auto mb-4 md:mr-6 py-5 px-8 text-sm font-bold uppercase border-2 border-transparent bg-gray-200 rounded hover:bg-gray-100 text-gray-800 transition duration-200"
           href="#"
         >
           Book Now

@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useRef, useState } from "react";
 
 const FaqsCard = (props) => {
@@ -14,42 +15,46 @@ const FaqsCard = (props) => {
 
   return (
     <div
-      className="space-y-3 mt-5 overflow-hidden border-b"
+      className="space-y-3 mt-5 overflow-hidden"
       key={idx}
       onClick={handleOpenAnswer}
     >
-      <h4 className="cursor-pointer pb-5 flex items-center justify-between text-lg text-gray-700 font-medium">
+      <h4 className="cursor-pointer pb-5 flex mt-2 items-center justify-between text-lg text-gray-700 font-medium">
         {faqsList.q}
         {state ? (
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-5 w-5 text-gray-500 ml-2"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M20 12H4"
-            />
-          </svg>
+          <div className="h-[30px] w-[30px] bg-white border-2 border-gray-400 rounded-full px-1  flex items-center justify-center">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5 text-gray-500 ml-2"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M20 12H4"
+              />
+            </svg>
+          </div>
         ) : (
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-5 w-5 text-gray-500 ml-2"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M12 4v16m8-8H4"
-            />
-          </svg>
+          <div className="h-[30px] w-[30px] bg-white border-2 border-gray-400 rounded-full px-1  flex items-center justify-center">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5 text-gray-500 ml-2"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M12 4v16m8-8H4"
+              />
+            </svg>
+          </div>
         )}
       </h4>
       <div
@@ -58,7 +63,7 @@ const FaqsCard = (props) => {
         style={state ? { height: answerH } : { height: "0px" }}
       >
         <div>
-          <p className="text-gray-500">{faqsList.a}</p>
+          <p className="text-gray-500 mt-4">{faqsList.a}</p>
         </div>
       </div>
     </div>
@@ -68,7 +73,7 @@ const FaqsCard = (props) => {
 const Help = () => {
   const faqsList = [
     {
-      q: "What are some random questions to ask?",
+      q: "What if my plans change?",
       a: "That's exactly the reason we created this random question generator. There are hundreds of random questions to choose from so you're able to find the perfect random question.",
     },
     {
@@ -119,7 +124,7 @@ const Help = () => {
             </button>
           </div>
         </div>
-        <div className="flex-1 mt-12 md:mt-0">
+        <div className="flex-1 mt-12 md:mt-0 bg-white p-2 rounded-lg border-gray-300 border-2">
           <ul className="space-y-4 divide-y">
             {faqsList.map((item, idx) => (
               <FaqsCard idx={idx} faqsList={item} key={idx} />
