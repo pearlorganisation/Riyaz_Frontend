@@ -11,15 +11,35 @@ const GetInTouch = () => {
     <div className="mt-6 max-w-full max-lg:max-w-full  bg-gradient-to-r from-teal-200 to-lime-100">
       <div className="grid lg:grid-cols-2 items-center gap-14 sm:p-8 p-4 font-[sans-serif]">
         <div>
-          <h1 className="text-4xl font-bold text-black">Get in Touch</h1>
-          <p className="text-sm text-black mt-4 leading-relaxed w-[70%]">
+          <h1
+            data-aos="fade-up"
+            data-aos-delay="200"
+            className="text-4xl font-bold text-black"
+          >
+            Get in Touch
+          </h1>
+          <p
+            data-aos="fade-up"
+            data-aos-delay="500"
+            className="text-sm text-black mt-4 leading-relaxed w-[70%]"
+          >
             Have some big idea or brand to develop and need help? Then reach out
             we would love to hear about your project and provide help.
           </p>
 
-          <h3 className="text-black mt-12">Follow Us On Social Media ..</h3>
+          <h3
+            data-aos="fade-up"
+            data-aos-delay="800"
+            className="text-black mt-12"
+          >
+            Follow Us On Social Media ..
+          </h3>
 
-          <ul className="flex mt-6 space-x-4">
+          <ul
+            data-aos="zoom-in"
+            data-aos-delay="200"
+            className="flex mt-6 space-x-4"
+          >
             <li className="bg-[#46B8EA] hover:bg-[#a91079e2] h-10 w-10 rounded-full flex items-center justify-center shrink-0">
               <a href="javascript:void(0)">
                 <svg
@@ -81,7 +101,12 @@ const GetInTouch = () => {
                   data-original="#000000"
                 />
               </svg>
-              <a href="javascript:void(0)" className="text-black text-sm ml-4">
+              <a
+                data-aos="fade-up"
+                data-aos-delay="500"
+                href="javascript:void(0)"
+                className="text-black text-sm ml-4"
+              >
                 Email : info@example.com
               </a>
             </li>
@@ -98,7 +123,12 @@ const GetInTouch = () => {
                   data-original="#000000"
                 ></path>
               </svg>
-              <a href="javascript:void(0)" className="text-black text-sm ml-4">
+              <a
+                data-aos="fade-up"
+                data-aos-delay="700"
+                href="javascript:void(0)"
+                className="text-black text-sm ml-4"
+              >
                 Phone : +158 996 888
               </a>
             </li>
@@ -119,7 +149,12 @@ const GetInTouch = () => {
                   data-original="#000000"
                 ></path>
               </svg>
-              <a href="javascript:void(0)" className="text-black text-sm ml-4">
+              <a
+                data-aos="fade-up"
+                data-aos-delay="900"
+                href="javascript:void(0)"
+                className="text-black text-sm ml-4"
+              >
                 Address : 123 Street 256 House
               </a>
             </li>
@@ -132,28 +167,40 @@ const GetInTouch = () => {
             onSubmit={handleSubmit(getInTouchSubmission)}
           >
             <input
+              data-aos="fade-up"
+              data-aos-delay="300"
               type="text"
               placeholder="Enter your Name"
               {...register("firstName")}
               className="w-full rounded-lg py-3 px-4 text-gray-800 text-sm outline-[#a91079]"
             />
             <input
+              data-aos="fade-up"
+              data-aos-delay="500"
               type="email"
               placeholder="Enter your Email"
               className="w-full rounded-lg py-3 px-4 text-gray-800 text-sm outline-[#a91079]"
             />
             <input
+              data-aos="fade-up"
+              data-aos-delay="700"
               type="text"
               placeholder="Enter your Phone"
               className="w-full rounded-lg py-3 px-4 text-gray-800 text-sm outline-[#a91079]"
             />
             <textarea
+              data-aos="fade-up"
+              data-aos-delay="900"
               placeholder="Enter your Message"
               rows="6"
               className="w-full rounded-lg px-4 text-gray-800 text-sm pt-3 outline-[#a91079]"
             ></textarea>
 
-            <div className="flex items-center justify-center">
+            <div
+              data-aos="zoom-in"
+              data-aos-delay="300"
+              className="flex items-center justify-center"
+            >
               <button
                 type="submit"
                 style={{

@@ -17,11 +17,18 @@ export default function Header() {
       <div className="items-center px-4 max-w-screen-xl mx-auto md:flex md:px-8">
         <div className="flex items-center justify-between py-3 md:py-5 md:block">
           <Link to="/">
-            <img src={Logo} width={120} height={50} alt="Float UI logo" />
+            <img
+              src={Logo}
+              width={120}
+              height={50}
+              alt="logo"
+              data-aos="zoom-in"
+              data-aos-delay="800"
+            />
           </Link>
           <div className="md:hidden">
             <button
-              className="text-gray-700 outline-none p-2 rounded-md focus:border-gray-400 focus:border"
+              className="text-gray-700 outline-none p-2 rounded-md focus:border-white border-2 border-white focus:border"
               onClick={() => setState(!state)}
             >
               {state ? (
@@ -29,7 +36,7 @@ export default function Header() {
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-6 w-6"
                   viewBox="0 0 20 20"
-                  fill="currentColor"
+                  fill="white"
                 >
                   <path
                     fillRule="evenodd"
@@ -41,7 +48,7 @@ export default function Header() {
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-6 w-6"
-                  fill="none"
+                  fill="white"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
                 >
@@ -61,7 +68,11 @@ export default function Header() {
             state ? "block" : "hidden"
           }`}
         >
-          <ul className="justify-center items-center space-y-8 md:flex md:space-x-6 md:space-y-0">
+          <ul
+            className="justify-center items-center space-y-8 md:flex md:space-x-6 md:space-y-0"
+            data-aos="fade-up"
+            data-aos-delay="800"
+          >
             {navigation.map((item, idx) => {
               return (
                 <li key={idx} className="text-white hover:text-primary">
@@ -71,7 +82,7 @@ export default function Header() {
             })}
           </ul>
         </div>
-        <div className="hidden md:inline-block ">
+        <div className="hidden md:inline-block " data-aos="fade-left">
           <Link
             to="/"
             className="py-3 px-4 mr-2 text-white bg-black border-2 border-primary border-width-2 hover:bg-red-400 rounded-md shadow"
@@ -81,6 +92,8 @@ export default function Header() {
 
           <Link
             to="/"
+            data-aos="zoom-out"
+            data-aos-delay="800"
             className="py-3 px-4 text-white bg-primary hover:bg-blue-500 rounded-md shadow"
           >
             Login

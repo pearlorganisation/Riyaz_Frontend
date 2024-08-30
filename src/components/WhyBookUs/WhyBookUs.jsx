@@ -58,13 +58,17 @@ const WhyBookUs = () => {
   return (
     <div className="bg-white w-full bg-opacity-50 py-12 ">
       <div className="text-center">
-        <div className="">
+        <div data-aos="fade-up" data-aos-delay="200" className="">
           <span className="bg-gradient-to-l from-teal-200 to-lime-400 bg-clip-text text-transparent font-bold uppercase text-2xl tracking-widest">
             WHY BOOK WITH US
           </span>
         </div>
 
-        <div className="flex items-center justify-center mt-4 mb-6">
+        <div
+          data-aos="fade-up"
+          data-aos-delay="400"
+          className="flex items-center justify-center mt-4 mb-6"
+        >
           <div className="w-[50%]">
             <span className="text-black  uppercase text-md ">
               Get to and from airport with no fuss. Compare, choose and book a
@@ -74,7 +78,11 @@ const WhyBookUs = () => {
           </div>
         </div>
 
-        <div className="flex items-center justify-evenly ">
+        <div
+          data-aos="fade-up"
+          data-aos-delay="600"
+          className="flex items-center justify-evenly "
+        >
           {features.map((feature) => (
             <div
               key={feature.id}
@@ -103,15 +111,25 @@ const WhyBookUs = () => {
               >
                 <div className="flex flex-col items-center justify-center">
                   <img
+                    data-aos="fade-up"
+                    data-aos-delay="100"
                     src={featureDetail.image}
                     alt={featureDetail.name}
                     className="w-[40px] h-[40px] "
                   />
-                  <h3 className="font-semibold text-sm text-black py-3">
+                  <h3
+                    data-aos="fade-up"
+                    data-aos-delay="300"
+                    className="font-semibold text-sm text-black py-3"
+                  >
                     {featureDetail.name}
                   </h3>
 
-                  <span className="text-black text-sm text-wrap mt-4 w-[60%]">
+                  <span
+                    data-aos="fade-up"
+                    data-aos-delay="500"
+                    className="text-black text-sm text-wrap mt-4 w-[60%]"
+                  >
                     {featureDetail.description}
                   </span>
                 </div>

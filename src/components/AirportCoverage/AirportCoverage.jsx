@@ -24,7 +24,12 @@ const AirportCoverage = () => {
   return (
     <div className="bg-white w-full bg-opacity-50 py-6 ">
       <div className="text-center">
-        <div className="">
+        <div
+          className=""
+          data-aos="fade-right"
+          data-aos-offset="300"
+          data-aos-easing="ease-in-sine"
+        >
           <span className="bg-gradient-to-l from-teal-200 to-lime-400 bg-clip-text text-transparent font-bold uppercase text-2xl tracking-widest">
             GREET GUESTS AIRPORT COVERAGE
           </span>
@@ -39,11 +44,16 @@ const AirportCoverage = () => {
               >
                 <div className="flex flex-col items-center justify-center">
                   <img
+                    data-aos="zoom-in"
+                    data-aos-easing="ease-in-sine"
                     src={coverage.image}
                     alt={coverage.name}
                     className="w-[60px] h-[60px] "
                   />
-                  <h3 className="font-bold text-sm text-black py-3">
+                  <h3
+                    data-aos="fade-up"
+                    className="font-bold text-sm text-black py-3"
+                  >
                     {coverage.name}
                   </h3>
                 </div>
@@ -52,7 +62,10 @@ const AirportCoverage = () => {
           </div>
         </div>
 
-        <div className="flex items-center justify-center mt-8">
+        <div
+          data-aos="fade-left"
+          className="flex items-center justify-center mt-8"
+        >
           <button
             className="uppercase bg-green-500 hover:bg-green-300 text-white text-md font-bold py-2 px-4  rounded-md"
             style={{

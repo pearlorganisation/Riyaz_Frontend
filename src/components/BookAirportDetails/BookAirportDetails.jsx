@@ -48,13 +48,17 @@ const BookAirportDetails = () => {
   return (
     <div className="flex items-center justify-center  w-full bg-opacity-50 py-12 space-y-6">
       <div className="text-center ">
-        <div className="">
+        <div data-aos="fade-up" className="">
           <span className="bg-gradient-to-l from-teal-200 to-lime-400 bg-clip-text text-transparent font-bold uppercase text-2xl tracking-widest">
             BOOK AIRPORT TRANSFERS UAE
           </span>
         </div>
 
-        <div className="flex items-center justify-center mt-4 mb-6 py-6">
+        <div
+          data-aos="fade-up"
+          data-aos-delay="400"
+          className="flex items-center justify-center mt-4 mb-6 py-6"
+        >
           <div className="w-[50%]  ">
             <span className="text-black  uppercase text-md ">
               Book your airport transfer and get where you are going fast.
@@ -64,7 +68,12 @@ const BookAirportDetails = () => {
           </div>
         </div>
 
-        <div className="bg-gradient-to-r from-teal-200 to-lime-100">
+        <div
+          data-aos="fade-right"
+          data-aos-offset="300"
+          data-aos-easing="ease-in-sine"
+          className="bg-gradient-to-r from-teal-200 to-lime-100"
+        >
           <div className="grid grid-cols-2 gap-8 text-gray-500 sm:gap-12 md:grid-cols-3 lg:grid-cols-6 p-12">
             {vehicles.map((vehicle) => (
               <div key={vehicle.id} className="">

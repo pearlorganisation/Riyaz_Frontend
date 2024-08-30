@@ -32,12 +32,21 @@ const usefulLinks = [
 
 const Footer = () => {
   return (
-    <footer className="p-10 bg-gradient-to-r from-teal-200 to-lime-100">
+    <footer
+      data-aos="zoom-in"
+      data-aos-delay="600"
+      className="p-10 bg-gradient-to-r from-teal-200 to-lime-100"
+    >
       <div className="max-w-screen-xl mx-auto px-4 text-gray-600 md:px-8">
         <div className="justify-between sm:flex">
           <div className="space-y-6">
-            <img src={Logo} className="w-42 h-32" />
-            <p className="max-w-md">
+            <img
+              data-aos="zoom-in"
+              data-aos-delay="1000"
+              src={Logo}
+              className="w-42 h-32"
+            />
+            <p data-aos="fade-up" data-aos-delay="1000" className="max-w-md">
               We will greet our guests as their best guide, bringing your
               personal experiences.
             </p>
@@ -109,24 +118,49 @@ const Footer = () => {
           </div>
 
           <div className="space-y-3 ml-2">
-            <h1 className="font-bold text-2xl text-black"> Useful Links</h1>
+            <h1
+              data-aos="fade-up"
+              data-aos-delay="1200"
+              className="font-bold text-2xl text-black"
+            >
+              Useful Links
+            </h1>
             <div className="grid grid-cols-2  gap-2">
               {usefulLinks.map((u) => (
                 <Link key={u.id} to={u.href}>
-                  <p>{u.name}</p>
+                  <p data-aos="fade-up" data-aos-delay="1400">
+                    {u.name}
+                  </p>
                 </Link>
               ))}
             </div>
 
             <div className="space-y-3">
-              <img src={Payment} alt="payment" />
+              <img
+                data-aos="zoom-in"
+                data-aos-delay="1200"
+                src={Payment}
+                alt="payment"
+              />
             </div>
           </div>
           <div className="space-y-6">
-            <p className="text-gray-700 font-bold text-2xl">Subscribe Now</p>
+            <p
+              data-aos="fade-up"
+              data-aos-delay="1600"
+              className="text-gray-700 font-bold text-2xl"
+            >
+              Subscribe Now
+            </p>
 
-            <p>Dont miss our future updates! Get Subscribed Today!</p>
-            <div className="flex items-center gap-3 mt-3 sm:block">
+            <p data-aos="fade-up" data-aos-delay="1800">
+              Dont miss our future updates! Get Subscribed Today!
+            </p>
+            <div
+              data-aos="fade-up"
+              data-aos-delay="1800"
+              className="flex items-center gap-3 mt-3 sm:block"
+            >
               <div className="flex-1 mt-6 md:mt-0">
                 <form
                   onSubmit={(e) => e.preventDefault()}

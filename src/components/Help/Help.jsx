@@ -19,7 +19,11 @@ const FaqsCard = (props) => {
       key={idx}
       onClick={handleOpenAnswer}
     >
-      <h4 className="cursor-pointer pb-5 flex mt-2 items-center justify-between text-lg text-gray-700 font-medium">
+      <h4
+        data-aos="fade-up"
+        data-aos-delay="300"
+        className="cursor-pointer pb-5 flex mt-2 items-center justify-between text-lg text-gray-700 font-medium"
+      >
         {faqsList.q}
         {state ? (
           <div className="h-[30px] w-[30px] bg-white border-2 border-gray-400 rounded-full px-1  flex items-center justify-center">
@@ -39,7 +43,11 @@ const FaqsCard = (props) => {
             </svg>
           </div>
         ) : (
-          <div className="h-[30px] w-[30px] bg-white border-2 border-gray-400 rounded-full px-1  flex items-center justify-center">
+          <div
+            data-aos="fade-down"
+            data-aos-delay="300"
+            className="h-[30px] w-[30px] bg-white border-2 border-gray-400 rounded-full px-1  flex items-center justify-center"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5 text-gray-500 ml-2"
@@ -62,7 +70,7 @@ const FaqsCard = (props) => {
         className="duration-300"
         style={state ? { height: answerH } : { height: "0px" }}
       >
-        <div>
+        <div data-aos="fade-up" data-aos-delay="300">
           <p className="text-gray-500 mt-4">{faqsList.a}</p>
         </div>
       </div>
@@ -99,21 +107,39 @@ const Help = () => {
       <div className="max-w-screen-xl mx-auto px-4 gap-12 md:flex md:px-8">
         <div className="flex-1">
           <div className="max-w-lg">
-            <h3 className="bg-gradient-to-l text-4xl from-teal-400 to-lime-300 bg-clip-text text-transparent font-bold">
+            <h3
+              data-aos="fade-up"
+              data-aos-delay="100"
+              className="bg-gradient-to-l text-4xl from-teal-400 to-lime-300 bg-clip-text text-transparent font-bold"
+            >
               Need Help ?
             </h3>
-            <p className="mt-3 text-gray-800 text-xs  sm:text-xl">
+            <p
+              data-aos="fade-up"
+              data-aos-delay="300"
+              className="mt-3 text-gray-800 text-xs  sm:text-xl"
+            >
               Manage My Booking
             </p>
-            <p className="mt-3 text-gray-800 text-xs  sm:text-xl">
+            <p
+              data-aos="fade-up"
+              data-aos-delay="500"
+              className="mt-3 text-gray-800 text-xs  sm:text-xl"
+            >
               Visit Help Center
             </p>
 
-            <p className="mt-3 text-gray-800 text-xs sm:text-xl">
+            <p
+              data-aos="fade-up"
+              data-aos-delay="700"
+              className="mt-3 text-gray-800 text-xs sm:text-xl"
+            >
               Talk to our Team
             </p>
 
             <button
+              data-aos="flip-right"
+              data-aos-delay="300"
               className="mt-8 mb-2 uppercase bg-green-500 hover:bg-green-300 text-white text-md font-bold py-2 px-4  rounded-md"
               style={{
                 boxShadow:
@@ -124,7 +150,11 @@ const Help = () => {
             </button>
           </div>
         </div>
-        <div className="flex-1 mt-12 md:mt-0 bg-white p-2 rounded-lg border-gray-300 border-2">
+        <div
+          data-aos="zoom-out"
+          data-aos-delay="800"
+          className="flex-1 mt-12 md:mt-0 bg-white p-2 rounded-lg border-gray-300 border-2"
+        >
           <ul className="space-y-4 divide-y">
             {faqsList.map((item, idx) => (
               <FaqsCard idx={idx} faqsList={item} key={idx} />

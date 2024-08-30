@@ -1,4 +1,3 @@
-import React from "react";
 import CalendarIcon from "../../assets/images/calendar.png";
 import AirplaneIcon from "../../assets/images/airplane.png";
 import LocationIcon from "../../assets/images/location.png";
@@ -9,84 +8,94 @@ const Hero = () => {
       <div className="flex items-center justify-center  bg-opacity-50 py-12">
         <div className="container  mx-auto">
           <div className="mx-auto text-center">
-            <div>
+            <div data-aos="fade-up">
               <span className="text-black font-bold uppercase text-5xl tracking-widest">
                 BOOK YOUR RIDES
               </span>
             </div>
-            <div>
+            <div data-aos="fade-up" data-aos-delay="300">
               <span className="text-black font-bold uppercase text-5xl tracking-widest">
                 ALL OVER UAE
               </span>
             </div>
-            <h2 className="mt-8 mb-6 text-xl lg:text-2xl font-bold text-black">
+            <h2
+              data-aos="fade-right"
+              className="mt-8 mb-6 text-xl lg:text-2xl font-bold text-black"
+            >
               #Exploring the World With Greet Guest Tourism
             </h2>
 
-            <div className="space-y-4 px-4 bg-primary rounded-md p-[5px] relative w-[98%] items-center justify-center">
-              <div className="grid grid-cols-1  sm:grid-cols-5 py-1 gap-1">
-                <div className="rounded-full relative ">
-                  <input
-                    type="text"
-                    name="destination"
-                    id="destination"
-                    placeholder="Arrival Airport"
-                    className="rounded-s-lg lg:w-[90%]  h-[50px] pl-[50px]"
-                  />
+            <div
+              data-aos="fade-down"
+              className="space-y-4 px-4 bg-primary rounded-md p-[5px] relative w-[98%] items-center justify-center"
+            >
+              <div className="py-2 gap-2 flex lg:flex-row flex-col md:items-center">
+                <div className="flex flex-row">
+                  <div className="rounded-full relative md:items-center justify-center">
+                    <input
+                      type="text"
+                      name="destination"
+                      id="destination"
+                      placeholder="Arrival Airport"
+                      className="rounded-s-lg w-[90%]  h-[50px] pl-[50px]"
+                    />
 
-                  <img
-                    src={AirplaneIcon}
-                    alt="airplane"
-                    className="absolute inset-y-1 left-8 top-3"
-                  />
+                    <img
+                      src={AirplaneIcon}
+                      alt="airplane"
+                      className="absolute inset-y-1 left-8 top-3"
+                    />
+                  </div>
+
+                  <div className="rounded-full relative ">
+                    <input
+                      type="text"
+                      name="destination"
+                      id="destination"
+                      placeholder="Location"
+                      className="rounded-e-lg w-[90%] h-[50px] pl-[50px]"
+                    />
+
+                    <img
+                      src={LocationIcon}
+                      alt="location"
+                      className="absolute inset-y-1 left-8 top-3"
+                    />
+                  </div>
                 </div>
 
-                <div className="rounded-full relative ">
-                  <input
-                    type="text"
-                    name="destination"
-                    id="destination"
-                    placeholder="Location"
-                    className="rounded-e-lg w-[100%] h-[50px] pl-[50px]"
-                  />
+                <div className="flex flex-row gap-2">
+                  <div className="rounded-full relative">
+                    <input
+                      type="text"
+                      name="destination"
+                      id="destination"
+                      placeholder="Date"
+                      className="rounded-lg w-[90%] h-[50px] pl-[50px]"
+                    />
 
-                  <img
-                    src={LocationIcon}
-                    alt="location"
-                    className="absolute inset-y-2 left-2 top-3"
-                  />
-                </div>
+                    <img
+                      src={CalendarIcon}
+                      alt="calendar"
+                      className="absolute inset-y-1 left-8 top-3"
+                    />
+                  </div>
 
-                <div className="rounded-full relative">
-                  <input
-                    type="text"
-                    name="destination"
-                    id="destination"
-                    placeholder="Date"
-                    className="rounded-lg h-[50px] pl-[50px]"
-                  />
+                  <div className="rounded-full relative gap-2">
+                    <input
+                      type="text"
+                      name="destination"
+                      id="destination"
+                      placeholder="Return Date"
+                      className="rounded-lg w-[90%] h-[50px] pl-[50px]"
+                    />
 
-                  <img
-                    src={CalendarIcon}
-                    alt="calendar"
-                    className="absolute inset-y-0 left-2 top-3"
-                  />
-                </div>
-
-                <div className="rounded-full relative gap-2">
-                  <input
-                    type="text"
-                    name="destination"
-                    id="destination"
-                    placeholder="Return Date"
-                    className="rounded-lg  h-[50px] pl-[50px]"
-                  />
-
-                  <img
-                    src={CalendarIcon}
-                    alt="calendar"
-                    className="absolute inset-y-0 left-2 top-3"
-                  />
+                    <img
+                      src={CalendarIcon}
+                      alt="calendar"
+                      className="absolute inset-y-1 left-8 top-3"
+                    />
+                  </div>
                 </div>
 
                 <div className="flex items-center justify-center  ">
@@ -103,7 +112,10 @@ const Hero = () => {
               </div>
             </div>
 
-            <div className="space-y-4 items-center justify-center mt-10">
+            <div
+              data-aos="flip-left"
+              className="space-y-4 items-center justify-center mt-10"
+            >
               <a
                 style={{ boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px" }}
                 className="w-auto md:w-auto mb-4 md:mr-6 py-5 px-8 text-sm font-bold uppercase border-2 border-transparent bg-gray-200 rounded hover:bg-gray-100 text-gray-800 transition duration-200"
@@ -120,3 +132,5 @@ const Hero = () => {
 };
 
 export default Hero;
+
+// grid grid-cols md:grid-cols-3 lg:grid-cols-3  sm:grid-cols-5
