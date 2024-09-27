@@ -1,15 +1,24 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import Logo from "../../../assets/images/logo.png";
+import { useDispatch, useSelector } from "react-redux";
+import { clearUser } from "../../../features/slices/authSlice";
 
 export default function Header() {
+  const navigate = useNavigate();
   const [state, setState] = useState(false);
 
+  const { isUserLoggedIn } = useSelector((state) => state.auth);
+  const dipsatch = useDispatch();
+
+  const handleLogout = () => {
+    dipsatch(clearUser());
+    navigate("/login");
+  };
   const navigation = [
     { title: "Home", path: "/" },
     { title: "About Us", path: "/about_us" },
     { title: "Contact Us", path: "/contact_us" },
-    { title: "Product", path: "/product" },
   ];
 
   return (
@@ -37,6 +46,7 @@ export default function Header() {
                   className="h-6 w-6"
                   viewBox="0 0 20 20"
                   fill="white"
+                  stroke="currentColor"
                 >
                   <path
                     fillRule="evenodd"
@@ -82,23 +92,33 @@ export default function Header() {
             })}
           </ul>
         </div>
-        <div className="hidden md:inline-block " data-aos="fade-left">
-          <Link
-            to="/"
-            className="py-3 px-4 mr-2 text-white bg-black border-2 border-primary border-width-2 hover:bg-red-400 rounded-md shadow"
-          >
-            Sign Up
-          </Link>
 
-          <Link
-            to="/"
-            data-aos="zoom-out"
-            data-aos-delay="800"
-            className="py-3 px-4 text-white bg-primary hover:bg-blue-500 rounded-md shadow"
+        {!isUserLoggedIn ? (
+          <div className="hidden md:inline-block " data-aos="fade-left">
+            <Link
+              to="/signup"
+              className="py-3 px-4 mr-2 text-white bg-black border-2 border-primary border-width-2 hover:bg-red-400 rounded-md shadow"
+            >
+              Sign Up
+            </Link>
+
+            <Link
+              to="/login"
+              data-aos="zoom-out"
+              data-aos-delay="800"
+              className="py-3 px-4 text-white bg-primary hover:bg-blue-500 rounded-md shadow"
+            >
+              Login
+            </Link>
+          </div>
+        ) : (
+          <button
+            className="text-white px-6 py-2 border-2 border-[#2DA5F3] rounded-md"
+            onClick={handleLogout}
           >
-            Login
-          </Link>
-        </div>
+            Logout
+          </button>
+        )}
       </div>
     </nav>
   );

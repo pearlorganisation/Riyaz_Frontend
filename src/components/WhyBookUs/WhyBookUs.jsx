@@ -103,11 +103,11 @@ const WhyBookUs = () => {
         </div>
 
         <div className="bg-gradient-to-r from-teal-200 to-lime-100">
-          <div className="flex items-center justify-evenly py-6">
+          <div className="grid grid-cols-2 lg:grid-cols-4  flex-row items-center justify-evenly py-6">
             {featureDetails.map((featureDetail) => (
               <div
                 key={featureDetail.id}
-                className="grid grid-cols items-center justify-center mt-8"
+                className=" items-center justify-center mt-8"
               >
                 <div className="flex flex-col items-center justify-center">
                   <img
@@ -115,7 +115,7 @@ const WhyBookUs = () => {
                     data-aos-delay="100"
                     src={featureDetail.image}
                     alt={featureDetail.name}
-                    className="w-[40px] h-[40px] "
+                    className="w-[40px] h-[40px]"
                   />
                   <h3
                     data-aos="fade-up"

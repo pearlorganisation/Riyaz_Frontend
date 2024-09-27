@@ -8,8 +8,12 @@ import Partners from "../../components/Partners/Partners";
 import Help from "../../components/Help/Help";
 import GetInTouch from "../../components/GetInTouch/GetInTouch";
 import Feedback from "../../components/Feedback/Feedback";
+import { useSelector } from "react-redux";
 
 const Home = () => {
+  const authState = useSelector((state) => state.auth);
+
+  console.log("Home Page", authState);
   return (
     <div>
       <div
@@ -21,7 +25,6 @@ const Home = () => {
       >
         <Hero />
       </div>
-
       <BookAirportDetails />
       <WhyBookUs />
       <AirportCoverage />
@@ -29,7 +32,6 @@ const Home = () => {
       <Banner />
       <Partners />
       <Help />
-
       <GetInTouch />
       <Feedback />
     </div>

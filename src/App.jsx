@@ -1,9 +1,20 @@
 import "./App.css";
-import { RouterProvider } from "react-router-dom";
-import routes from "./routes/routes";
+import {
+  createBrowserRouter,
+  Navigate,
+  RouterProvider,
+} from "react-router-dom";
 import { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { useSelector } from "react-redux";
+import Layout from "./components/DefaultLayout/Layout/Layout";
+import Home from "./pages/Home/Home";
+import About from "./pages/About/About";
+import Contact from "./pages/Contact/Contact";
+import Login from "./pages/Login/Login";
+import Signup from "./pages/Signup/Signup";
+import VehicleListing from "./pages/VehicleListing/VehicleListing";
 
 function App() {
   useEffect(() => {
@@ -15,6 +26,42 @@ function App() {
     });
     AOS.refresh();
   }, []);
+
+  const { isUserLoggedIn } = useSelector((state) => state.auth);
+
+  const routes = createBrowserRouter([
+    {
+      path: "/",
+      element: isUserLoggedIn ? <Layout /> : <Navigate to="/login" />,
+      children: [
+        {
+          index: true,
+          element: <Home />,
+        },
+        {
+          path: "about_us",
+          element: <About />,
+        },
+        {
+          path: "contact_us",
+          element: <Contact />,
+        },
+        {
+          path: "vehicles",
+          element: <VehicleListing />,
+        },
+      ],
+    },
+    {
+      path: "login",
+      element: isUserLoggedIn ? <Navigate to="/" /> : <Login />,
+    },
+    {
+      path: "signup",
+      element: isUserLoggedIn ? <Navigate to="/" /> : <Signup />,
+    },
+  ]);
+
   return (
     <div>
       <RouterProvider router={routes} />
