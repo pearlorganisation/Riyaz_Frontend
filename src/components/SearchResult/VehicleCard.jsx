@@ -1,11 +1,24 @@
 /* eslint-disable react/prop-types */
-import React from "react";
+import React, { useState } from "react";
 import { TbCircleArrowRight } from "react-icons/tb";
+import LearnMoreModal from "./LearnMoreModal";
 
 const VehicleCard = ({ vehicle }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleModal = () => {
+    setIsModalOpen(!isModalOpen);
+  };
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <div>
-      <div key={vehicle.id} className="rounded-md mt-6 bg-blue-300">
+      <div key={vehicle.id} className="rounded-md mt-6 bg-blue-200">
         <div className="grid grid-cols-1 lg:grid-cols-[70%_auto]">
           <div>
             <div className="flex flex-row px-6 py-2">
@@ -35,8 +48,14 @@ const VehicleCard = ({ vehicle }) => {
 
             <div className="mt-3 px-6 py-2 flex flex-row gap-4 text-white">
               <TbCircleArrowRight size="24" />
-              <h1> Learn More </h1>
+              <button onClick={openModal}> Learn More </button>
             </div>
+
+            <LearnMoreModal
+              data={vehicle}
+              isOpen={isModalOpen}
+              onClose={closeModal}
+            />
           </div>
 
           <div className="bg-blue-900 flex flex-col items-center justify-start">

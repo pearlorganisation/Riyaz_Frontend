@@ -13,12 +13,25 @@ const vehiclesData = [
         image:
           "https://d1lk4k9zl9klra.cloudfront.net/web/dotcom/vehicle/370x300/car-economy-sedan.png",
         name: " Rashid Hussain Passenger Transport",
+        vehicle: "Sedan",
+        private: true,
+        class: "Economy",
 
         tags: ["PRIVATE", "ECONOMY", "SEDAN", "MEET N GREET"],
         ratings: 3.5,
         reviews: 65,
         tour: "ONE WAY",
         price: "1757.55",
+        maxPassengerCapacity: 4,
+        maxLuggageCapacity: {
+          checkedLuggage: 1,
+          handLuggage: 1,
+        },
+        cancellationTime: 48,
+        meetngreet: true,
+        extraInfo:
+          "Extras such as child seats and extra luggage may be available. These may attract an additional cost that would need to be paid to the transport company directly. Please request these extras when booking and your transport company will respond with their availabilities and rates.",
+        feesIncluded: true,
       },
       {
         id: 2,
@@ -31,6 +44,7 @@ const vehiclesData = [
         reviews: 17,
         tour: "ONE WAY",
         price: "2176.01",
+        maxCapacity: 4,
       },
       {
         id: 3,
@@ -43,6 +57,7 @@ const vehiclesData = [
         reviews: 9,
         tour: "ONE WAY",
         price: "2343.40",
+        maxCapacity: 4,
       },
       {
         id: 4,
@@ -55,6 +70,7 @@ const vehiclesData = [
         reviews: 6,
         tour: "ONE WAY",
         price: "2510.17",
+        maxCapacity: 4,
       },
       {
         id: 5,
@@ -67,6 +83,7 @@ const vehiclesData = [
         reviews: 50,
         tour: "ONE WAY",
         price: "3012.95",
+        maxCapacity: 4,
       },
     ],
   },
@@ -83,6 +100,7 @@ const vehiclesData = [
         reviews: 65,
         tour: "ONE WAY",
         price: "2594.48",
+        maxCapacity: 8,
       },
       {
         id: 2,
@@ -95,6 +113,7 @@ const vehiclesData = [
         reviews: 9,
         tour: "ONE WAY",
         price: "2929.25",
+        maxCapacity: 8,
       },
       {
         id: 3,
@@ -107,6 +126,7 @@ const vehiclesData = [
         reviews: 17,
         tour: "ONE WAY",
         price: "3180.33",
+        maxCapacity: 8,
       },
       {
         id: 4,
@@ -119,6 +139,7 @@ const vehiclesData = [
         reviews: 300,
         tour: "ONE WAY",
         price: "3347.72",
+        maxCapacity: 8,
       },
       {
         id: 5,
@@ -131,6 +152,7 @@ const vehiclesData = [
         reviews: 14,
         tour: "ONE WAY",
         price: "3497.83",
+        maxCapacity: 8,
       },
     ],
   },
@@ -147,6 +169,7 @@ const vehiclesData = [
         reviews: 65,
         tour: "ONE WAY",
         price: "2594.55",
+        maxCapacity: 15,
       },
       {
         id: 2,
@@ -159,6 +182,7 @@ const vehiclesData = [
         reviews: 17,
         tour: "ONE WAY",
         price: "2929.01",
+        maxCapacity: 15,
       },
       {
         id: 3,
@@ -171,6 +195,7 @@ const vehiclesData = [
         reviews: 9,
         tour: "ONE WAY",
         price: "3180.40",
+        maxCapacity: 15,
       },
       {
         id: 4,
@@ -183,6 +208,7 @@ const vehiclesData = [
         reviews: 6,
         tour: "ONE WAY",
         price: "3264.17",
+        maxCapacity: 15,
       },
       {
         id: 5,
@@ -195,6 +221,7 @@ const vehiclesData = [
         reviews: 50,
         tour: "ONE WAY",
         price: "3680.95",
+        maxCapacity: 15,
       },
     ],
   },
@@ -211,6 +238,7 @@ const vehiclesData = [
         reviews: 65,
         tour: "ONE WAY",
         price: "2594.48",
+        maxCapacity: 35,
       },
       {
         id: 2,
@@ -223,6 +251,7 @@ const vehiclesData = [
         reviews: 9,
         tour: "ONE WAY",
         price: "2929.25",
+        maxCapacity: 35,
       },
       {
         id: 3,
@@ -235,6 +264,7 @@ const vehiclesData = [
         reviews: 17,
         tour: "ONE WAY",
         price: "3180.33",
+        maxCapacity: 35,
       },
       {
         id: 4,
@@ -247,6 +277,7 @@ const vehiclesData = [
         reviews: 300,
         tour: "ONE WAY",
         price: "3347.72",
+        maxCapacity: 35,
       },
     ],
   },
