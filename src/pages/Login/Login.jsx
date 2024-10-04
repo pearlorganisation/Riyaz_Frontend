@@ -16,15 +16,15 @@ const Login = () => {
 
   const navigate = useNavigate();
 
-  const submitForm = (data) => {
-    dispatch(userLogin(data));
-  };
+  // const submitForm = (data) => {
+  //   dispatch(userLogin(data));
+  // };
 
-  useEffect(() => {
-    if (userInfo) {
-      navigate("/");
-    }
-  }, [navigate, userInfo]);
+  // useEffect(() => {
+  //   if (userInfo) {
+  //     navigate("/");
+  //   }
+  // }, [navigate, userInfo]);
 
   return (
     <div className="min-h-screen bg-gray-100 text-gray-900 flex justify-center">
@@ -38,7 +38,9 @@ const Login = () => {
           </div>
           <div className="mt-12 flex flex-col items-center">
             <div className="w-full flex-1 mt-8">
-              <form onSubmit={handleSubmit(submitForm)}>
+              <form onSubmit={()=> navigate('/')}
+              // onSubmit={handleSubmit(submitForm)}
+              >
                 <div className="mx-auto max-w-xs">
                   <input
                     className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"

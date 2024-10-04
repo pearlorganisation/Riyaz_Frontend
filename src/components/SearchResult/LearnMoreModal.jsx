@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { TbCircleArrowRight } from "react-icons/tb";
 import ModalDescription from "../ModalDescription/ModalDescription";
-
+import ModalReviews from "../ModalDescription/ModalReviews";
+import ModalAbout from "../ModalDescription/ModalAbout";
 /* eslint-disable react/prop-types */
 const LearnMoreModal = ({ isOpen, onClose, data }) => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -90,12 +91,14 @@ const LearnMoreModal = ({ isOpen, onClose, data }) => {
 
         {activeIndex == 1 && (
           <div className="mt-3">
-            Ratings of the vehicle based on Highest, Lowest
+           <ModalReviews data={data} />
           </div>
         )}
 
         {activeIndex == 2 && (
-          <div className="mt-3">About the Company providing the Vehicle</div>
+          <div className="mt-3">
+            <ModalAbout data={data} />
+          </div>
         )}
 
         <div className="w-full h-80 rounded-md bg-gray-200 flex items-center justify-center overflow-hidden mt-8">
