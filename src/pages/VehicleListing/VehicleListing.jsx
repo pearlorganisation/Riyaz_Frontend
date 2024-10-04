@@ -6,7 +6,7 @@ const VehicleListing = () => {
   return (
     <div> 
     <div className="static z-10">
-      <div className="absolute bottom-20 left-60 max-w-max bg-opacity-90 bg-blue-400 rounded-xl text-white z-30 right-60">
+      <div className="absolute bottom-20 left-60 max-w-max bg-opacity-90 bg-blue-300 rounded-xl text-white z-30 right-60">
          <SearchUpdate />
       </div>
 
