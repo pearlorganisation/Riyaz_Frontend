@@ -193,7 +193,7 @@ const SidebarFilter = ({ onVehicleTypeChange }) => {
           </div>
         ))}
 
-        <hr className="mt-3" />
+        {/* <hr className="mt-3" />
 
         <h1 className="mt-5 text-xl font-semibold"> Inclusions and Extras </h1>
 
@@ -211,11 +211,11 @@ const SidebarFilter = ({ onVehicleTypeChange }) => {
               <span>{type.name}</span>
             </label>
           </div>
-        ))}
+        ))} */}
 
         <hr className="mt-3" />
 
-        <h1 className="mt-5">Rating</h1>
+        <h1 className="mt-5 text-xl font-semibold">Rating</h1>
 
         <div className="flex flex-col gap-4">
           {ratingsTypes.map((rating) => (
@@ -236,7 +236,7 @@ const SidebarFilter = ({ onVehicleTypeChange }) => {
 
         <hr className="mt-3" />
 
-        <h1 className="mt-5">Rating</h1>
+        <h1 className="mt-5 text-xl font-semibold">Reviews</h1>
 
         <div className="flex flex-col gap-4">
           {numbersOfReviewsTypes.map((review) => (

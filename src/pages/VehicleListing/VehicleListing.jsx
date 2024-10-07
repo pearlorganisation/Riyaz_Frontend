@@ -48,7 +48,7 @@ const SearchUpdate = ({setDate, setReturnDate}) => {
       <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
         {/* From Field */}
         <div className="flex-grow w-full sm:w-auto">
-          <label className="block mb-2">From</label>
+          <label className="block mb-2">Pickup Location</label>
           <div className="flex items-center bg-white text-black p-2 rounded">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -75,7 +75,7 @@ const SearchUpdate = ({setDate, setReturnDate}) => {
 
         {/* To Field */}
         <div className="flex-grow w-full sm:w-auto">
-          <label className="block mb-2">To</label>
+          <label className="block mb-2">Destination</label>
           <div className="flex items-center bg-white text-black p-2 rounded">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -98,7 +98,7 @@ const SearchUpdate = ({setDate, setReturnDate}) => {
       <div className="flex flex-col sm:flex-row md:flex-row items-center justify-center gap-4">
         {/* Flight Arrival */}
         <div className="flex-grow w-full sm:w-auto">
-          <label className="block mb-2">Flight Arrival Details</label>
+          <label className="block mb-2">Pickup Date</label>
           <div className="flex items-center bg-white text-black p-2 rounded">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -132,10 +132,10 @@ const SearchUpdate = ({setDate, setReturnDate}) => {
           </div>
         </div>
 
-        {/* Passengers */}
+      
         <div className="w-full sm:w-auto">
           <label className="block mb-2">Passengers</label>
-          <div className="flex items-center bg-white text-black p-2 rounded">
+          <div className="flex items-center bg-white text-black p-2 rounded ">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5 mr-2"
@@ -158,7 +158,7 @@ const SearchUpdate = ({setDate, setReturnDate}) => {
 
         {/* Return Date */}
         <div className="flex-grow w-full sm:w-auto">
-          <label className="block mb-2 text-nowrap">Flight Departure Details</label>
+          <label className="block mb-2 text-nowrap">Return Date</label>
           <div className="flex items-center bg-white text-black p-2 rounded">
             <input
               type="date"
