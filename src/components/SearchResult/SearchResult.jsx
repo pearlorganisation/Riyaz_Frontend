@@ -302,7 +302,6 @@ const vehiclesData = [
   },
 ];
 
-
 const SearchResult = ({ selectedVehicleTypes, date, returnDate }) => {
   const vehicleMapping = {
     sedan: vehiclesData[0].sedans,
@@ -311,7 +310,13 @@ const SearchResult = ({ selectedVehicleTypes, date, returnDate }) => {
     bus: vehiclesData[3].buses,
   };
 
-  const filteredVehicles = selectedVehicleTypes.flatMap((type) => {
+  // If no vehicle types are selected, include all types for filtering
+  const allVehicleTypes = selectedVehicleTypes.length
+    ? selectedVehicleTypes
+    : ["sedan", "suv", "van", "bus"];
+
+  // Filter vehicles based on availability and selected types or date range
+  const filteredVehicles = allVehicleTypes.flatMap((type) => {
     const vehicles = vehicleMapping[type];
     return vehicles
       ? vehicles.filter((vehicle) => {
@@ -328,10 +333,12 @@ const SearchResult = ({ selectedVehicleTypes, date, returnDate }) => {
       : [];
   });
 
+  console.log(filteredVehicles, "filtered vehi")
+
   return (
     <div className="px-20 py-10">
       <div className="flex flex-row justify-between">
-        <h1 className="mt-5">50 Results </h1>
+        <h1 className="mt-5">{filteredVehicles.length} Results </h1>
 
         <div className="flex flex-row gap-4 items-center">
           <h1 className=""> Sort By </h1>
@@ -340,101 +347,30 @@ const SearchResult = ({ selectedVehicleTypes, date, returnDate }) => {
               className="px-5 py-4 border border-blue-500 rounded-md text-lg font-semibold"
               defaultValue="vh-lp"
             >
-              <option value="text-lg price-lth">
-                <FaArrowRightArrowLeft className="w-8 h-8" /> Pricing - Low to
-                Low{" "}
-              </option>
-              <option value="text-lg price-htl">
-                <FaArrowRightArrowLeft className="w-8 h-8" /> Pricing - High to
-                Low{" "}
-              </option>
-              <option value="text-lg rating-h">
-                <FaArrowRightArrowLeft className="w-8 h-8" /> Rating - Highest{" "}
-              </option>
-              <option value="text-lg rating-l">
-                <FaArrowRightArrowLeft className="w-8 h-8" /> Rating - Lowest{" "}
-              </option>
-              <option value="text-lg vh-hp">
-                <FaArrowRightArrowLeft className="w-8 h-8" /> Vehicle - Highest
-                Price{" "}
-              </option>
-              <option value="text-lg vh-lp relative ">
-                <FaArrowRightArrowLeft className="w-8 h-8 absolute top-2 left-2" />
-                <span>Vehicle - Lowest</span>
-                Price{" "}
-              </option>
+              {/* Sort options */}
+              <option value="price-lth">Pricing - Low to High</option>
+              <option value="price-htl">Pricing - High to Low</option>
+              <option value="rating-h">Rating - Highest</option>
+              <option value="rating-l">Rating - Lowest</option>
+              <option value="vh-hp">Vehicle - Highest Price</option>
+              <option value="vh-lp">Vehicle - Lowest Price</option>
             </select>
           </div>
         </div>
       </div>
-      {selectedVehicleTypes.length === 0 ? (
-        <>
-          <div className="mt-8">
-            <h1 className="text-5xl font-medium"> Sedans </h1>
-            {vehiclesData[0].sedans.map((sedan) => (
-              <VehicleCard key={sedan.id} vehicle={sedan} />
-            ))}
-            <div className="flex items-center justify-center mt-8">
-              <button className="px-6 py-2 border border-black text-blue-950 font-bold text-4xl rounded-md flex flex-row gap-2">
-                <span>See 15 More Sedans</span>
-                <BiArrowToBottom />
-              </button>
-            </div>
-          </div>
-           
-          <div className="mt-8">
-            <h1 className="text-5xl font-medium"> Suvs </h1>
-            {vehiclesData[1].suvs.map((suv) => (
-              <VehicleCard key={suv.id} vehicle={suv} />
-            ))}
-            <div className="flex items-center justify-center mt-8">
-              <button className="px-6 py-2 border border-black text-blue-950 font-bold text-4xl rounded-md flex flex-row gap-2">
-                <span>See 15 More Suvs</span>
-                <BiArrowToBottom />
-              </button>
-            </div>
-          </div>
 
-          <div className="mt-8">
-            <h1 className="text-5xl font-medium"> Sedans </h1>
-            {vehiclesData[2].vans.map((van) => (
-              <VehicleCard key={van.id} vehicle={van} />
-            ))}
-            <div className="flex items-center justify-center mt-8">
-              <button className="px-6 py-2 border border-black text-blue-950 font-bold text-4xl rounded-md flex flex-row gap-2">
-                <span>See 15 More Vans</span>
-                <BiArrowToBottom />
-              </button>
-            </div>
-          </div>
-
-          <div className="mt-8">
-            <h1 className="text-5xl font-medium"> Sedans </h1>
-            {vehiclesData[3].buses.map((bus) => (
-              <VehicleCard key={bus.id} vehicle={bus} />
-            ))}
-            <div className="flex items-center justify-center mt-8">
-              <button className="px-6 py-2 border border-black text-blue-950 font-bold text-4xl rounded-md flex flex-row gap-2">
-                <span>See 15 More Bus</span>
-                <BiArrowToBottom />
-              </button>
-            </div>
-          </div>
-          {/* Repeat for SUVs, VANS, and BUSES */}
-        </>
+      {filteredVehicles.length === 0 ? (
+        <h2>No vehicles found for the selected types or date range.</h2>
       ) : (
-        <>
-          {filteredVehicles.length === 0 ? (
-            <h2>No vehicles found for the selected types.</h2>
-          ) : (
-            filteredVehicles.map((vehicle) => (
-              <VehicleCard key={vehicle.id} vehicle={vehicle} />
-            ))
-          )}
-        </>
+        filteredVehicles.map((vehicle) => (
+          <VehicleCard key={vehicle.id} vehicle={vehicle} />
+        ))
       )}
     </div>
   );
 };
 
 export default SearchResult;
+
+
+ 

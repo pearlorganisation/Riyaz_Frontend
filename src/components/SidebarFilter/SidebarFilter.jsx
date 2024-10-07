@@ -22,7 +22,7 @@ const vehiclesData = [
   {
     id: 1,
     name: "Sedan",
-    disabled: true,
+    disabled: false,
   },
   {
     id: 2,
@@ -32,7 +32,7 @@ const vehiclesData = [
   {
     id: 3,
     name: "Limo",
-    disabled: true,
+    disabled: false,
   },
   {
     id: 4,
@@ -42,7 +42,7 @@ const vehiclesData = [
   {
     id: 5,
     name: "Bus",
-    disabled: true,
+    disabled: false,
   },
 ];
 

@@ -35,6 +35,7 @@ const VehicleCard = ({ vehicle }) => {
                 <div className="flex flex-row gap-6">
                   <h1>{vehicle.ratings}</h1>
                   <h1> {vehicle.reviews} Reviews</h1>
+                 
                 </div>
               </div>
             </div>
