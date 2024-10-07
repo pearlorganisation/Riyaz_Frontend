@@ -1,5 +1,5 @@
 import React from "react";
-
+import { useState } from "react";
 const typesData = [
   {
     id: 1,
@@ -119,7 +119,17 @@ const faqsList = [];
 
 const whyUsFeatures = [];
 
-const SidebarFilter = () => {
+const SidebarFilter = ({ onVehicleTypeChange }) => {
+  const [selectedVehicleTypes, setSelectedVehicleTypes] = useState([]);
+
+  const handleCheckboxChange = (vehicleType) => {
+    const updatedVehicleTypes = selectedVehicleTypes.includes(vehicleType)
+      ? selectedVehicleTypes.filter((type) => type !== vehicleType)
+      : [...selectedVehicleTypes, vehicleType];
+
+    setSelectedVehicleTypes(updatedVehicleTypes);
+    onVehicleTypeChange(updatedVehicleTypes);
+  }
   return (
     <div>
       <div className="px-20 py-10">
@@ -151,6 +161,8 @@ const SidebarFilter = () => {
               <input
                 type="checkbox"
                 name="myCheckbox"
+                value={type.name.toLocaleLowerCase()}
+                onChange={(e)=>handleCheckboxChange(type.name.toLocaleLowerCase())}
                 defaultChecked={false}
                 className="mr-4 h-6 w-6"
                 disabled={type.disabled}
@@ -247,4 +259,4 @@ const SidebarFilter = () => {
   );
 };
 
-export default SidebarFilter;
+export default SidebarFilter

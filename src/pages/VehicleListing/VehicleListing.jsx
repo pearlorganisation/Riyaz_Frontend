@@ -1,8 +1,14 @@
 import SearchResult from "../../components/SearchResult/SearchResult";
 import SidebarFilter from "../../components/SidebarFilter/SidebarFilter";
 import { GoArrowSwitch } from "react-icons/go";
+import { useState } from "react";
 
-const VehicleListing = () => {
+
+const VehicleListing = () => { 
+  const [selectedVehicleTypes, setSelectedVehicleTypes] = useState([]);
+
+  const handleVehicleTypeChange = (types) => {
+    setSelectedVehicleTypes(types);}
   return (
     <div> 
     <div className="static z-10">
@@ -17,8 +23,8 @@ const VehicleListing = () => {
 
       {/* Sidebar and Search Results */}
       <div className="grid grid-cols-1 lg:grid-cols-[30%_auto] gap-8 mt-20">
-        <SidebarFilter />
-        <SearchResult />
+          <SidebarFilter onVehicleTypeChange={handleVehicleTypeChange} />
+          <SearchResult selectedVehicleTypes={selectedVehicleTypes} />
       </div>
     </div>
     </div>
@@ -257,7 +263,7 @@ const SearchUpdate = () => {
       </div>
 
       {/* Row 2: Flight Arrival, Passengers, and Return Date */}
-      <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+      <div className="flex flex-col sm:flex-row md:flex-row items-center justify-center gap-4">
         {/* Flight Arrival */}
         <div className="flex-grow w-full sm:w-auto">
           <label className="block mb-2">Flight Arrival Details</label>

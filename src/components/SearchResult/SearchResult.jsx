@@ -283,7 +283,22 @@ const vehiclesData = [
   },
 ];
 
-const SearchResult = () => {
+const SearchResult = ({ selectedVehicleTypes }) => {
+  // Create a mapping for vehicle types to their respective data
+  const vehicleMapping = {
+    sedan: vehiclesData[0].sedans,
+    suv: vehiclesData[1].suvs,
+    van: vehiclesData[2].vans,
+    bus: vehiclesData[3].buses,
+  };
+
+  // Filter vehicles based on selected vehicle types
+  const filteredVehicles = selectedVehicleTypes.flatMap((type) => {
+    const vehicles = vehicleMapping[type];
+    return vehicles ? vehicles : [];
+  });
+
+  
   return (
     <div className="px-20 py-10">
       <div className="flex flex-row justify-between">
@@ -324,8 +339,7 @@ const SearchResult = () => {
           </div>
         </div>
       </div>
-
-      <div className="mt-8">
+      {selectedVehicleTypes.length === 0 ? <><div className="mt-8">
         <h1 className="text-5xl font-medium"> Sedans </h1>
 
         {vehiclesData[0].sedans.map((sedan) => (
@@ -340,44 +354,53 @@ const SearchResult = () => {
         </div>
       </div>
 
-      <div className="mt-8">
-        <h1 className="text-5xl font-medium"> SUVS </h1>
+        <div className="mt-8">
+          <h1 className="text-5xl font-medium"> SUVS </h1>
 
-        {vehiclesData[1].suvs.map((suv) => (
-          <VehicleCard key={suv.id} vehicle={suv} />
-        ))}
+          {vehiclesData[1].suvs.map((suv) => (
+            <VehicleCard key={suv.id} vehicle={suv} />
+          ))}
 
-        <div className="flex items-center justify-center mt-8">
-          <button className="px-6 py-2 border border-black text-blue-950 font-bold text-4xl rounded-md flex flex-row gap-2">
-            <span>See 7 More SUVs</span>
-            <BiArrowToBottom />
-          </button>
+          <div className="flex items-center justify-center mt-8">
+            <button className="px-6 py-2 border border-black text-blue-950 font-bold text-4xl rounded-md flex flex-row gap-2">
+              <span>See 7 More SUVs</span>
+              <BiArrowToBottom />
+            </button>
+          </div>
         </div>
-      </div>
 
-      <div className="mt-8">
-        <h1 className="text-5xl font-medium"> VANS </h1>
+        <div className="mt-8">
+          <h1 className="text-5xl font-medium"> VANS </h1>
 
-        {vehiclesData[2].vans.map((van) => (
-          <VehicleCard key={van.id} vehicle={van} />
-        ))}
+          {vehiclesData[2].vans.map((van) => (
+            <VehicleCard key={van.id} vehicle={van} />
+          ))}
 
-        <div className="flex items-center justify-center mt-8">
-          <button className="px-6 py-2 border border-black text-blue-950 font-bold text-4xl rounded-md flex flex-row gap-2">
-            <span>See 9 More VANS</span>
-            <BiArrowToBottom />
-          </button>
+          <div className="flex items-center justify-center mt-8">
+            <button className="px-6 py-2 border border-black text-blue-950 font-bold text-4xl rounded-md flex flex-row gap-2">
+              <span>See 9 More VANS</span>
+              <BiArrowToBottom />
+            </button>
+          </div>
         </div>
-      </div>
 
-      <div className="mt-8">
-        <h1 className="text-5xl font-medium"> BUSES </h1>
+        <div className="mt-8">
+          <h1 className="text-5xl font-medium"> BUSES </h1>
 
-        {vehiclesData[3].buses.map((bus) => (
-          <VehicleCard key={bus.id} vehicle={bus} />
-        ))}
-      </div>
-    </div>
+          {vehiclesData[3].buses.map((bus) => (
+            <VehicleCard key={bus.id} vehicle={bus} />
+          ))}
+        </div></> : <>{
+          filteredVehicles.length === 0 ? (
+            <h2>No vehicles found for the selected types.</h2>
+          ) : (
+            filteredVehicles.map((vehicle) => (
+              <VehicleCard key={vehicle.id} vehicle={vehicle} />
+            ))
+          )
+        }</> 
+}
+     </div>
   );
 };
 
