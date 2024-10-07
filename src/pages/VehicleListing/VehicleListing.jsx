@@ -151,7 +151,7 @@ const SearchUpdate = ({setDate, setReturnDate}) => {
             <input
               type="number"
               className="w-full bg-transparent focus:outline-none"
-              value="1"
+              
             />
           </div>
         </div>

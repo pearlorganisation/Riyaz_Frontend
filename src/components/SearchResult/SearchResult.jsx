@@ -381,6 +381,45 @@ const SearchResult = ({ selectedVehicleTypes, date, returnDate }) => {
               </button>
             </div>
           </div>
+           
+          <div className="mt-8">
+            <h1 className="text-5xl font-medium"> Suvs </h1>
+            {vehiclesData[1].suvs.map((suv) => (
+              <VehicleCard key={suv.id} vehicle={suv} />
+            ))}
+            <div className="flex items-center justify-center mt-8">
+              <button className="px-6 py-2 border border-black text-blue-950 font-bold text-4xl rounded-md flex flex-row gap-2">
+                <span>See 15 More Suvs</span>
+                <BiArrowToBottom />
+              </button>
+            </div>
+          </div>
+
+          <div className="mt-8">
+            <h1 className="text-5xl font-medium"> Sedans </h1>
+            {vehiclesData[2].vans.map((van) => (
+              <VehicleCard key={van.id} vehicle={van} />
+            ))}
+            <div className="flex items-center justify-center mt-8">
+              <button className="px-6 py-2 border border-black text-blue-950 font-bold text-4xl rounded-md flex flex-row gap-2">
+                <span>See 15 More Vans</span>
+                <BiArrowToBottom />
+              </button>
+            </div>
+          </div>
+
+          <div className="mt-8">
+            <h1 className="text-5xl font-medium"> Sedans </h1>
+            {vehiclesData[3].buses.map((bus) => (
+              <VehicleCard key={bus.id} vehicle={bus} />
+            ))}
+            <div className="flex items-center justify-center mt-8">
+              <button className="px-6 py-2 border border-black text-blue-950 font-bold text-4xl rounded-md flex flex-row gap-2">
+                <span>See 15 More Bus</span>
+                <BiArrowToBottom />
+              </button>
+            </div>
+          </div>
           {/* Repeat for SUVs, VANS, and BUSES */}
         </>
       ) : (
