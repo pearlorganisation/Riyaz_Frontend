@@ -16,6 +16,8 @@ import Login from "./pages/Login/Login";
 import Signup from "./pages/Signup/Signup";
 import VehicleListing from "./pages/VehicleListing/VehicleListing";
 import VehicleDetails from "./components/VehicleDetails/vehicleDetails";
+import ProfileData from "./components/ProfileData/ProfileData";
+import BookingsData from "./components/BookingsData/BookingsData";
 
 function App() {
   useEffect(() => {
@@ -56,6 +58,14 @@ function App() {
           path: "vehicle-details", 
           element: <VehicleDetails />,   
         },
+        {
+          path:"profile",
+          element: <ProfileData />
+        },
+        {
+          path: "bookings",
+          element: <BookingsData />
+        }
       ],
     },
     {
