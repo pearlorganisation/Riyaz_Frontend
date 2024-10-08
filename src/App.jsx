@@ -33,8 +33,8 @@ function App() {
   const routes = createBrowserRouter([
     {
       path: "/",
-      // element: isUserLoggedIn ? <Layout /> : <Navigate to="/login" />,
-      element: <Layout/>,
+      element: isUserLoggedIn ? <Layout /> : <Navigate to="/login" />,
+      
       children: [
         {
           index: true,
@@ -60,13 +60,13 @@ function App() {
     },
     {
       path: "login",
-      // element: isUserLoggedIn ? <Navigate to="/" /> : <Login />,
-      element: <Login />,
+      element: isUserLoggedIn ? <Navigate to="/" /> : <Login />,
+   
     },
     {
       path: "signup",
-      // element: isUserLoggedIn ? <Navigate to="/" /> : <Signup />,
-      element: <Signup />,
+      element: isUserLoggedIn ? <Navigate to="/" /> : <Signup />,
+   
     },
   ]);
 
