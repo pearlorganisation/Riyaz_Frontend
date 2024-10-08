@@ -14,11 +14,12 @@ const VehicleListing = () => {
   return (
     <div> 
     <div className="static z-10">
-      <div className="absolute bottom-20 left-60 max-w-max bg-opacity-90 bg-blue-300 rounded-xl text-white z-30 right-60">
-          <SearchUpdate 
+        <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 max-w-max bg-opacity-90 bg-blue-300 rounded-xl text-white z-30">
+          <SearchUpdate
             setDate={setDate}
             setReturnDate={setReturnDate} />
-      </div>
+        </div>
+
 
       {/* Map Section */}
       <div className="w-full h-[65vh] bg-red-400 z-10">
@@ -42,9 +43,9 @@ export default VehicleListing;
  
 const SearchUpdate = ({ setDate, setReturnDate }) => {
   return (
-    <form className="p-4 space-y-4 w-full max-w-full">
+    <form className="p-4 space-y-4 w-full max-w-full h-full">
       {/* Row 1: From and To Fields */}
-      <div className="flex flex-col sm:flex-row items-center justify-between gap-4 w-full max-w-full">
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-4 w-full max-w-full max-h-max">
         {/* From Field */}
         <div className="flex-grow w-full max-w-full sm:w-auto">
           <label className="block mb-2">Pickup Location</label>
@@ -131,7 +132,7 @@ const SearchUpdate = ({ setDate, setReturnDate }) => {
         </div>
 
         {/* Passengers */}
-        <div className="w-full sm:w-auto max-w-full">
+        {/* <div className="w-full sm:w-auto max-w-full">
           <label className="block mb-2">Passengers</label>
           <div className="flex items-center bg-white text-black p-2 rounded max-w-full">
             <svg
@@ -151,7 +152,7 @@ const SearchUpdate = ({ setDate, setReturnDate }) => {
               className="w-full bg-transparent focus:outline-none"
             />
           </div>
-        </div>
+        </div> */}
 
         {/* Return Date */}
         <div className="flex-grow w-full max-w-full sm:w-auto">
