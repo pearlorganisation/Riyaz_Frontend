@@ -40,16 +40,15 @@ const VehicleListing = () => {
 export default VehicleListing;
 
  
-const SearchUpdate = ({setDate, setReturnDate}) => {
- 
+const SearchUpdate = ({ setDate, setReturnDate }) => {
   return (
-    <form className="p-4 space-y-4" >
+    <form className="p-4 space-y-4 w-full max-w-full">
       {/* Row 1: From and To Fields */}
-      <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-4 w-full max-w-full">
         {/* From Field */}
-        <div className="flex-grow w-full sm:w-auto">
+        <div className="flex-grow w-full max-w-full sm:w-auto">
           <label className="block mb-2">Pickup Location</label>
-          <div className="flex items-center bg-white text-black p-2 rounded">
+          <div className="flex items-center bg-white text-black p-2 rounded max-w-full">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5 mr-2"
@@ -74,9 +73,9 @@ const SearchUpdate = ({setDate, setReturnDate}) => {
         </div>
 
         {/* To Field */}
-        <div className="flex-grow w-full sm:w-auto">
+        <div className="flex-grow w-full max-w-full sm:w-auto">
           <label className="block mb-2">Destination</label>
-          <div className="flex items-center bg-white text-black p-2 rounded">
+          <div className="flex items-center bg-white text-black p-2 rounded max-w-full">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5 mr-2"
@@ -95,11 +94,11 @@ const SearchUpdate = ({setDate, setReturnDate}) => {
       </div>
 
       {/* Row 2: Flight Arrival, Passengers, and Return Date */}
-      <div className="flex flex-col sm:flex-row md:flex-row items-center justify-center gap-4">
-        {/* Flight Arrival */}
-        <div className="flex-grow w-full sm:w-auto">
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-4 w-full max-w-full">
+        {/* Pickup Date */}
+        <div className="flex-grow w-full max-w-full sm:w-auto">
           <label className="block mb-2">Pickup Date</label>
-          <div className="flex items-center bg-white text-black p-2 rounded">
+          <div className="flex items-center bg-white text-black p-2 rounded max-w-full">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5 mr-2"
@@ -114,16 +113,15 @@ const SearchUpdate = ({setDate, setReturnDate}) => {
             </svg>
             <input
               type="date"
-              
               className="w-full bg-transparent focus:outline-none"
-              onChange={(e)=> setDate(e.target.value)}
+              onChange={(e) => setDate(e.target.value)}
             />
           </div>
         </div>
 
         {/* Time Field */}
-        <div className="flex-grow w-full sm:w-auto">
-          <div className="flex items-center bg-white text-black p-2 mt-4 sm:mt-8 rounded">
+        <div className="flex-grow w-full max-w-full sm:w-auto">
+          <div className="flex items-center bg-white text-black p-2 mt-4 sm:mt-8 rounded max-w-full">
             <input
               type="time"
               className="w-full bg-transparent focus:outline-none"
@@ -132,10 +130,10 @@ const SearchUpdate = ({setDate, setReturnDate}) => {
           </div>
         </div>
 
-      
-        <div className="w-full sm:w-auto">
+        {/* Passengers */}
+        <div className="w-full sm:w-auto max-w-full">
           <label className="block mb-2">Passengers</label>
-          <div className="flex items-center bg-white text-black p-2 rounded ">
+          <div className="flex items-center bg-white text-black p-2 rounded max-w-full">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5 mr-2"
@@ -151,27 +149,25 @@ const SearchUpdate = ({setDate, setReturnDate}) => {
             <input
               type="number"
               className="w-full bg-transparent focus:outline-none"
-              
             />
           </div>
         </div>
 
         {/* Return Date */}
-        <div className="flex-grow w-full sm:w-auto">
+        <div className="flex-grow w-full max-w-full sm:w-auto">
           <label className="block mb-2 text-nowrap">Return Date</label>
-          <div className="flex items-center bg-white text-black p-2 rounded">
+          <div className="flex items-center bg-white text-black p-2 rounded max-w-full">
             <input
               type="date"
               className="w-full bg-transparent focus:outline-none"
-             
-              onChange={(e)=>setReturnDate(e.target.value)}
+              onChange={(e) => setReturnDate(e.target.value)}
             />
           </div>
         </div>
 
         {/* Return Time */}
-        <div className="flex-grow w-full sm:w-auto">
-          <div className="flex items-center bg-white text-black p-2 mt-4 sm:mt-8 rounded">
+        <div className="flex-grow w-full max-w-full sm:w-auto">
+          <div className="flex items-center bg-white text-black p-2 mt-4 sm:mt-8 rounded max-w-full">
             <input
               type="time"
               className="w-full bg-transparent focus:outline-none"
@@ -182,7 +178,10 @@ const SearchUpdate = ({setDate, setReturnDate}) => {
 
         {/* Update Button */}
         <div className="w-full sm:w-auto">
-          <button type="submit" className="bg-gray-500 px-6 py-2 mt-4 sm:mt-8 rounded text-white cursor-pointer opacity-80">
+          <button
+            type="submit"
+            className="bg-gray-500 px-6 py-2 mt-4 sm:mt-8 rounded text-white cursor-pointer opacity-80"
+          >
             Update
           </button>
         </div>
@@ -190,6 +189,7 @@ const SearchUpdate = ({setDate, setReturnDate}) => {
     </form>
   );
 };
+
 
  
 
