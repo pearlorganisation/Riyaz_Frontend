@@ -122,14 +122,14 @@ const BookingsData = () => {
   return (
     <> 
       <div className='flex flex-col justify-center items-center'>
-        <div className='flex flex-col justify-center items-center lg:h-max md:h-max h-auto'>
+        <div className='flex flex-col justify-center items-center lg:h-max md:h-max h-auto mt-3'>
           <img src={Car}
             width={200}
             height={180}
-            className=''
+            className='mt-2'
           />
 
-          <h1 className='text-4xl font-light pr-3 pl-3'>Your Bookings</h1>
+          <h1 className='text-4xl font- pt-3'>Your Bookings</h1>
           <p className='text-lg font-light pb-2 pt-3'>manishgupta@pearlorganisation.com</p>
         </div>  
         <div className='flex flex-col flex-wrap p-6 lg:flex-row md:flex-col  items-center justify-center gap-1 w-full mb-3'>
