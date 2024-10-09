@@ -10,16 +10,9 @@ function Dropdown() {
         setShowDropdown(!showDropdown);
     };
     const navigate = useNavigate();
-    // const { isUserLoggedIn } = useSelector((state)=>{state.auth});
+     
     const dipsatch = useDispatch();
-
-    // const handleMouseEnter = () => {
-    //     setShowDropdown(true);
-    // };
-
-    // const handleMouseLeave = () => {
-    //     setShowDropdown(false);
-    // };
+ 
  /** Handle for navigating to the profile data page */
  const handleProfile = () =>{
     navigate("/profile")
@@ -49,7 +42,7 @@ const handleBooking =()=>{
                         <li className="px-4 py-2 hover:bg-gray-200 cursor-pointer text-center font-medium"><button onClick={handleBooking}>Bookings</button></li>
                         <li className="px-4 py-2 hover:bg-gray-200 cursor-pointer">
                             <button
-                                className="text-white px-6 py-2 border-2 border-[#2DA5F3] rounded-md w-full text-red-400"
+                                className="px-6 py-2 border-2 border-[#2DA5F3] rounded-md w-full text-red-400"
                                 onClick={handleLogout}
                             >
                                 Logout
