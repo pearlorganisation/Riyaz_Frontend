@@ -64,7 +64,7 @@ function App() {
         },
         {
           path: "bookings",
-          element: <BookingsData />
+          element: isUserLoggedIn ? <BookingsData />: <Login />
         }
       ],
     },
