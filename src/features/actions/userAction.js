@@ -47,6 +47,7 @@ export const updateUserProfile = createAsyncThunk(
     }) => {
         try {
             const config = {
+                withCredentials: true,
                 headers: {
                     "Content-Type": "application/json",
                 },
