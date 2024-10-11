@@ -35,6 +35,7 @@ export const userLogin = createAsyncThunk(
   async ({ email, password }, { rejectWithValue }) => {
     try {
       const config = {
+        withCredentials:true,
         headers: {
           "Content-Type": "application/json",
         },

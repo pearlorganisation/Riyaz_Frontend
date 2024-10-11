@@ -8,10 +8,23 @@ import Partners from "../../components/Partners/Partners";
 import Help from "../../components/Help/Help";
 import GetInTouch from "../../components/GetInTouch/GetInTouch";
 import Feedback from "../../components/Feedback/Feedback";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getUserProfile } from "../../features/actions/userAction";
 
 const Home = () => {
   const authState = useSelector((state) => state.auth);
+
+  const { userInfo } = useSelector((state) => state.user);
+  console.log("Home Page", authState);
+
+  console.log("Profile", userInfo);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getUserProfile());
+  }, []);
 
   console.log("Home Page", authState);
   return (

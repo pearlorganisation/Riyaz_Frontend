@@ -1,12 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Profile from "../../assets/images/profile/832.jpg";
 import { GoPlus } from "react-icons/go";
 import { AiTwotoneDelete } from "react-icons/ai";
+import { useSelector } from 'react-redux';
+import UpdateModal from '../UpdateModal/UpdateModal';
+// import axios from 'axios';
+
 
 const ProfileData = () => {
+
+  const { userInfo } = useSelector(state=> state.user);
+  const { name , email, mobileNumber } = userInfo
+  
+
+  // for updateProflie
+  const [edit, setEdit] = useState(false)
+  const handleEdit = ()=>{
+    setEdit(!edit);
+  }
+ 
   return (
   <>
-  <div className='flex flex-col justify-center items-center'>
+  <div className='flex flex-col justify-center items-center z-10 relative'>
         <div className='flex flex-col justify-center items-center lg:h-max md:h-max h-auto'>
            <img src={Profile}
             width={200}
@@ -14,53 +29,52 @@ const ProfileData = () => {
             className='' 
             /> 
           
-          <h1 className='text-4xl font-light pr-3 pl-3'>manishgupta@pearlorganisation.com</h1>
-          <p className='text-lg font-light pb-2 pt-3'>manishgupta@pearlorganisation.com</p>
+          <h1 className='text-4xl font-light pr-3 pl-3'>{email}</h1>
+          <p className='text-lg font-light pb-2 pt-3'>{email}</p>
+       
         </div>
         <div className='flex flex-col lg:flex-row md:flex-col gap-2 justify-between w-[80%] mb-3'>
           <div className='w-full lg:w-1/2 mt-3'>
            <div className="bg-white p-8 rounded-lg shadow-2xl">
-            <h2 className="text-xl font-semibold mb-2 w-full flex flex-row justify-between">Your Profile <span className="text-sm text-red-600">* required</span></h2>
+            <h2 className="text-xl font-semibold mb-2 w-full flex flex-row justify-between">Your Profile <span className="text-sm text-red-600">* required</span>
+            </h2>
             <p className="text-sm text-gray-500 mb-6">This information is used to pre-fill your details and make it quicker for you to complete a booking.</p>
 
-            <form action="#">
+            <div>
                <div className="mb-4">
                 <label for="given-name" className="block text-sm font-medium text-gray-700">Given Name *</label>
-                <input type="text" id="given-name" name="given-name" className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm h-12" required />
-              </div>
-
-               <div className="mb-4">
-                <label for="family-name" className="block text-sm font-medium text-gray-700">Family Name *</label>
-                <input type="text" id="family-name" name="family-name" className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm h-12" required />
+                <input type="text" value={name} id="given-name" name="given-name" className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm h-12" 
+                // onChange={(e)=>setUserName(e.target.value)}
+                required />
               </div>
 
                <div className="mb-4">
                 <label for="mobile-number" className="block text-sm font-medium text-gray-700">Mobile Number *</label>
                 <div className="flex mt-1">
                   <span className="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-sm">🇮🇳</span>
-                  <input type="text" id="mobile-number" name="mobile-number" placeholder="081234 56789" className="block w-full px-3 py-2 border border-gray-300 rounded-r-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm h-12" required />
+                  <input type="text" value={mobileNumber} id="mobile-number" name="mobile-number" placeholder="081234 56789" className="block w-full px-3 py-2 border border-gray-300 rounded-r-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm h-12" 
+                  // onChange={(e)=>setMobile(e.target.value)}
+                  required />
                 </div>
               </div>
 
                <div className="mb-4">
                 <label for="email" className="block text-sm font-medium text-gray-700">Email Address *</label>
-                <input type="email" id="email" name="email" placeholder="example@domain.com" className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm h-12" required />
+                <input type="email" id="email" value={email} name="email" placeholder="example@domain.com" className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm h-12"
+                // onChange={(e)=>setUserEmail(e.target.value)}
+                 required />
               </div>
 
-               <div className="mb-4">
-                <label for="birth-date" className="block text-sm font-medium text-gray-700">Birth Date</label>
-                <input type="date" id="birth-date" name="birth-date" className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm h-12" />
-              </div>
+                
 
                <div className='flex justify-between'>
-                <button type="submit" className="w-full bg-black hover:bg-blue-900 text-white mr-3 h-14 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 text-2xl font-serif">
-                  Save Profile
+                <button onClick={handleEdit} className="w-full bg-black hover:bg-blue-900 text-white h-14 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 text-2xl font-serif">
+                  Edit Profile
                 </button>
-                <button type="submit" className="w-full bg-white hover:text-blue-500 text-black ml-3 h-14 rounded-md shadow-sm text-2xl font-serif border-2 border-blue-400">
-                  Cancel
-                </button>
+                
+                
               </div>
-            </form>
+            </div>
           </div>
         </div>
         <div className='w-full lg:w-1/2'> 
@@ -81,7 +95,10 @@ const ProfileData = () => {
             </div>
          </div>
         </div>
-     
+        {/* Modal */}
+        {edit && (
+          <UpdateModal email={email} mobileNumber={mobileNumber} name={name} handleEdit={handleEdit} /> 
+          )}
   </div>
   </>
   )
