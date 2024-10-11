@@ -20,10 +20,10 @@ const Banner = () => {
     <div
       className="relative  bg-cover object-center bg-no-repeat  border-2"
       style={{
-        background: "url('backgroundTemp.png'",
+        background: "url('backgroundTemp.png')",
       }}
     >
-      <div className="flex items-center justify-center   py-12 z-50">
+      <div className="flex items-center justify-center py-12 z-50">
         <div className="container  mx-auto">
           <div className="mx-auto">
             <div

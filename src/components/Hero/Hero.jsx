@@ -1,8 +1,10 @@
 import CalendarIcon from "../../assets/images/calendar.png";
 import AirplaneIcon from "../../assets/images/airplane.png";
 import LocationIcon from "../../assets/images/location.png";
+import { useNavigate } from "react-router-dom";
 
 const Hero = () => {
+  const navigate = useNavigate();
   return (
     <div className="  ">
       <div className="flex items-center justify-center  bg-opacity-50 py-12">
@@ -100,6 +102,7 @@ const Hero = () => {
 
                 <div className="flex items-center justify-center  ">
                   <button
+                    onClick={() => navigate("/vehicles")}
                     className="uppercase bg-green-500 hover:bg-green-300 text-white text-md font-bold py-2 px-4  rounded-md"
                     style={{
                       boxShadow:
