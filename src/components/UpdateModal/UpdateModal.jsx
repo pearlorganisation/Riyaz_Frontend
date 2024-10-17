@@ -1,25 +1,37 @@
  
 
-
-
 import React, { useRef } from 'react';
-
+import { useDispatch } from 'react-redux';
+import { getUserProfile, updateUserProfile } from '../../features/actions/userAction';
 const UpdateModal = ({ email, mobileNumber, name, handleEdit }) => {
     const nameRef = useRef(null);
     const emailRef = useRef(null);
     const mobileNumberRef = useRef(null);
+    const dispatch = useDispatch();
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         const updatedName = nameRef.current.value;
         const updatedEmail = emailRef.current.value;
         const updatedMobileNumber = mobileNumberRef.current.value;
- 
-        console.log("Updated Values: ", { updatedName, updatedEmail, updatedMobileNumber });
 
-        // Optionally, call the handleEdit function
-        // handleEdit({ updatedName, updatedEmail, updatedMobileNumber });
+        // Dispatch the updateUserProfile action
+        dispatch(updateUserProfile({
+            name: updatedName,
+            email: updatedEmail,
+            mobileNumber: updatedMobileNumber,
+        }))
+            .unwrap()
+            .then(() => {
+                // Optionally close the modal on success
+                console.log('Profile updated successfully');
+                dispatch(getUserProfile())
+                handleEdit(); // Close the modal
+            })
+            .catch((error) => {
+                console.error('Error while updating profile:', error);
+            });
     };
 
     return (
