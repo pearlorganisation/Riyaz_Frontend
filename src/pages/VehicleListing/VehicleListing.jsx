@@ -1,11 +1,15 @@
 import SearchResult from "../../components/SearchResult/SearchResult";
 import SidebarFilter from "../../components/SidebarFilter/SidebarFilter";
 import { GoArrowSwitch } from "react-icons/go";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 
 const VehicleListing = () => { 
   const [selectedVehicleTypes, setSelectedVehicleTypes] = useState([]);
+  const [selectedVehicleClasses, setSelectedVehicleClasses] = useState([]);
+  const [selectedVehicleRating, setSelectedVehicleRating] = useState(null);
+  const [selectedVehicleReviews, setSelectedVehicleReviews] = useState(null);
+
   const [date, setDate] = useState("");
   const [returnDate, setReturnDate] = useState("");
 
@@ -28,8 +32,17 @@ const VehicleListing = () => {
 
       {/* Sidebar and Search Results */}
       <div className="grid grid-cols-1 lg:grid-cols-[30%_auto] gap-8 mt-20">
-          <SidebarFilter onVehicleTypeChange={handleVehicleTypeChange} />
-          <SearchResult selectedVehicleTypes={selectedVehicleTypes}
+          <SidebarFilter 
+            onVehicleTypeChange={handleVehicleTypeChange} 
+            setSelectedVehicleClasses={setSelectedVehicleClasses} 
+            setSelectedVehicleRating={setSelectedVehicleRating}
+            setSelectedVehicleReviews={setSelectedVehicleReviews}
+          />
+          <SearchResult 
+            selectedVehicleClasses={selectedVehicleClasses}
+            selectedVehicleTypes={selectedVehicleTypes}
+            selectedVehicleRating={selectedVehicleRating}
+            selectedVehicleReviews={selectedVehicleReviews}
             date={date}
             returnDate={returnDate} />
       </div>

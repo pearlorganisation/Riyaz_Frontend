@@ -96,22 +96,27 @@ const numbersOfReviewsTypes = [
   {
     id: 1,
     name: "50 or more",
+    value: 50,
   },
   {
     id: 2,
     name: "25 or more",
+    value: 25,
   },
   {
     id: 3,
     name: "10 or more",
+    value: 10,
   },
   {
     id: 4,
     name: "5 or more",
+    value: 5,
   },
   {
     id: 5,
     name: "1 or more",
+    value: 1,
   },
 ];
 
@@ -119,7 +124,7 @@ const faqsList = [];
 
 const whyUsFeatures = [];
 
-const SidebarFilter = ({ onVehicleTypeChange }) => {
+const SidebarFilter = ({ onVehicleTypeChange, setSelectedVehicleClasses, setSelectedVehicleRating, setSelectedVehicleReviews }) => {
   const [selectedVehicleTypes, setSelectedVehicleTypes] = useState([]);
 
   const handleCheckboxChange = (vehicleType) => {
@@ -129,6 +134,14 @@ const SidebarFilter = ({ onVehicleTypeChange }) => {
 
     setSelectedVehicleTypes(updatedVehicleTypes);
     onVehicleTypeChange(updatedVehicleTypes);
+  }
+
+  const handleClassChange = (vehicleClass) => {
+    setSelectedVehicleClasses((prev) =>
+      prev.includes(vehicleClass)
+        ? prev.filter((v) => v !== vehicleClass)
+        : [...prev, vehicleClass]
+    );
   }
   return (
     <div>
@@ -184,6 +197,8 @@ const SidebarFilter = ({ onVehicleTypeChange }) => {
                 type="checkbox"
                 name="myCheckbox"
                 defaultChecked={false}
+                value={type.name.toLocaleLowerCase()}
+                onChange={(e)=>handleClassChange(type.name.toLocaleLowerCase())}
                 className="mr-4 h-6 w-6"
                 disabled={type.disabled}
               />
@@ -225,8 +240,9 @@ const SidebarFilter = ({ onVehicleTypeChange }) => {
             >
               <input
                 type="radio"
-                name="myRadio"
+                name="ratingRadio"
                 value={rating.stars}
+                onChange={(e) => setSelectedVehicleRating(parseInt(e.target.value) || 0)}
                 className="mr-4 w-6 h-6 hover:border-2 hover:border-blue-500"
               />
               <span>{rating.stars} Stars and More</span>
@@ -246,8 +262,9 @@ const SidebarFilter = ({ onVehicleTypeChange }) => {
             >
               <input
                 type="radio"
-                name="myRadio"
-                value={review.name}
+                name="reviewRadio"
+                value={review.value}
+                onChange={(e) => setSelectedVehicleReviews(parseInt(e.target.value) || 0)}
                 className="mr-4 w-6 h-6 hover:border-2 hover:border-blue-500"
               />
               <span> {review.name}</span>

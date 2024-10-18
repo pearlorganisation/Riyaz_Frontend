@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { BiArrowToBottom } from "react-icons/bi";
 import { CiStar } from "react-icons/ci";
 
@@ -15,7 +15,7 @@ const vehiclesData = [
         name: " Rashid Hussain Passenger Transport",
         vehicle: "Sedan",
         private: true,
-        class: "Economy",
+        class: "economy",
         tags: ["PRIVATE", "ECONOMY", "SEDAN", "MEET N GREET"],
         ratings: 3.5,
         reviews: 65,
@@ -302,7 +302,14 @@ const vehiclesData = [
   },
 ];
 
-const SearchResult = ({ selectedVehicleTypes, date, returnDate }) => {
+const SearchResult = ({
+  selectedVehicleTypes,
+  date,
+  returnDate,
+  selectedVehicleClasses,
+  selectedVehicleRating,
+  selectedVehicleReviews
+}) => {
   const vehicleMapping = {
     sedan: vehiclesData[0].sedans,
     suv: vehiclesData[1].suvs,
@@ -310,38 +317,54 @@ const SearchResult = ({ selectedVehicleTypes, date, returnDate }) => {
     bus: vehiclesData[3].buses,
   };
 
-  // If no vehicle types are selected, include all types for filtering
-  const allVehicleTypes = selectedVehicleTypes.length
-    ? selectedVehicleTypes
-    : ["sedan", "suv", "van", "bus"];
+  const [filteredVehicles, setFilteredVehicles] = useState([]);
 
-  // Filter vehicles based on availability and selected types or date range
-  const filteredVehicles = allVehicleTypes.flatMap((type) => {
-    const vehicles = vehicleMapping[type];
-    return vehicles
-      ? vehicles.filter((vehicle) => {
-        const availableFrom = new Date(vehicle.availableFrom);
-        const availableTo = new Date(vehicle.availableTo);
-        const selectedStartDate = new Date(date);
-        const selectedEndDate = new Date(returnDate);
+  useEffect(() => {
+    const allVehicleTypes = selectedVehicleTypes.length
+      ? selectedVehicleTypes
+      : ["sedan", "suv", "van", "bus"];
 
-        // Check if the vehicle is available within the selected date range
-        return (
-          (availableFrom <= selectedEndDate && availableTo >= selectedStartDate)
-        );
-      })
-      : [];
-  });
+    const filtered = allVehicleTypes.flatMap((type) => {
+      const vehicles = vehicleMapping[type];
+      return vehicles
+        ? vehicles.filter((vehicle) => {
+            const availableFrom = new Date(vehicle.availableFrom);
+            const availableTo = new Date(vehicle.availableTo);
+            const selectedStartDate = new Date(date);
+            const selectedEndDate = new Date(returnDate);
 
-  console.log(filteredVehicles, "filtered vehi")
+            const isDateAvailable =
+              availableFrom <= selectedEndDate &&
+              availableTo >= selectedStartDate;
+
+            const isClassSelected =
+              selectedVehicleClasses.length === 0 ||
+              (vehicle?.class &&
+                selectedVehicleClasses.includes(vehicle.class));
+
+            const isRatingSelected =
+              selectedVehicleRating === null ||
+              vehicle?.ratings >= selectedVehicleRating;
+
+            const isReviewSelected =
+              selectedVehicleReviews === null ||
+              vehicle?.reviews >= selectedVehicleReviews;
+
+            return isDateAvailable && isClassSelected && isRatingSelected && isReviewSelected;
+          })
+        : [];
+    });
+    console.log(filtered);
+    setFilteredVehicles(filtered);
+  }, [selectedVehicleTypes, date, returnDate, selectedVehicleClasses, selectedVehicleRating , selectedVehicleReviews]);
 
   return (
     <div className="px-20 py-10">
       <div className="flex flex-row justify-between">
-        <h1 className="mt-5">{filteredVehicles.length} Results </h1>
+        <h1 className="mt-5">{filteredVehicles.length} Results</h1>
 
         <div className="flex flex-row gap-4 items-center">
-          <h1 className=""> Sort By </h1>
+          <h1>Sort By</h1>
           <div className="flex flex-row gap-4">
             <select
               className="px-5 py-4 border border-blue-500 rounded-md text-lg font-semibold"
@@ -360,10 +383,12 @@ const SearchResult = ({ selectedVehicleTypes, date, returnDate }) => {
       </div>
 
       {filteredVehicles.length === 0 ? (
-        <h2>No vehicles found for the selected types or date range.</h2>
+        <h2>
+          No vehicles found for the selected types, classes, or date range.
+        </h2>
       ) : (
-        filteredVehicles.map((vehicle) => (
-          <VehicleCard key={vehicle.id} vehicle={vehicle} />
+        filteredVehicles.map((vehicle, index) => (
+          <VehicleCard key={index} vehicle={vehicle} />
         ))
       )}
     </div>
@@ -371,6 +396,3 @@ const SearchResult = ({ selectedVehicleTypes, date, returnDate }) => {
 };
 
 export default SearchResult;
-
-
- 
