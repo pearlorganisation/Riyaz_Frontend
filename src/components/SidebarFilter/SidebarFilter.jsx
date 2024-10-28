@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 const typesData = [
   {
     id: 1,
     name: "Shared",
-    disabled: true,
+    disabled: false,
   },
   {
     id: 2,
@@ -14,7 +15,7 @@ const typesData = [
   {
     id: 3,
     name: "Rideshare",
-    disabled: true,
+    disabled: false,
   },
 ];
 
@@ -126,10 +127,50 @@ const SidebarFilter = ({ onVehicleTypeChange }) => {
     const updatedVehicleTypes = selectedVehicleTypes.includes(vehicleType)
       ? selectedVehicleTypes.filter((type) => type !== vehicleType)
       : [...selectedVehicleTypes, vehicleType];
-
     setSelectedVehicleTypes(updatedVehicleTypes);
     onVehicleTypeChange(updatedVehicleTypes);
-  }
+  };
+  
+
+  const [selectedTypes, setSelectedTypes] = useState([]);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  // Handle checkbox change
+  const handleCheckType = (type) => {
+    let updatedTypes = [...selectedTypes];
+
+    if (updatedTypes.includes(type)) {
+      updatedTypes = updatedTypes.filter((t) => t !== type); // Remove the type if unchecked
+    } else {
+      updatedTypes.push(type); // Add the type if checked
+    }
+
+    setSelectedTypes(updatedTypes);
+  };
+
+  useEffect(() => {
+    
+    const searchParams = new URLSearchParams(location.search);
+    const existingTypes = searchParams.getAll("serviceType");
+
+    
+    if (selectedTypes.sort().join(",") !== existingTypes.sort().join(",")) {
+      
+      searchParams.delete("serviceType");
+
+       
+      selectedTypes.forEach((type) => {
+        searchParams.append("serviceType", type);
+      });
+
+     
+      navigate({
+        pathname: location.pathname,
+        search: searchParams.toString(),
+      }, { replace: true });  
+    }
+  }, [selectedTypes, navigate, location]);
   return (
     <div>
       <div className="px-20 py-10">
@@ -141,8 +182,10 @@ const SidebarFilter = ({ onVehicleTypeChange }) => {
               <input
                 type="checkbox"
                 name="myCheckbox"
-                defaultChecked={false}
+                value={type.name.toLocaleLowerCase()}
+                onChange={(e)=>handleCheckType(type.name.toLocaleLowerCase())}
                 disabled={type.disabled}
+                defaultChecked={false}
                 className="mr-4 h-6 w-6"
               />
 
@@ -192,26 +235,6 @@ const SidebarFilter = ({ onVehicleTypeChange }) => {
             </label>
           </div>
         ))}
-
-        {/* <hr className="mt-3" />
-
-        <h1 className="mt-5 text-xl font-semibold"> Inclusions and Extras </h1>
-
-        {inclusionsAndExtrasTypes.map((type) => (
-          <div className="flex" key={type.id}>
-            <label className="flex items-start justify-center mt-6">
-              <input
-                type="checkbox"
-                name="myCheckbox"
-                defaultChecked={false}
-                className="mr-4 h-6 w-6"
-                disabled={type.disabled}
-              />
-
-              <span>{type.name}</span>
-            </label>
-          </div>
-        ))} */}
 
         <hr className="mt-3" />
 
