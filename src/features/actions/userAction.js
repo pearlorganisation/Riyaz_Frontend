@@ -3,7 +3,7 @@ import {
     createAsyncThunk
 } from "@reduxjs/toolkit";
 
-const localURL = "http://localhost:3000/api/v1";
+export const localURL = "http://localhost:3000/api/v1";
 
 export const getUserProfile = createAsyncThunk(
     "user/getProfile",

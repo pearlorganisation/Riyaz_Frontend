@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BiArrowToBottom } from "react-icons/bi";
 import { CiStar } from "react-icons/ci";
 
 import VehicleCard from "./VehicleCard";
 import { FaArrowRightArrowLeft } from "react-icons/fa6";
+import { useDispatch, useSelector } from "react-redux";
+import { getVehicles } from "../../features/actions/vehicleAction";
+ 
 
 const vehiclesData = [
   {
@@ -303,6 +306,15 @@ const vehiclesData = [
 ];
 
 const SearchResult = ({ selectedVehicleTypes, date, returnDate }) => {
+
+  /*------------------------------------------------dynamic data----------------------------------------------------------------- */
+  
+
+  const dispatch = useDispatch();
+  const { vehicleInfo } = useSelector((state) => state.vehicle);
+  useEffect(() => {
+    dispatch(getVehicles())
+  }, [])
   const vehicleMapping = {
     sedan: vehiclesData[0].sedans,
     suv: vehiclesData[1].suvs,
@@ -318,8 +330,14 @@ const SearchResult = ({ selectedVehicleTypes, date, returnDate }) => {
   // Filter vehicles based on availability and selected types or date range
   const filteredVehicles = allVehicleTypes.flatMap((type) => {
     const vehicles = vehicleMapping[type];
+
     return vehicles
       ? vehicles.filter((vehicle) => {
+        if (!date && !returnDate) {
+          // If no date is selected, show all vehicles
+          return true;
+        }
+
         const availableFrom = new Date(vehicle.availableFrom);
         const availableTo = new Date(vehicle.availableTo);
         const selectedStartDate = new Date(date);
@@ -360,7 +378,7 @@ const SearchResult = ({ selectedVehicleTypes, date, returnDate }) => {
       </div>
 
       {filteredVehicles.length === 0 ? (
-        <h2>No vehicles found for the selected types or date range.</h2>
+        <h1>No Data Found</h1>
       ) : (
         filteredVehicles.map((vehicle) => (
           <VehicleCard key={vehicle.id} vehicle={vehicle} />
@@ -371,6 +389,3 @@ const SearchResult = ({ selectedVehicleTypes, date, returnDate }) => {
 };
 
 export default SearchResult;
-
-
- 

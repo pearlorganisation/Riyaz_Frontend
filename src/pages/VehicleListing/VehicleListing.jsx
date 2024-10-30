@@ -1,7 +1,9 @@
 import SearchResult from "../../components/SearchResult/SearchResult";
 import SidebarFilter from "../../components/SidebarFilter/SidebarFilter";
 import { GoArrowSwitch } from "react-icons/go";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+// import { useDispatch, useSelector } from "react-redux";
+// import { getVehicles } from "../../features/actions/vehicleAction";
 
 
 const VehicleListing = () => { 
@@ -11,6 +13,13 @@ const VehicleListing = () => {
 
   const handleVehicleTypeChange = (types) => {
     setSelectedVehicleTypes(types);}
+
+  // const dispatch = useDispatch();
+  // const { vehicleInfo } = useSelector((state) => state.vehicle);
+  // useEffect(()=>{
+  //   dispatch(getVehicles())
+  // },[])
+
   return (
     <div> 
     <div className="static z-10">
@@ -40,7 +49,7 @@ const VehicleListing = () => {
 
 export default VehicleListing;
 
- 
+ /*------------------------------------------------------handle for selecting date----------------------------------------------------------- */
 const SearchUpdate = ({ setDate, setReturnDate }) => {
   return (
     <form className="p-4 space-y-4 w-full max-w-full h-full">
