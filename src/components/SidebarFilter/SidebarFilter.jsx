@@ -1,5 +1,6 @@
+/* eslint-disable react/prop-types */
 import React from "react";
-
+import { useState } from "react";
 const typesData = [
   {
     id: 1,
@@ -22,7 +23,7 @@ const vehiclesData = [
   {
     id: 1,
     name: "Sedan",
-    disabled: true,
+    disabled: false,
   },
   {
     id: 2,
@@ -32,7 +33,7 @@ const vehiclesData = [
   {
     id: 3,
     name: "Limo",
-    disabled: true,
+    disabled: false,
   },
   {
     id: 4,
@@ -42,7 +43,7 @@ const vehiclesData = [
   {
     id: 5,
     name: "Bus",
-    disabled: true,
+    disabled: false,
   },
 ];
 
@@ -119,7 +120,17 @@ const faqsList = [];
 
 const whyUsFeatures = [];
 
-const SidebarFilter = () => {
+const SidebarFilter = ({ onVehicleTypeChange }) => {
+  const [selectedVehicleTypes, setSelectedVehicleTypes] = useState([]);
+
+  const handleCheckboxChange = (vehicleType) => {
+    const updatedVehicleTypes = selectedVehicleTypes.includes(vehicleType)
+      ? selectedVehicleTypes.filter((type) => type !== vehicleType)
+      : [...selectedVehicleTypes, vehicleType];
+
+    setSelectedVehicleTypes(updatedVehicleTypes);
+    onVehicleTypeChange(updatedVehicleTypes);
+  };
   return (
     <div>
       <div className="px-20 py-10">
@@ -151,6 +162,10 @@ const SidebarFilter = () => {
               <input
                 type="checkbox"
                 name="myCheckbox"
+                value={type.name.toLocaleLowerCase()}
+                onChange={(e) =>
+                  handleCheckboxChange(type.name.toLocaleLowerCase())
+                }
                 defaultChecked={false}
                 className="mr-4 h-6 w-6"
                 disabled={type.disabled}

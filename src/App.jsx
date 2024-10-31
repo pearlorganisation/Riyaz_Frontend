@@ -15,6 +15,7 @@ import Contact from "./pages/Contact/Contact";
 import Login from "./pages/Login/Login";
 import Signup from "./pages/Signup/Signup";
 import VehicleListing from "./pages/VehicleListing/VehicleListing";
+import VehicleDetails from "./pages/VehicleDetails/VehicleDetails";
 
 function App() {
   useEffect(() => {
@@ -32,7 +33,7 @@ function App() {
   const routes = createBrowserRouter([
     {
       path: "/",
-      element: isUserLoggedIn ? <Layout /> : <Navigate to="/login" />,
+      element: <Layout />,
       children: [
         {
           index: true,
@@ -49,6 +50,10 @@ function App() {
         {
           path: "vehicles",
           element: <VehicleListing />,
+        },
+        {
+          path: "vehicle-details",
+          element: <VehicleDetails />,
         },
       ],
     },

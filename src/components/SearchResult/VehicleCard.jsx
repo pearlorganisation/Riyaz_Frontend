@@ -1,10 +1,12 @@
 /* eslint-disable react/prop-types */
+import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import { TbCircleArrowRight } from "react-icons/tb";
 import LearnMoreModal from "./LearnMoreModal";
 
 const VehicleCard = ({ vehicle }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const navigate = useNavigate();
 
   const handleModal = () => {
     setIsModalOpen(!isModalOpen);
@@ -16,6 +18,10 @@ const VehicleCard = ({ vehicle }) => {
     setIsModalOpen(false);
   };
 
+  const handleSelect = (vehicle) => {
+    navigate(`/vehicle-details`, { state: { vehicle } }); // Pass vehicle data through state
+  };
+
   return (
     <div>
       <div key={vehicle.id} className="rounded-md mt-6 bg-blue-200">
@@ -25,7 +31,7 @@ const VehicleCard = ({ vehicle }) => {
               <img src={vehicle.image} className="w-36 h-28" />
 
               <div className="flex flex-col gap-6 px-6 py-6">
-                <h1 className="">{vehicle.name} </h1>
+                <h1 className="">{vehicle.name}</h1>
 
                 <div className="flex flex-row gap-6">
                   <h1>{vehicle.ratings}</h1>
@@ -65,7 +71,10 @@ const VehicleCard = ({ vehicle }) => {
               <span className="text-5xl text-white"> {vehicle.price}</span>
             </div>
 
-            <button className="px-6 py-2 border-2 border-white text-white mt-6 rounded-md flex fle-row gap-3">
+            <button
+              className="px-6 py-2 border-2 border-white text-white mt-6 rounded-md flex fle-row gap-3"
+              onClick={() => handleSelect(vehicle)} // Pass the entire vehicle object
+            >
               <span> SELECT </span>
               <TbCircleArrowRight size="24" />
             </button>

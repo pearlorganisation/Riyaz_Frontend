@@ -1,6 +1,7 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import authReducer from "./slices/authSlice";
-
+import userReducer from "./slices/userSlice";
+import vehicleReducer from "./slices/vehicleSlice";
 import { encryptTransform } from "redux-persist-transform-encrypt";
 import persistReducer from "redux-persist/es/persistReducer";
 import storage from "redux-persist/lib/storage";
@@ -24,6 +25,8 @@ const persistConfig = {
 
 const reducer = combineReducers({
   auth: authReducer,
+  user: userReducer,
+  vehicle: vehicleReducer,
 });
 
 const rootReducer = (state, action) => {

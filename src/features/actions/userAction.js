@@ -3,9 +3,9 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 
 const localURL = "http://localhost:3000/api/v1";
 
-export const registerUser = createAsyncThunk(
-  "auth/register",
-  async ({ name, email, password, mobileNumber }, { rejectWithValue }) => {
+export const getUserProfile = createAsyncThunk(
+  "user/getProfile",
+  async (_, { rejectWithValue }) => {
     try {
       const config = {
         withCredentials: true,
@@ -13,13 +13,11 @@ export const registerUser = createAsyncThunk(
           "Content-Type": "application/json",
         },
       };
-      const { data } = await axios.post(
-        `${localURL}/auth/signup`,
-        { name, email, password, mobileNumber },
-        config
-      );
+      const { data } = await axios.get(`${localURL}/users/profile`, config);
 
-      console.log("Register Data", data);
+      console.log("Profile Data", data);
+
+      return data.data;
     } catch (error) {
       // return custom error message from backend if present
       if (error.response && error.response.data.message) {
@@ -31,26 +29,22 @@ export const registerUser = createAsyncThunk(
   }
 );
 
-export const userLogin = createAsyncThunk(
-  "auth/login",
-  async ({ email, password }, { rejectWithValue }) => {
+export const updateUserProfile = createAsyncThunk(
+  "user/updateProfile",
+  async ({ name, email, mobileNumber }, { rejectWithValue }) => {
     try {
       const config = {
-        withCredentials: true,
-
         headers: {
           "Content-Type": "application/json",
         },
       };
-      const { data } = await axios.post(
-        `${localURL}/auth/login`,
-        { email, password },
+      const { data } = await axios.put(
+        `${localURL}/users/profile`,
+        { name, email, mobileNumber },
         config
       );
 
-      console.log(data, "asdasdasdasddasdasdasdasd");
-      // store user's token in local storage
-      // localStorage.setItem("isLoggedIn", true);
+      console.log(data, "update user profile data");
 
       return data;
     } catch (error) {
