@@ -44,8 +44,8 @@ const ProfileData = () => {
                <div className="mb-4">
                 <label for="given-name" className="block text-sm font-medium text-gray-700">Given Name *</label>
                 <input type="text" value={name} id="given-name" name="given-name" className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm h-12" 
-                // onChange={(e)=>setUserName(e.target.value)}
-                disabled />
+                 disabled
+               />
               </div>
 
                <div className="mb-4">
@@ -53,16 +53,14 @@ const ProfileData = () => {
                 <div className="flex mt-1">
                   <span className="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-sm">🇮🇳</span>
                   <input type="text" value={mobileNumber} id="mobile-number" name="mobile-number" placeholder="081234 56789" className="block w-full px-3 py-2 border border-gray-300 rounded-r-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm h-12" 
-                  // onChange={(e)=>setMobile(e.target.value)}
-                   disabled />
+                  disabled />
                 </div>
               </div>
 
                <div className="mb-4">
                 <label for="email" className="block text-sm font-medium text-gray-700">Email Address *</label>
                 <input type="email" id="email" value={email} name="email" placeholder="example@domain.com" className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm h-12"
-                // onChange={(e)=>setUserEmail(e.target.value)}
-                 disabled />
+                disabled />
               </div>
 
                 
