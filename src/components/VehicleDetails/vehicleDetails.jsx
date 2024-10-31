@@ -21,9 +21,9 @@ const VehicleDetails = () => {
 
   return (
     <div> 
-    <div className="flex justify-center mt-10">
+    <div className="flex justify-center items-center mt-10">
       {/* This is the card of car details */}
-      <div className="shadow-lg rounded-lg max-w-max md:w-[60%] flex">
+      <div className="lg:w-[100%] flex items-center justify-center">
         
         {/* Left Section - Image and Details with gray background */}
         <div className="flex flex-col items-center gap-4 bg-gray-100 rounded-l-lg p-4 relative">

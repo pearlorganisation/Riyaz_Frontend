@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { getVehicles } from "../../features/actions/vehicleAction";
+import { useDispatch } from "react-redux";
 const typesData = [
   {
     id: 1,
@@ -135,7 +137,7 @@ const SidebarFilter = ({ onVehicleTypeChange }) => {
   const [selectedTypes, setSelectedTypes] = useState([]);
   const navigate = useNavigate();
   const location = useLocation();
-
+  const dispatch = useDispatch();
   // Handle checkbox change
   const handleCheckType = (type) => {
     let updatedTypes = [...selectedTypes];
@@ -150,27 +152,28 @@ const SidebarFilter = ({ onVehicleTypeChange }) => {
   };
 
   useEffect(() => {
-    
     const searchParams = new URLSearchParams(location.search);
     const existingTypes = searchParams.getAll("serviceType");
 
-    
     if (selectedTypes.sort().join(",") !== existingTypes.sort().join(",")) {
-      
       searchParams.delete("serviceType");
 
-       
       selectedTypes.forEach((type) => {
         searchParams.append("serviceType", type);
       });
 
-     
-      navigate({
-        pathname: location.pathname,
-        search: searchParams.toString(),
-      }, { replace: true });  
+      navigate(
+        {
+          pathname: location.pathname,
+          search: searchParams.toString(),
+        },
+        { replace: true }
+      );
     }
-  }, [selectedTypes, navigate, location]);
+
+    // Dispatch getVehicles with the selected types in params
+    dispatch(getVehicles({ serviceType: selectedTypes }));
+  }, [selectedTypes, navigate, location, dispatch]);
   return (
     <div>
       <div className="px-20 py-10">
@@ -182,8 +185,8 @@ const SidebarFilter = ({ onVehicleTypeChange }) => {
               <input
                 type="checkbox"
                 name="myCheckbox"
-                value={type.name.toLocaleLowerCase()}
-                onChange={(e)=>handleCheckType(type.name.toLocaleLowerCase())}
+                value={type.name}
+                onChange={(e)=>handleCheckType(type.name)}
                 disabled={type.disabled}
                 defaultChecked={false}
                 className="mr-4 h-6 w-6"
