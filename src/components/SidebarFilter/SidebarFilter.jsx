@@ -123,45 +123,68 @@ const faqsList = [];
 const whyUsFeatures = [];
 
 const SidebarFilter = ({ onVehicleTypeChange }) => {
-  const [selectedVehicleTypes, setSelectedVehicleTypes] = useState([]);
-
-  const handleCheckboxChange = (vehicleType) => {
-    const updatedVehicleTypes = selectedVehicleTypes.includes(vehicleType)
-      ? selectedVehicleTypes.filter((type) => type !== vehicleType)
-      : [...selectedVehicleTypes, vehicleType];
-    setSelectedVehicleTypes(updatedVehicleTypes);
-    onVehicleTypeChange(updatedVehicleTypes);
-  };
   
+  const [selectedVehicleTypes, setSelectedVehicleTypes] = useState([]); // for vehicle types
+  const [selectedTypes, setSelectedTypes] = useState([]); // for types of ride
+  const [selectedClassTypes, setSelectedClassTypes] = useState([]); // for selecting by class types of vehicles
+  const [selectedRatingTypes, setSelectedRatingTypes] = useState([]); // for selecting vehicles on ratings type
+  const [selectedReviewTypes, setSelectedReviewTypes] = useState([]); // for selecting based on reviews
 
-  const [selectedTypes, setSelectedTypes] = useState([]);
   const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useDispatch();
-  // Handle checkbox change
+
+  // Handle checkbox change for serviceType
   const handleCheckType = (type) => {
     let updatedTypes = [...selectedTypes];
-
     if (updatedTypes.includes(type)) {
-      updatedTypes = updatedTypes.filter((t) => t !== type); // Remove the type if unchecked
+      updatedTypes = updatedTypes.filter((t) => t !== type);
     } else {
-      updatedTypes.push(type); // Add the type if checked
+      updatedTypes.push(type);
     }
-
     setSelectedTypes(updatedTypes);
   };
 
+  // Handle checkbox change for vehicleType
+  const handleCheckboxChange = (vehicleType) => {
+    let updatedVehicleTypes = [...selectedVehicleTypes];
+    if (updatedVehicleTypes.includes(vehicleType)) {
+      updatedVehicleTypes = updatedVehicleTypes.filter((vt) => vt !== vehicleType); // vt = vehicle type
+    } else {
+      updatedVehicleTypes.push(vehicleType);
+    }
+    setSelectedVehicleTypes(updatedVehicleTypes);
+  };
+
+  // Handle Checkbox change for vehicle class type
+  const handleClassCheckbox =(classType)=>{
+    let updatedClassType = [...selectedClassTypes];
+    if(updatedClassType.includes(classType)){
+      updatedClassType = updatedClassType.filter((ct)=> ct !== classType); // ct = class type
+    }else{
+      updatedClassType.push(classType)
+    }
+    setSelectedClassTypes(updatedClassType);
+  }
+
+  // use effect to run on changing on different value
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
-    const existingTypes = searchParams.getAll("serviceType");
+    const existingServiceTypes = searchParams.getAll("serviceType");
+    const existingVehicleTypes = searchParams.getAll("vehicleType");
+    const existingClassTypes = searchParams.getAll("vehicleClass");
 
-    if (selectedTypes.sort().join(",") !== existingTypes.sort().join(",")) {
+    // Update URL if selectedTypes or selectedVehicleTypes changed
+    if (selectedTypes.sort().join(",") !== existingServiceTypes.sort().join(",") ||
+      selectedVehicleTypes.sort().join(",") !== existingVehicleTypes.sort().join(",") || selectedClassTypes.sort().join(",") !== existingClassTypes.sort().join(",")) {
+
       searchParams.delete("serviceType");
+      searchParams.delete("vehicleType");
+      searchParams.delete("vehicleClass");
 
-      selectedTypes.forEach((type) => {
-        searchParams.append("serviceType", type);
-      });
-
+      selectedTypes.forEach((type) => searchParams.append("serviceType", type));
+      selectedVehicleTypes.forEach((type) => searchParams.append("vehicleType", type));
+      selectedClassTypes.forEach((type)=>searchParams.append("vehicleClass",type)) 
       navigate(
         {
           pathname: location.pathname,
@@ -171,9 +194,9 @@ const SidebarFilter = ({ onVehicleTypeChange }) => {
       );
     }
 
-    // Dispatch getVehicles with the selected types in params
-    dispatch(getVehicles({ serviceType: selectedTypes }));
-  }, [selectedTypes, navigate, location, dispatch]);
+    // Dispatch getVehicles with the selected types and vehicle types in params
+    dispatch(getVehicles({ serviceType: selectedTypes, vehicleType: selectedVehicleTypes, vehicleClass: selectedClassTypes }));
+  }, [selectedTypes, selectedVehicleTypes, selectedClassTypes, navigate, location, dispatch]);
   return (
     <div>
       <div className="px-20 py-10">
@@ -184,7 +207,7 @@ const SidebarFilter = ({ onVehicleTypeChange }) => {
             <label className="flex items-start justify-center mt-6">
               <input
                 type="checkbox"
-                name="myCheckbox"
+                name="serviceTypeCheckbox"
                 value={type.name}
                 onChange={(e)=>handleCheckType(type.name)}
                 disabled={type.disabled}
@@ -206,9 +229,9 @@ const SidebarFilter = ({ onVehicleTypeChange }) => {
             <label className="flex items-start justify-center mt-6">
               <input
                 type="checkbox"
-                name="myCheckbox"
-                value={type.name.toLocaleLowerCase()}
-                onChange={(e)=>handleCheckboxChange(type.name.toLocaleLowerCase())}
+                name="vehicleTypeCheckbox"
+                value={type.name}
+                onChange={() => handleCheckboxChange(type.name)}
                 defaultChecked={false}
                 className="mr-4 h-6 w-6"
                 disabled={type.disabled}
@@ -228,7 +251,9 @@ const SidebarFilter = ({ onVehicleTypeChange }) => {
             <label className="flex items-start justify-center mt-6">
               <input
                 type="checkbox"
-                name="myCheckbox"
+                name="myClassTypeCheckbox"
+                value={type.name}
+                onChange={()=>handleClassCheckbox(type.name)}
                 defaultChecked={false}
                 className="mr-4 h-6 w-6"
                 disabled={type.disabled}
