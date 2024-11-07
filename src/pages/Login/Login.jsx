@@ -91,7 +91,7 @@ const Login = () => {
 
               <div className="flex flex-col items-center">
                 <p>
-                  Don't have an account ?
+                  Do not have an account ?
                   <Link to={"/signup"}>
                     <span className="text-[#419A62]"> Sign Up</span>
                   </Link>

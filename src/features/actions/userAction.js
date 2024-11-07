@@ -1,7 +1,7 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-const localURL = "http://localhost:3000/api/v1";
+export const localURL = "http://localhost:3000/api/v1";
 
 export const getUserProfile = createAsyncThunk(
   "user/getProfile",
@@ -31,16 +31,22 @@ export const getUserProfile = createAsyncThunk(
 
 export const updateUserProfile = createAsyncThunk(
   "user/updateProfile",
-  async ({ name, email, mobileNumber }, { rejectWithValue }) => {
+  async ({ mobileNumber, email, name }, { rejectWithValue }) => {
     try {
       const config = {
+        withCredentials: true,
         headers: {
           "Content-Type": "application/json",
         },
       };
       const { data } = await axios.put(
         `${localURL}/users/profile`,
-        { name, email, mobileNumber },
+        {
+          email,
+
+          mobileNumber,
+          name,
+        },
         config
       );
 

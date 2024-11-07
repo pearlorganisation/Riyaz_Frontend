@@ -25,6 +25,8 @@ const Home = () => {
   useEffect(() => {
     dispatch(getUserProfile());
   }, []);
+
+  console.log("Home Page", authState);
   return (
     <div>
       <div

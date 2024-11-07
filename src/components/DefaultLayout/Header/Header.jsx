@@ -3,18 +3,19 @@ import { Link, useNavigate } from "react-router-dom";
 import Logo from "../../../assets/images/logo.png";
 import { useDispatch, useSelector } from "react-redux";
 import { clearUser } from "../../../features/slices/authSlice";
+import Dropdown from "../../ProfileMenu/ProfileMenu";
 
 export default function Header() {
   const navigate = useNavigate();
   const [state, setState] = useState(false);
 
   const { isUserLoggedIn } = useSelector((state) => state.auth);
-  const dipsatch = useDispatch();
+  // const dipsatch = useDispatch();
 
-  const handleLogout = () => {
-    dipsatch(clearUser());
-    navigate("/login");
-  };
+  // const handleLogout = () => {
+  //   dipsatch(clearUser());
+  //   navigate("/login");
+  // };
   const navigation = [
     { title: "Home", path: "/" },
     { title: "About Us", path: "/about_us" },
@@ -112,12 +113,13 @@ export default function Header() {
             </Link>
           </div>
         ) : (
-          <button
-            className="text-white px-6 py-2 border-2 border-[#2DA5F3] rounded-md"
-            onClick={handleLogout}
-          >
-            Logout
-          </button>
+          // <button
+          //   className="text-white px-6 py-2 border-2 border-[#2DA5F3] rounded-md"
+          //   onClick={handleLogout}
+          // >
+          //   Logout
+          // </button>
+          <Dropdown />
         )}
       </div>
     </nav>

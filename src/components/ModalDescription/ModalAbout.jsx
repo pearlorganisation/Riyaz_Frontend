@@ -1,5 +1,5 @@
-/* eslint-disable react/prop-types */
 import React from "react";
+
 const ModalAbout = ({ data }) => {
   return (
     <div className="flex flex-col">
@@ -21,4 +21,5 @@ const ModalAbout = ({ data }) => {
     </div>
   );
 };
+
 export default ModalAbout;

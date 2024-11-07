@@ -1,25 +1,24 @@
+/** http://localhost:3000/api/v1/vehicles */
+
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { localURL } from "./userAction";
 
-const localURL = "http://localhost:3000/api/v1";
-
-export const searchVehicles = createAsyncThunk(
+export const getVehicles = createAsyncThunk(
   "vehicle/getVehicle",
-  async (_, { rejectWithValue }) => {
+  async (params, { rejectWithValue }) => {
     try {
       const config = {
-        withCredentials: true,
         headers: {
           "Content-Type": "application/json",
         },
+        params, // accepting params
       };
-      const { data } = await axios.get(`${localURL}/vehicles/search`, config);
 
-      console.log("Vehicle Search Data", data);
-
+      const { data } = await axios.get(`${localURL}/vehicles`, config);
+      console.log("Filtered Vehicles Data", data);
       return data.data;
     } catch (error) {
-      // return custom error message from backend if present
       if (error.response && error.response.data.message) {
         return rejectWithValue(error.response.data.message);
       } else {

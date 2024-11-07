@@ -1,10 +1,11 @@
-/* eslint-disable react/prop-types */
 import React from "react";
 import { CiCircleInfo } from "react-icons/ci";
+
 const ModalReviews = ({ data }) => {
   return (
     <div>
       <h1 className="text-xl font-light">Traveller Reviews</h1>
+
       <div className="mt-2 ml-1">
         <h1 className="text-lg font-semibold mb-2">Sort By</h1>
         <select
@@ -22,4 +23,5 @@ const ModalReviews = ({ data }) => {
     </div>
   );
 };
+
 export default ModalReviews;

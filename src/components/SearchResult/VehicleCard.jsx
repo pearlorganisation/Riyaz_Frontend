@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import { TbCircleArrowRight } from "react-icons/tb";
@@ -24,24 +23,34 @@ const VehicleCard = ({ vehicle }) => {
 
   return (
     <div>
-      <div key={vehicle.id} className="rounded-md mt-6 bg-blue-200">
+      <div key={vehicle._id} className="rounded-md mt-6 bg-blue-200">
         <div className="grid grid-cols-1 lg:grid-cols-[70%_auto]">
           <div>
             <div className="flex flex-row px-6 py-2">
-              <img src={vehicle.image} className="w-36 h-28" />
+              <img
+                src={vehicle?.images[0]?.secure_url}
+                alt="Vehicle"
+                className="w-36 h-28"
+              />
 
               <div className="flex flex-col gap-6 px-6 py-6">
-                <h1 className="">{vehicle.name}</h1>
+                <h1 className="text-xl font-semibold">
+                  {vehicle?.vehicleName}
+                </h1>
 
                 <div className="flex flex-row gap-6">
-                  <h1>{vehicle.ratings}</h1>
-                  <h1> {vehicle.reviews} Reviews</h1>
+                  <h1>{vehicle?.ratings?.averageRating} ★</h1>
+                  <h1>{vehicle?.ratings?.numberOfRatings} Reviews</h1>
                 </div>
               </div>
             </div>
 
             <div className="flex flex-row gap-5 px-6 py-2">
-              {vehicle.tags.map((tag, index) => (
+              {[
+                vehicle?.vehicleType,
+                vehicle?.vehicleClass,
+                vehicle?.serviceType,
+              ].map((tag, index) => (
                 <div className="px-1 py-1 bg-gray-200 rounded-md" key={index}>
                   <h1 className="text-sm">{tag}</h1>
                 </div>
@@ -65,14 +74,14 @@ const VehicleCard = ({ vehicle }) => {
           </div>
 
           <div className="bg-blue-900 flex flex-col items-center justify-start">
-            <h1 className="text-blue-400 mt-6">{vehicle.tour}</h1>
-            <div className=" mt-6 flex items-start justify-start gap-1">
+            <h1 className="text-blue-400 mt-6">Tour Description</h1>
+            <div className="mt-6 flex items-start justify-start gap-1">
               <span className="text-white text-2xl">₹</span>
-              <span className="text-5xl text-white"> {vehicle.price}</span>
+              <span className="text-5xl text-white">{vehicle?.price}</span>
             </div>
 
             <button
-              className="px-6 py-2 border-2 border-white text-white mt-6 rounded-md flex fle-row gap-3"
+              className="px-6 py-2 border-2 border-white text-white mt-6 rounded-md flex flex-row gap-3"
               onClick={() => handleSelect(vehicle)} // Pass the entire vehicle object
             >
               <span> SELECT </span>

@@ -29,14 +29,18 @@ const userSlice = createSlice({
           state.isSuccess = false;
           state.isError = true;
           state.message = action.payload;
-          toast.error(action.payload, { position: "top-center" });
+          toast.error(action.payload, {
+            position: "top-center",
+          });
         })
         .addCase(updateUserProfile.rejected, (state, action) => {
           state.isLoading = false;
           state.isSuccess = false;
           state.isError = true;
           state.message = action.payload;
-          toast.error(action.payload, { position: "top-center" });
+          toast.error(action.payload, {
+            position: "top-center",
+          });
         }),
       builder
         .addCase(getUserProfile.fulfilled, (state, action) => {

@@ -63,7 +63,7 @@ const BookAirportDetails = () => {
             <span className="text-black  uppercase text-md ">
               Book your airport transfer and get where you are going fast.
               Private cards,shuttles, shared vans and luxurary limousines are
-              standing by. Compare transport options to andfrom your airport.
+              standing by. Compare transport options to and from your airport.
             </span>
           </div>
         </div>
