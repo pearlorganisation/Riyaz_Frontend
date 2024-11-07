@@ -1,8 +1,5 @@
-/** http://localhost:3000/api/v1/vehicles */
-
-import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { localURL } from "./userAction";
+import { axiosInstance } from "../../services/axiosInterceptor";
 
 export const getVehicles = createAsyncThunk(
   "vehicle/getVehicle",
@@ -15,7 +12,7 @@ export const getVehicles = createAsyncThunk(
         params, // accepting params
       };
 
-      const { data } = await axios.get(`${localURL}/vehicles`, config);
+      const { data } = await axiosInstance.get(`/vehicles`, config);
       console.log("Filtered Vehicles Data", data);
       return data.data;
     } catch (error) {

@@ -1,7 +1,6 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-
-export const localURL = "http://localhost:3000/api/v1";
+import { axiosInstance } from "../../services/axiosInterceptor";
 
 export const getUserProfile = createAsyncThunk(
   "user/getProfile",
@@ -13,7 +12,7 @@ export const getUserProfile = createAsyncThunk(
           "Content-Type": "application/json",
         },
       };
-      const { data } = await axios.get(`${localURL}/users/profile`, config);
+      const { data } = await axiosInstance.get(`/users/profile`, config);
 
       console.log("Profile Data", data);
 
@@ -39,8 +38,8 @@ export const updateUserProfile = createAsyncThunk(
           "Content-Type": "application/json",
         },
       };
-      const { data } = await axios.put(
-        `${localURL}/users/profile`,
+      const { data } = await axiosInstance.put(
+        `/users/profile`,
         {
           email,
 
