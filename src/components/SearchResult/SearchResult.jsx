@@ -319,7 +319,7 @@ const SearchResult = ({ date, returnDate }) => {
   }, [dispatch]);
 
   // Filter vehicles based on availability and selected date range
-  const filteredVehicles = vehicleInfo.filter((vehicle) => {
+  const filteredVehicles = vehicleInfo?.filter((vehicle) => {
     if (!date && !returnDate) {
       // If no date is selected, show all vehicles
       return true;
@@ -341,7 +341,7 @@ const SearchResult = ({ date, returnDate }) => {
   const vehiclesPerPage = 5;
   const indexOfLastVehicle = currentPage * vehiclesPerPage;
   const indexOfFirstVehicle = indexOfLastVehicle - vehiclesPerPage;
-  const currentVehicles = filteredVehicles.slice(
+  const currentVehicles = filteredVehicles?.slice(
     indexOfFirstVehicle,
     indexOfLastVehicle
   );
@@ -352,7 +352,7 @@ const SearchResult = ({ date, returnDate }) => {
   return (
     <div className="px-20 py-10">
       <div className="flex flex-row justify-between">
-        <h1 className="mt-5">{filteredVehicles.length} Results </h1>
+        <h1 className="mt-5">{filteredVehicles?.length} Results </h1>
         <div className="flex flex-row gap-4 items-center">
           <h1>Sort By</h1>
           <div className="flex flex-row gap-4">
@@ -370,18 +370,18 @@ const SearchResult = ({ date, returnDate }) => {
         </div>
       </div>
 
-      {filteredVehicles.length === 0 ? (
+      {filteredVehicles?.length === 0 ? (
         <h1>No Data Found</h1>
       ) : (
         <>
-          {currentVehicles.map((vehicle) => (
+          {currentVehicles?.map((vehicle) => (
             <VehicleCard key={vehicle._id} vehicle={vehicle} />
           ))}
 
           <div className="flex justify-center mt-4">
             {/* Pagination controls */}
             {Array.from(
-              { length: Math.ceil(filteredVehicles.length / vehiclesPerPage) },
+              { length: Math.ceil(filteredVehicles?.length / vehiclesPerPage) },
               (_, i) => (
                 <button
                   key={i + 1}
