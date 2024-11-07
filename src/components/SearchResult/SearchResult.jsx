@@ -313,6 +313,7 @@ const SearchResult = ({ date, returnDate }) => {
   const dispatch = useDispatch();
  
   const { vehicleInfo } = useSelector((state) => state.vehicle);
+  const { isSuccess, isError } = useSelector((state)=>state.vehicle);
 
   useEffect(() => {
     dispatch(getVehicles());
@@ -374,9 +375,10 @@ const SearchResult = ({ date, returnDate }) => {
         <h1>No Data Found</h1>
       ) : (
         <>
-          {currentVehicles?.map((vehicle) => (
+          {isSuccess  ? currentVehicles?.map((vehicle) => (
             <VehicleCard key={vehicle._id} vehicle={vehicle} />
-          ))}
+          )) : <div className="flex justify-center items-center mt-8">
+                <h1 className=" text-3xl font-semibold">No Vehicles found </h1></div>}
 
           <div className="flex justify-center mt-4">
             {/* Pagination controls */}

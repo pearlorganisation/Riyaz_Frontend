@@ -23,7 +23,7 @@ const VehicleDetails = () => {
     <div> 
       <div className="flex justify-center items-center mt-10">
         {/* Car Details Card */}
-        <div className="flex flex-col lg:flex-row items-stretch lg:w-4/5 bg-red-200 rounded-lg shadow-md h-auto lg:h-56">
+        <div className="flex flex-col lg:flex-row items-stretch lg:w-3/5 w-full sm:m-2  rounded-lg shadow-md h-auto lg:h-56">
 
           {/* Left Section - Image and Details */}
           <div className="flex flex-col lg:flex-row items-center lg:items-stretch gap-4 bg-gray-100 rounded-t-lg lg:rounded-l-lg lg:rounded-tr-none p-4 lg:w-2/3">
@@ -75,7 +75,7 @@ const VehicleDetails = () => {
                       <div className="w-1/2 flex flex-col mb-2">
                          <div className="mt-3">
                            <h1 className="font-semibold">Pick-up</h1>
-                           <span>Dubai Airport (DXB), Terminal 1</span>
+                           <span>{vehicle?.pickupLocation}</span>
                          </div>
                          <div className="mt-3"> 
                            <h1 className="font-semibold">Passengers</h1>
@@ -85,13 +85,13 @@ const VehicleDetails = () => {
                             <h1 className="font-semibold">
                               Date
                             </h1>
-                            <span>Friday, 04 Oct, 2024</span>
+                          <span>{vehicle?.pickupDate}</span>
                           </div>
                       </div>
                       <div className="w-1/2 flex flex-col mb-2">
                         <div className="mt-3">
                            <h1 className="font-semibold">Drop-off</h1>
-                           <span>Burj Al Arab (Dubai - Umm Suqeim 3 - Dubai - United Arab Emirates)</span>
+                      <span>{vehicle?.destination}</span>
                          </div>
                          <div className="mt-3">
                            <h1 className="font-semibold">Luggage</h1>

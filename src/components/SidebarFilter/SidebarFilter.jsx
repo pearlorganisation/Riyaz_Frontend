@@ -34,7 +34,7 @@ const vehiclesData = [
   },
   {
     id: 3,
-    name: "Limo",
+    name: "Limousine",
     disabled: false,
   },
   {
