@@ -67,19 +67,7 @@ const classTypes = [
   },
 ];
 
-const inclusionsAndExtrasTypes = [
-  {
-    id: 1,
-    name: "Meet N Greet",
-    disabled: false,
-  },
-  {
-    id: 2,
-    name: "COVID 19 Prepared",
-    disabled: false,
-  },
-];
-
+ 
 const ratingsTypes = [
   {
     id: 1,
