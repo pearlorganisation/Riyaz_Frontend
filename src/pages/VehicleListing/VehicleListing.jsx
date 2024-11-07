@@ -24,7 +24,7 @@ const VehicleListing = () => {
 
         {/* Map Section */}
         <div className="w-full h-[65vh] bg-red-400 z-10">
-          <h1 className="bg-white">Map</h1>
+          <h1 className="bg-white">Maps</h1>
         </div>
 
         {/* Sidebar and Search Results */}
