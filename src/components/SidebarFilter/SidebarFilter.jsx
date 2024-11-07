@@ -111,7 +111,6 @@ const faqsList = [];
 const whyUsFeatures = [];
 
 const SidebarFilter = () => {
-  
   const [selectedVehicleTypes, setSelectedVehicleTypes] = useState([]); // for vehicle types
   const [selectedTypes, setSelectedTypes] = useState([]); // for types of ride
   const [selectedClassTypes, setSelectedClassTypes] = useState([]); // for selecting by class types of vehicles
@@ -130,52 +129,54 @@ const SidebarFilter = () => {
     } else {
       updatedTypes.push(type);
     }
-      setSelectedTypes(updatedTypes);
+    setSelectedTypes(updatedTypes);
   };
 
   // Handle checkbox change for vehicleType
   const handleCheckboxChange = (vehicleType) => {
     let updatedVehicleTypes = [...selectedVehicleTypes];
     if (updatedVehicleTypes.includes(vehicleType)) {
-      updatedVehicleTypes = updatedVehicleTypes.filter((vt) => vt !== vehicleType); // vt = vehicle type
+      updatedVehicleTypes = updatedVehicleTypes.filter(
+        (vt) => vt !== vehicleType
+      ); // vt = vehicle type
     } else {
       updatedVehicleTypes.push(vehicleType);
     }
-      setSelectedVehicleTypes(updatedVehicleTypes);
+    setSelectedVehicleTypes(updatedVehicleTypes);
   };
 
   // Handle Checkbox change for vehicle class type
-  const handleClassCheckbox =(classType)=>{
+  const handleClassCheckbox = (classType) => {
     let updatedClassType = [...selectedClassTypes];
-    if(updatedClassType.includes(classType)){
-      updatedClassType = updatedClassType.filter((ct)=> ct !== classType); // ct = class type
-    }else{
-      updatedClassType.push(classType)
+    if (updatedClassType.includes(classType)) {
+      updatedClassType = updatedClassType.filter((ct) => ct !== classType); // ct = class type
+    } else {
+      updatedClassType.push(classType);
     }
     setSelectedClassTypes(updatedClassType);
-  }
-  
+  };
+
   // handle checkbox for selecting by rating
-  const handleRatingCheckbox =(ratingType)=>{
+  const handleRatingCheckbox = (ratingType) => {
     let updatedRatingType = [...selectedRatingTypes];
-    if(updatedRatingType.includes(ratingType)){
-      updatedRatingType = updatedRatingType.filter((rt)=> rt != ratingType); // rt = rating type
-    }else{
+    if (updatedRatingType.includes(ratingType)) {
+      updatedRatingType = updatedRatingType.filter((rt) => rt != ratingType); // rt = rating type
+    } else {
       updatedRatingType.push(ratingType);
     }
-      setSelectedRatingTypes(updatedRatingType);
-  }
+    setSelectedRatingTypes(updatedRatingType);
+  };
 
   // handle checkbox for selecting by reviews
-  const handleReviewCheckbox = (reviewType)=>{
+  const handleReviewCheckbox = (reviewType) => {
     let updatedReviewType = [...selectedReviewTypes];
-    if(updatedReviewType.includes(reviewType)){
-      updatedReviewType = updatedReviewType.filter((rt)=>rt != reviewType)
-    }else{
-      updatedReviewType.push(reviewType)
+    if (updatedReviewType.includes(reviewType)) {
+      updatedReviewType = updatedReviewType.filter((rt) => rt != reviewType);
+    } else {
+      updatedReviewType.push(reviewType);
     }
-      setSelectedReviewTypes(updatedReviewType);
-  }
+    setSelectedReviewTypes(updatedReviewType);
+  };
 
   // use effect to run on changing on different value
   useEffect(() => {
@@ -187,26 +188,39 @@ const SidebarFilter = () => {
     const existingReviewTypes = searchParams.getAll("numberOfRatings");
     // Check if selected values differ from existing URL parameters
     if (
-      selectedTypes.sort().join(",") !== existingServiceTypes.sort().join(",") ||
-      selectedVehicleTypes.sort().join(",") !== existingVehicleTypes.sort().join(",") ||
-      selectedClassTypes.sort().join(",") !== existingClassTypes.sort().join(",") ||
-      selectedRatingTypes.sort().join(",") !== existingRatingTypes.sort().join(",") ||
-      selectedReviewTypes.sort().join(",") !== existingReviewTypes.sort().join(",")  
+      selectedTypes.sort().join(",") !==
+        existingServiceTypes.sort().join(",") ||
+      selectedVehicleTypes.sort().join(",") !==
+        existingVehicleTypes.sort().join(",") ||
+      selectedClassTypes.sort().join(",") !==
+        existingClassTypes.sort().join(",") ||
+      selectedRatingTypes.sort().join(",") !==
+        existingRatingTypes.sort().join(",") ||
+      selectedReviewTypes.sort().join(",") !==
+        existingReviewTypes.sort().join(",")
     ) {
       // Reset URL parameters for updated filters
       searchParams.delete("serviceType");
       searchParams.delete("vehicleType");
       searchParams.delete("vehicleClass");
       searchParams.delete("averageRating");
-      searchParams.delete("numberOfRatings")
+      searchParams.delete("numberOfRatings");
       // Add each selected filter to the URL
       selectedTypes.forEach((type) => searchParams.append("serviceType", type));
-      selectedVehicleTypes.forEach((type) => searchParams.append("vehicleType", type));
-      selectedClassTypes.forEach((type) => searchParams.append("vehicleClass", type));
+      selectedVehicleTypes.forEach((type) =>
+        searchParams.append("vehicleType", type)
+      );
+      selectedClassTypes.forEach((type) =>
+        searchParams.append("vehicleClass", type)
+      );
 
       // Add selected average ratings to the URL
-      selectedRatingTypes.forEach((rating) => searchParams.append("averageRating", rating));
-      selectedReviewTypes.forEach((review) => searchParams.append("numberOfRatings",review));
+      selectedRatingTypes.forEach((rating) =>
+        searchParams.append("averageRating", rating)
+      );
+      selectedReviewTypes.forEach((review) =>
+        searchParams.append("numberOfRatings", review)
+      );
       // Update URL with new filters
       navigate(
         {
@@ -218,13 +232,15 @@ const SidebarFilter = () => {
     }
 
     // Dispatch getVehicles with selected filters, including average rating
-    dispatch(getVehicles({
-      serviceType: selectedTypes,
-      vehicleType: selectedVehicleTypes,
-      vehicleClass: selectedClassTypes,
-      rating: selectedRatingTypes,
-      reviews: selectedReviewTypes // Pass selected ratings as a parameter
-    }));
+    dispatch(
+      getVehicles({
+        serviceType: selectedTypes,
+        vehicleType: selectedVehicleTypes,
+        vehicleClass: selectedClassTypes,
+        rating: selectedRatingTypes,
+        reviews: selectedReviewTypes, // Pass selected ratings as a parameter
+      })
+    );
   }, [
     selectedTypes,
     selectedVehicleTypes,
@@ -233,7 +249,7 @@ const SidebarFilter = () => {
     selectedReviewTypes, // Include selected ratings in dependencies
     navigate,
     location,
-    dispatch
+    dispatch,
   ]);
   return (
     <div>
@@ -247,7 +263,7 @@ const SidebarFilter = () => {
                 type="checkbox"
                 name="serviceTypeCheckbox"
                 value={type.name}
-                onChange={(e)=>handleCheckType(type.name)}
+                onChange={(e) => handleCheckType(type.name)}
                 disabled={type.disabled}
                 defaultChecked={false}
                 className="mr-4 h-6 w-6"
@@ -291,7 +307,7 @@ const SidebarFilter = () => {
                 type="checkbox"
                 name="myClassTypeCheckbox"
                 value={type.name}
-                onChange={()=>handleClassCheckbox(type.name)}
+                onChange={() => handleClassCheckbox(type.name)}
                 defaultChecked={false}
                 className="mr-4 h-6 w-6"
                 disabled={type.disabled}
@@ -316,7 +332,7 @@ const SidebarFilter = () => {
                 type="checkbox"
                 name="myRatingType"
                 value={parseInt(rating.stars)}
-                onChange={()=>handleRatingCheckbox(parseInt(rating.stars))}
+                onChange={() => handleRatingCheckbox(parseInt(rating.stars))}
                 defaultChecked={false}
                 className="mr-4 w-6 h-6 hover:border-2 hover:border-blue-500"
               />
@@ -339,7 +355,7 @@ const SidebarFilter = () => {
                 type="checkbox"
                 name="myReviewTypes"
                 value={review.name}
-                onChange={()=>handleReviewCheckbox(review.name)}
+                onChange={() => handleReviewCheckbox(review.name)}
                 defaultChecked={false}
                 className="mr-4 w-6 h-6 hover:border-2 hover:border-blue-500"
               />
@@ -352,4 +368,4 @@ const SidebarFilter = () => {
   );
 };
 
-export default SidebarFilter
+export default SidebarFilter;

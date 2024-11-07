@@ -27,10 +27,16 @@ const VehicleCard = ({ vehicle }) => {
         <div className="grid grid-cols-1 lg:grid-cols-[70%_auto]">
           <div>
             <div className="flex flex-row px-6 py-2">
-              <img src={vehicle?.images[0]?.secure_url} alt="Vehicle" className="w-36 h-28" />
+              <img
+                src={vehicle?.images[0]?.secure_url}
+                alt="Vehicle"
+                className="w-36 h-28"
+              />
 
               <div className="flex flex-col gap-6 px-6 py-6">
-                <h1 className="text-xl font-semibold">{vehicle?.vehicleName}</h1>
+                <h1 className="text-xl font-semibold">
+                  {vehicle?.vehicleName}
+                </h1>
 
                 <div className="flex flex-row gap-6">
                   <h1>{vehicle?.ratings?.averageRating} ★</h1>
@@ -40,7 +46,11 @@ const VehicleCard = ({ vehicle }) => {
             </div>
 
             <div className="flex flex-row gap-5 px-6 py-2">
-               {[vehicle?.vehicleType, vehicle?.vehicleClass, vehicle?.serviceType].map((tag, index) => (
+              {[
+                vehicle?.vehicleType,
+                vehicle?.vehicleClass,
+                vehicle?.serviceType,
+              ].map((tag, index) => (
                 <div className="px-1 py-1 bg-gray-200 rounded-md" key={index}>
                   <h1 className="text-sm">{tag}</h1>
                 </div>

@@ -1,7 +1,5 @@
-import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-
-const localURL = "http://localhost:3000/api/v1";
+import { axiosInstance } from "../../services/axiosInterceptor";
 
 export const registerUser = createAsyncThunk(
   "auth/register",
@@ -12,8 +10,8 @@ export const registerUser = createAsyncThunk(
           "Content-Type": "application/json",
         },
       };
-      const { data } = await axios.post(
-        `${localURL}/auth/signup`,
+      const { data } = await axiosInstance.post(
+        `/auth/signup`,
         { name, email, password, mobileNumber },
         config
       );
@@ -35,13 +33,13 @@ export const userLogin = createAsyncThunk(
   async ({ email, password }, { rejectWithValue }) => {
     try {
       const config = {
-        withCredentials:true,
+        withCredentials: true,
         headers: {
           "Content-Type": "application/json",
         },
       };
-      const { data } = await axios.post(
-        `${localURL}/auth/login`,
+      const { data } = await axiosInstance.post(
+        `/auth/login`,
         { email, password },
         config
       );

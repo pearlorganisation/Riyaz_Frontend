@@ -91,7 +91,7 @@ const LearnMoreModal = ({ isOpen, onClose, data }) => {
 
         {activeIndex == 1 && (
           <div className="mt-3">
-           <ModalReviews data={data} />
+            <ModalReviews data={data} />
           </div>
         )}
 

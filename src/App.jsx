@@ -35,8 +35,8 @@ function App() {
   const routes = createBrowserRouter([
     {
       path: "/",
-      element:  <Layout />,
-      
+      element: <Layout />,
+
       children: [
         {
           index: true,
@@ -55,28 +55,26 @@ function App() {
           element: <VehicleListing />,
         },
         {
-          path: "vehicle-details", 
-          element: <VehicleDetails />,   
+          path: "vehicle-details",
+          element: <VehicleDetails />,
         },
         {
-          path:"profile",
-          element: <ProfileData />
+          path: "profile",
+          element: <ProfileData />,
         },
         {
           path: "bookings",
-          element: isUserLoggedIn ? <BookingsData />: <Login />
-        }
+          element: isUserLoggedIn ? <BookingsData /> : <Login />,
+        },
       ],
     },
     {
       path: "login",
       element: isUserLoggedIn ? <Navigate to="/" /> : <Login />,
-   
     },
     {
       path: "signup",
       element: isUserLoggedIn ? <Navigate to="/" /> : <Signup />,
-   
     },
   ]);
 

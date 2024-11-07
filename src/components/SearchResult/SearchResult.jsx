@@ -6,7 +6,6 @@ import VehicleCard from "./VehicleCard";
 import { FaArrowRightArrowLeft } from "react-icons/fa6";
 import { useDispatch, useSelector } from "react-redux";
 import { getVehicles } from "../../features/actions/vehicleAction";
- 
 
 const vehiclesData = [
   {
@@ -306,14 +305,12 @@ const vehiclesData = [
 ];
 
 const SearchResult = ({ date, returnDate }) => {
-
   /*------------------------------------------------dynamic data----------------------------------------------------------------- */
-  
 
   const dispatch = useDispatch();
- 
+
   const { vehicleInfo } = useSelector((state) => state.vehicle);
-  const { isSuccess, isError } = useSelector((state)=>state.vehicle);
+  const { isSuccess, isError } = useSelector((state) => state.vehicle);
 
   useEffect(() => {
     dispatch(getVehicles());
@@ -332,9 +329,7 @@ const SearchResult = ({ date, returnDate }) => {
     const selectedEndDate = new Date(returnDate);
 
     // Check if the vehicle is available within the selected date range
-    return (
-      availableFrom <= selectedEndDate && availableTo >= selectedStartDate
-    );
+    return availableFrom <= selectedEndDate && availableTo >= selectedStartDate;
   });
 
   // Pagination logic
@@ -375,10 +370,15 @@ const SearchResult = ({ date, returnDate }) => {
         <h1>No Data Found</h1>
       ) : (
         <>
-          {isSuccess  ? currentVehicles?.map((vehicle) => (
-            <VehicleCard key={vehicle._id} vehicle={vehicle} />
-          )) : <div className="flex justify-center items-center mt-8">
-                <h1 className=" text-3xl font-semibold">No Vehicles found </h1></div>}
+          {isSuccess ? (
+            currentVehicles?.map((vehicle) => (
+              <VehicleCard key={vehicle._id} vehicle={vehicle} />
+            ))
+          ) : (
+            <div className="flex justify-center items-center mt-8">
+              <h1 className=" text-3xl font-semibold">No Vehicles found </h1>
+            </div>
+          )}
 
           <div className="flex justify-center mt-4">
             {/* Pagination controls */}
@@ -388,8 +388,9 @@ const SearchResult = ({ date, returnDate }) => {
                 <button
                   key={i + 1}
                   onClick={() => paginate(i + 1)}
-                  className={`px-4 py-2 border ${currentPage === i + 1 ? "bg-blue-500 text-white" : ""
-                    }`}
+                  className={`px-4 py-2 border ${
+                    currentPage === i + 1 ? "bg-blue-500 text-white" : ""
+                  }`}
                 >
                   {i + 1}
                 </button>

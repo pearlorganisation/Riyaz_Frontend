@@ -5,11 +5,10 @@ import { useEffect, useState } from "react";
 // import { useDispatch, useSelector } from "react-redux";
 // import { getVehicles } from "../../features/actions/vehicleAction";
 
-
-const VehicleListing = () => { 
+const VehicleListing = () => {
   const [date, setDate] = useState("");
   const [returnDate, setReturnDate] = useState("");
- 
+
   // const dispatch = useDispatch();
   // const { vehicleInfo } = useSelector((state) => state.vehicle);
   // useEffect(()=>{
@@ -17,35 +16,30 @@ const VehicleListing = () => {
   // },[])
 
   return (
-    <div> 
-    <div className="static z-10">
+    <div>
+      <div className="static z-10">
         <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 max-w-max bg-opacity-90 bg-blue-300 rounded-xl text-white z-30">
-          <SearchUpdate
-            setDate={setDate}
-            setReturnDate={setReturnDate} />
+          <SearchUpdate setDate={setDate} setReturnDate={setReturnDate} />
         </div>
 
+        {/* Map Section */}
+        <div className="w-full h-[65vh] bg-red-400 z-10">
+          <h1 className="bg-white">Map</h1>
+        </div>
 
-      {/* Map Section */}
-      <div className="w-full h-[65vh] bg-red-400 z-10">
-        <h1 className="bg-white">Map</h1>
-      </div>
-
-      {/* Sidebar and Search Results */}
-      <div className="grid grid-cols-1 lg:grid-cols-[30%_auto] gap-8 mt-20">
+        {/* Sidebar and Search Results */}
+        <div className="grid grid-cols-1 lg:grid-cols-[30%_auto] gap-8 mt-20">
           <SidebarFilter />
-          <SearchResult
-            date={date}
-            returnDate={returnDate} />
+          <SearchResult date={date} returnDate={returnDate} />
+        </div>
       </div>
-    </div>
     </div>
   );
 };
 
 export default VehicleListing;
 
- /*------------------------------------------------------handle for selecting date----------------------------------------------------------- */
+/*------------------------------------------------------handle for selecting date----------------------------------------------------------- */
 const SearchUpdate = ({ setDate, setReturnDate }) => {
   return (
     <form className="p-4 space-y-4 w-full max-w-full h-full">
@@ -196,10 +190,6 @@ const SearchUpdate = ({ setDate, setReturnDate }) => {
   );
 };
 
-
- 
-
-
 // <div className="w-[80%] flex items-center justify-center">
 //   <div className="bg-white rounded-md flex items-center justify-start">
 //     <form>
@@ -225,7 +215,6 @@ const SearchUpdate = ({ setDate, setReturnDate }) => {
 //     </form>
 //   </div>
 // </div>
-
 
 // Updated  Search component //
 // const SearchUpdate = () => {
