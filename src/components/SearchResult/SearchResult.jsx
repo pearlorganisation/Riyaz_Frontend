@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { BiArrowToBottom } from "react-icons/bi";
 import { CiStar } from "react-icons/ci";
 
 import VehicleCard from "./VehicleCard";
 import { FaArrowRightArrowLeft } from "react-icons/fa6";
+import { useDispatch, useSelector } from "react-redux";
+import { getVehicles } from "../../features/actions/vehicleAction";
 
 const vehiclesData = [
   {
@@ -302,46 +304,52 @@ const vehiclesData = [
   },
 ];
 
-const SearchResult = ({ selectedVehicleTypes, date, returnDate }) => {
-  const vehicleMapping = {
-    sedan: vehiclesData[0].sedans,
-    suv: vehiclesData[1].suvs,
-    van: vehiclesData[2].vans,
-    bus: vehiclesData[3].buses,
-  };
+const SearchResult = ({ date, returnDate }) => {
+  /*------------------------------------------------dynamic data----------------------------------------------------------------- */
 
-  // If no vehicle types are selected, include all types for filtering
-  const allVehicleTypes = selectedVehicleTypes.length
-    ? selectedVehicleTypes
-    : ["sedan", "suv", "van", "bus"];
+  const dispatch = useDispatch();
 
-  // Filter vehicles based on availability and selected types or date range
-  const filteredVehicles = allVehicleTypes.flatMap((type) => {
-    const vehicles = vehicleMapping[type];
-    return vehicles
-      ? vehicles.filter((vehicle) => {
-        const availableFrom = new Date(vehicle.availableFrom);
-        const availableTo = new Date(vehicle.availableTo);
-        const selectedStartDate = new Date(date);
-        const selectedEndDate = new Date(returnDate);
+  const { vehicleInfo } = useSelector((state) => state.vehicle);
 
-        // Check if the vehicle is available within the selected date range
-        return (
-          (availableFrom <= selectedEndDate && availableTo >= selectedStartDate)
-        );
-      })
-      : [];
+  useEffect(() => {
+    dispatch(getVehicles());
+  }, [dispatch]);
+
+  // Filter vehicles based on availability and selected date range
+  const filteredVehicles = vehicleInfo?.filter((vehicle) => {
+    if (!date && !returnDate) {
+      // If no date is selected, show all vehicles
+      return true;
+    }
+
+    const availableFrom = new Date(vehicle.availableFrom);
+    const availableTo = new Date(vehicle.availableTo);
+    const selectedStartDate = new Date(date);
+    const selectedEndDate = new Date(returnDate);
+
+    // Check if the vehicle is available within the selected date range
+    return availableFrom <= selectedEndDate && availableTo >= selectedStartDate;
   });
 
-  console.log(filteredVehicles, "filtered vehi")
+  // Pagination logic
+  const [currentPage, setCurrentPage] = useState(1);
+  const vehiclesPerPage = 5;
+  const indexOfLastVehicle = currentPage * vehiclesPerPage;
+  const indexOfFirstVehicle = indexOfLastVehicle - vehiclesPerPage;
+  const currentVehicles = filteredVehicles?.slice(
+    indexOfFirstVehicle,
+    indexOfLastVehicle
+  );
+
+  // Change page
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
     <div className="px-20 py-10">
       <div className="flex flex-row justify-between">
-        <h1 className="mt-5">{filteredVehicles.length} Results </h1>
-
+        <h1 className="mt-5">{filteredVehicles?.length} Results </h1>
         <div className="flex flex-row gap-4 items-center">
-          <h1 className=""> Sort By </h1>
+          <h1>Sort By</h1>
           <div className="flex flex-row gap-4">
             <select
               className="px-5 py-4 border border-blue-500 rounded-md text-lg font-semibold"
@@ -352,25 +360,40 @@ const SearchResult = ({ selectedVehicleTypes, date, returnDate }) => {
               <option value="price-htl">Pricing - High to Low</option>
               <option value="rating-h">Rating - Highest</option>
               <option value="rating-l">Rating - Lowest</option>
-              <option value="vh-hp">Vehicle - Highest Price</option>
-              <option value="vh-lp">Vehicle - Lowest Price</option>
             </select>
           </div>
         </div>
       </div>
 
-      {filteredVehicles.length === 0 ? (
-        <h2>No vehicles found for the selected types or date range.</h2>
+      {filteredVehicles?.length === 0 ? (
+        <h1>No Data Found</h1>
       ) : (
-        filteredVehicles.map((vehicle) => (
-          <VehicleCard key={vehicle.id} vehicle={vehicle} />
-        ))
+        <>
+          {currentVehicles?.map((vehicle) => (
+            <VehicleCard key={vehicle._id} vehicle={vehicle} />
+          ))}
+
+          <div className="flex justify-center mt-4">
+            {/* Pagination controls */}
+            {Array.from(
+              { length: Math.ceil(filteredVehicles?.length / vehiclesPerPage) },
+              (_, i) => (
+                <button
+                  key={i + 1}
+                  onClick={() => paginate(i + 1)}
+                  className={`px-4 py-2 border ${
+                    currentPage === i + 1 ? "bg-blue-500 text-white" : ""
+                  }`}
+                >
+                  {i + 1}
+                </button>
+              )
+            )}
+          </div>
+        </>
       )}
     </div>
   );
 };
 
 export default SearchResult;
-
-
- 

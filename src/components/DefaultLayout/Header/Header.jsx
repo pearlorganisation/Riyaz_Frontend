@@ -113,6 +113,12 @@ export default function Header() {
             </Link>
           </div>
         ) : (
+          // <button
+          //   className="text-white px-6 py-2 border-2 border-[#2DA5F3] rounded-md"
+          //   onClick={handleLogout}
+          // >
+          //   Logout
+          // </button>
           <Dropdown />
         )}
       </div>
