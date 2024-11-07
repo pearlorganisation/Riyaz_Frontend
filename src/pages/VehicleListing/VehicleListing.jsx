@@ -7,13 +7,9 @@ import { useEffect, useState } from "react";
 
 
 const VehicleListing = () => { 
-  const [selectedVehicleTypes, setSelectedVehicleTypes] = useState([]);
   const [date, setDate] = useState("");
   const [returnDate, setReturnDate] = useState("");
-
-  const handleVehicleTypeChange = (types) => {
-    setSelectedVehicleTypes(types);}
-
+ 
   // const dispatch = useDispatch();
   // const { vehicleInfo } = useSelector((state) => state.vehicle);
   // useEffect(()=>{
@@ -37,8 +33,8 @@ const VehicleListing = () => {
 
       {/* Sidebar and Search Results */}
       <div className="grid grid-cols-1 lg:grid-cols-[30%_auto] gap-8 mt-20">
-          <SidebarFilter onVehicleTypeChange={handleVehicleTypeChange} />
-          <SearchResult selectedVehicleTypes={selectedVehicleTypes}
+          <SidebarFilter />
+          <SearchResult
             date={date}
             returnDate={returnDate} />
       </div>

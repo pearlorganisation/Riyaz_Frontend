@@ -122,7 +122,7 @@ const faqsList = [];
 
 const whyUsFeatures = [];
 
-const SidebarFilter = ({ onVehicleTypeChange }) => {
+const SidebarFilter = () => {
   
   const [selectedVehicleTypes, setSelectedVehicleTypes] = useState([]); // for vehicle types
   const [selectedTypes, setSelectedTypes] = useState([]); // for types of ride
@@ -142,7 +142,7 @@ const SidebarFilter = ({ onVehicleTypeChange }) => {
     } else {
       updatedTypes.push(type);
     }
-    setSelectedTypes(updatedTypes);
+      setSelectedTypes(updatedTypes);
   };
 
   // Handle checkbox change for vehicleType
@@ -153,7 +153,7 @@ const SidebarFilter = ({ onVehicleTypeChange }) => {
     } else {
       updatedVehicleTypes.push(vehicleType);
     }
-    setSelectedVehicleTypes(updatedVehicleTypes);
+      setSelectedVehicleTypes(updatedVehicleTypes);
   };
 
   // Handle Checkbox change for vehicle class type
@@ -166,6 +166,28 @@ const SidebarFilter = ({ onVehicleTypeChange }) => {
     }
     setSelectedClassTypes(updatedClassType);
   }
+  
+  // handle checkbox for selecting by rating
+  const handleRatingCheckbox =(ratingType)=>{
+    let updatedRatingType = [...selectedRatingTypes];
+    if(updatedRatingType.includes(ratingType)){
+      updatedRatingType = updatedRatingType.filter((rt)=> rt != ratingType); // rt = rating type
+    }else{
+      updatedRatingType.push(ratingType);
+    }
+      setSelectedRatingTypes(updatedRatingType);
+  }
+
+  // handle checkbox for selecting by reviews
+  const handleReviewCheckbox = (reviewType)=>{
+    let updatedReviewType = [...selectedReviewTypes];
+    if(updatedReviewType.includes(reviewType)){
+      updatedReviewType = updatedReviewType.filter((rt)=>rt != reviewType)
+    }else{
+      updatedReviewType.push(reviewType)
+    }
+      setSelectedReviewTypes(updatedReviewType);
+  }
 
   // use effect to run on changing on different value
   useEffect(() => {
@@ -173,18 +195,31 @@ const SidebarFilter = ({ onVehicleTypeChange }) => {
     const existingServiceTypes = searchParams.getAll("serviceType");
     const existingVehicleTypes = searchParams.getAll("vehicleType");
     const existingClassTypes = searchParams.getAll("vehicleClass");
-
-    // Update URL if selectedTypes or selectedVehicleTypes changed
-    if (selectedTypes.sort().join(",") !== existingServiceTypes.sort().join(",") ||
-      selectedVehicleTypes.sort().join(",") !== existingVehicleTypes.sort().join(",") || selectedClassTypes.sort().join(",") !== existingClassTypes.sort().join(",")) {
-
+    const existingRatingTypes = searchParams.getAll("averageRating"); // Add existing average rating types
+    const existingReviewTypes = searchParams.getAll("numberOfRatings");
+    // Check if selected values differ from existing URL parameters
+    if (
+      selectedTypes.sort().join(",") !== existingServiceTypes.sort().join(",") ||
+      selectedVehicleTypes.sort().join(",") !== existingVehicleTypes.sort().join(",") ||
+      selectedClassTypes.sort().join(",") !== existingClassTypes.sort().join(",") ||
+      selectedRatingTypes.sort().join(",") !== existingRatingTypes.sort().join(",") ||
+      selectedReviewTypes.sort().join(",") !== existingReviewTypes.sort().join(",")  
+    ) {
+      // Reset URL parameters for updated filters
       searchParams.delete("serviceType");
       searchParams.delete("vehicleType");
       searchParams.delete("vehicleClass");
-
+      searchParams.delete("averageRating");
+      searchParams.delete("numberOfRatings")
+      // Add each selected filter to the URL
       selectedTypes.forEach((type) => searchParams.append("serviceType", type));
       selectedVehicleTypes.forEach((type) => searchParams.append("vehicleType", type));
-      selectedClassTypes.forEach((type)=>searchParams.append("vehicleClass",type)) 
+      selectedClassTypes.forEach((type) => searchParams.append("vehicleClass", type));
+
+      // Add selected average ratings to the URL
+      selectedRatingTypes.forEach((rating) => searchParams.append("averageRating", rating));
+      selectedReviewTypes.forEach((review) => searchParams.append("numberOfRatings",review));
+      // Update URL with new filters
       navigate(
         {
           pathname: location.pathname,
@@ -194,9 +229,24 @@ const SidebarFilter = ({ onVehicleTypeChange }) => {
       );
     }
 
-    // Dispatch getVehicles with the selected types and vehicle types in params
-    dispatch(getVehicles({ serviceType: selectedTypes, vehicleType: selectedVehicleTypes, vehicleClass: selectedClassTypes }));
-  }, [selectedTypes, selectedVehicleTypes, selectedClassTypes, navigate, location, dispatch]);
+    // Dispatch getVehicles with selected filters, including average rating
+    dispatch(getVehicles({
+      serviceType: selectedTypes,
+      vehicleType: selectedVehicleTypes,
+      vehicleClass: selectedClassTypes,
+      rating: selectedRatingTypes,
+      reviews: selectedReviewTypes // Pass selected ratings as a parameter
+    }));
+  }, [
+    selectedTypes,
+    selectedVehicleTypes,
+    selectedClassTypes,
+    selectedRatingTypes,
+    selectedReviewTypes, // Include selected ratings in dependencies
+    navigate,
+    location,
+    dispatch
+  ]);
   return (
     <div>
       <div className="px-20 py-10">
@@ -275,9 +325,11 @@ const SidebarFilter = ({ onVehicleTypeChange }) => {
               className="flex items-center justify-start mt-2"
             >
               <input
-                type="radio"
-                name="myRadio"
-                value={rating.stars}
+                type="checkbox"
+                name="myRatingType"
+                value={parseInt(rating.stars)}
+                onChange={()=>handleRatingCheckbox(parseInt(rating.stars))}
+                defaultChecked={false}
                 className="mr-4 w-6 h-6 hover:border-2 hover:border-blue-500"
               />
               <span>{rating.stars} Stars and More</span>
@@ -296,9 +348,11 @@ const SidebarFilter = ({ onVehicleTypeChange }) => {
               className="flex items-center justify-start mt-2"
             >
               <input
-                type="radio"
-                name="myRadio"
+                type="checkbox"
+                name="myReviewTypes"
                 value={review.name}
+                onChange={()=>handleReviewCheckbox(review.name)}
+                defaultChecked={false}
                 className="mr-4 w-6 h-6 hover:border-2 hover:border-blue-500"
               />
               <span> {review.name}</span>

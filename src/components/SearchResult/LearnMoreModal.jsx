@@ -22,16 +22,16 @@ const LearnMoreModal = ({ isOpen, onClose, data }) => {
         <div>
           <div className="grid grid-cols-2">
             <div className="bg-gray-200 flex flex-col items-center justify-center">
-              <h1 className="text-blue-950 mt-6"> {data.tour} </h1>
+              <h1 className="text-blue-950 mt-6"> {data?.tour} </h1>
               <div className=" mt-4 mb-4 flex items-start justify-start gap-1">
                 <span className="text-blue-950 text-2xl">₹</span>
-                <span className="text-5xl text-blue-950"> {data.price}</span>
+                <span className="text-5xl text-blue-950"> {data?.price}</span>
               </div>
             </div>
 
             <div className="flex flex-col items-center justify-center">
               <h1 className="mt-2 text-xl text-blue-950 font-bold text-wrap px-6">
-                {data.name}
+                {data?.name}
               </h1>
 
               <button className="px-6 w-[80%] items-center justify-center py-2 border-2 border-white text-white bg-blue-950 mt-3 rounded-md flex flex-row gap-3">
@@ -43,7 +43,7 @@ const LearnMoreModal = ({ isOpen, onClose, data }) => {
 
           <h1 className="mx-4">TAGS </h1>
           <div className="flex flex-row gap-4 mt-2">
-            {data.tags.map((tag, index) => (
+            {data?.tags?.map((tag, index) => (
               <div
                 key={index}
                 className="px-2 py-2 border-blue-950 border rounded-md"
@@ -103,7 +103,7 @@ const LearnMoreModal = ({ isOpen, onClose, data }) => {
 
         <div className="w-full h-80 rounded-md bg-gray-200 flex items-center justify-center overflow-hidden mt-8">
           <img
-            src={data.image}
+            src={data?.image}
             alt="Vehicle"
             className="w-[80%] h-full object-cover"
           />

@@ -21,55 +21,50 @@ const VehicleDetails = () => {
 
   return (
     <div> 
-    <div className="flex justify-center items-center mt-10">
-      {/* This is the card of car details */}
-      <div className="lg:w-[100%] flex items-center justify-center">
-        
-        {/* Left Section - Image and Details with gray background */}
-        <div className="flex flex-col items-center gap-4 bg-gray-100 rounded-l-lg p-4 relative">
-          <div className="flex flex-row"> 
-            <img
-              src={vehicle.image}
-              alt={vehicle.name}
-              className="w-24 h-16 object-cover rounded-lg mt-9 pr-1"
-            />
-            <div className="flex flex-col">
-              <h1 className="text-lg font-bold pt-6 pl-3 text-wrap pr-1">{vehicle.name}</h1>
-              <div className="flex items-center gap-2 pl-3">
-                <span className="text-yellow-500 text-lg">★★★★☆</span>
-                <span className="text-gray-500">{vehicle.reviews} reviews</span>
+      <div className="flex justify-center items-center mt-10">
+        {/* Car Details Card */}
+        <div className="flex flex-col lg:flex-row items-stretch lg:w-4/5 bg-red-200 rounded-lg shadow-md h-auto lg:h-56">
+
+          {/* Left Section - Image and Details */}
+          <div className="flex flex-col lg:flex-row items-center lg:items-stretch gap-4 bg-gray-100 rounded-t-lg lg:rounded-l-lg lg:rounded-tr-none p-4 lg:w-2/3">
+            <div className="flex-shrink-0">
+              <img
+                src={vehicle?.images[0]?.secure_url}
+                alt={vehicle?.vehicleName}
+                className="w-24 h-16 lg:w-32 lg:h-24 object-cover rounded-lg"
+              />
+            </div>
+            <div className="flex flex-col justify-center w-full text-center lg:text-left">
+              <h1 className="text-lg font-bold text-wrap">{vehicle?.vehicleName}</h1>
+              <div className="flex items-center justify-center lg:justify-start gap-2 mt-1">
+                <span className="text-yellow-500">{vehicle?.ratings?.averageRating} ★</span>
+                <span className="text-gray-500">{vehicle?.ratings?.numberOfRatings} reviews</span>
+              </div>
+              <div className="flex gap-2 mt-4 flex-wrap justify-center lg:justify-start">
+                {[vehicle?.vehicleType, vehicle?.vehicleClass, vehicle?.serviceType].map((tag, index) => (
+                  <div className="px-2 py-1 bg-gray-200 rounded-md" key={index}>
+                    <h1 className="text-sm">{tag}</h1>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
 
-          {/* Position the tags near the bottom, with some margin */}
-          <div className="absolute bottom-4 left-4 flex flex-wrap gap-2">
-            {vehicle.tags.map((tag, index) => (
-              <span key={index} className="bg-gray-200 text-sm rounded-md px-2 py-1">
-                {tag}
-              </span>
-            ))}
-          </div>
-        </div>
-
-        {/* Right Section - Pricing and Learn More with black background */}
-        <div className="flex flex-col justify-between items-center bg-black p-4 rounded-r-lg">
-          <div>
-            <h3 className="text-blue-600 text-xs font-semibold text-center pt-2">ONE WAY</h3>
+          {/* Right Section - Pricing and Learn More */}
+          <div className="flex flex-col justify-center items-center bg-black text-white p-4 rounded-b-lg lg:rounded-r-lg lg:rounded-bl-none lg:w-1/3">
+            <h3 className="text-blue-600 text-xs font-semibold text-center">ONE WAY</h3>
             <div className="flex items-baseline pt-3">
-              <span className="text-2xl font-bold text-white text-center">₹{vehicle.price}</span>
-              <span className="text-xs text-gray-500 ml-1 text-center">.06</span>
+              <span className="text-2xl font-bold">₹{vehicle?.price}</span>
+              <span className="text-xs text-gray-500 ml-1">.06</span>
             </div>
+            <button className="mt-4 px-4 py-2 bg-blue-900 rounded-md flex items-center gap-2">
+              <MdKeyboardArrowRight size="20" />
+              Learn More
+            </button>
           </div>
-
-          <button className="mt-4 px-4 py-2 bg-blue-900 text-white rounded-md flex items-center gap-2">
-            <MdKeyboardArrowRight size="20" />
-            Learn More  
-          </button>
         </div>
       </div>
- 
-    </div>
+
     {/* this is the div below the div which contains car details card */}
     <div className="bg-gray-200 mt-4 ">
         <div className="flex flex-col justify-center items-center">
