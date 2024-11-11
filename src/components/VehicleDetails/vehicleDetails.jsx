@@ -13,6 +13,7 @@ import { MdOutlineMailOutline } from "react-icons/md";
 
 const VehicleDetails = () => {
   const location = useLocation();
+  //user vehicle?.price for payment
   const { vehicle } = location.state;  // Access the vehicle data from state
 
   if (!vehicle) {
