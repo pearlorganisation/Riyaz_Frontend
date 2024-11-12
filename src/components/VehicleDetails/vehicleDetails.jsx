@@ -10,6 +10,11 @@ import { RiRefund2Fill } from "react-icons/ri";
 import { CiLock } from "react-icons/ci";
 import { MdOutlineMailOutline } from "react-icons/md";
 
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
+import PaymentForm from "../PaymentForm/PaymentForm";
+
+const stripePromise = loadStripe(`${import.meta.env.STRIPE_PUBLISH_KEY}`);
 
 const VehicleDetails = () => {
   const location = useLocation();
@@ -58,10 +63,12 @@ const VehicleDetails = () => {
               <span className="text-2xl font-bold">₹{vehicle?.price}</span>
               <span className="text-xs text-gray-500 ml-1">.06</span>
             </div>
+            <Elements stripe={stripePromise}>
             <button className="mt-4 px-4 py-2 bg-blue-900 rounded-md flex items-center gap-2">
               <MdKeyboardArrowRight size="20" />
-              Learn More
+              <PaymentForm />
             </button>
+            </Elements>
           </div>
         </div>
       </div>
@@ -339,6 +346,7 @@ const VehicleDetails = () => {
                   </p>
                   </div>
                 </div>
+                {/*  Confirm payment button */}
                 <div className="flex justify-center items-center">
                 <button className={`text-3xl font-sans text-center border-2 border-cyan-200 rounded-md pl-3 pr-3 pb-3 pt-3 bg-black text-white w-80 hover:bg-blue-900 delay-150 ease-in-out transition`} >Confirm Payment</button>
                 </div>
