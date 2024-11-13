@@ -9,6 +9,8 @@ import {
 import { IoIosArrowDown } from "react-icons/io";
 import { AiOutlineInfoCircle } from "react-icons/ai";
 import { useLocation } from "react-router-dom";
+import PaymentForm from "../../components/PaymentForm/PaymentForm";
+
 const VehicleDetails = () => {
   const location = useLocation();
   const { vehicle } = location.state; // Access the vehicle data from state
@@ -69,7 +71,7 @@ const VehicleDetails = () => {
             </div>
             <button className="mt-4 px-4 py-2 bg-blue-900 text-white rounded-md flex items-center gap-2">
               <MdKeyboardArrowRight size="20" />
-              Learn More
+              <PaymentForm data={vehicle} />
             </button>
           </div>
         </div>
