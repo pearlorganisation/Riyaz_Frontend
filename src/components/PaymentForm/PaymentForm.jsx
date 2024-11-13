@@ -1,18 +1,14 @@
 import { loadStripe } from '@stripe/stripe-js';
 
-const PaymentForm = (
-
-) => {
-    console.log(import.meta.env);
-
-    console.log("---------------------", import.meta.env.VITE_APP_STRIPE_PUBLISHABLE_KEY)
- 
+const PaymentForm = ({ data }) => {
+    const { price } = data;
     const makePayment = async () => {
         const stripe = await loadStripe(`${import.meta.env.VITE_APP_STRIPE_PUBLISHABLE_KEY}`)
-
+         
+        console.log("---------------------------",price)
         // body to pass 
         const body = {
-            amount: 400
+            amount: Math.floor(price)
         };
         const headers = {
             "Content-Type": "application/json"
