@@ -9,12 +9,8 @@ import { BsRecordCircle } from "react-icons/bs";
 import { RiRefund2Fill } from "react-icons/ri"; 
 import { CiLock } from "react-icons/ci";
 import { MdOutlineMailOutline } from "react-icons/md";
-
-import { Elements } from '@stripe/react-stripe-js';
-import { loadStripe } from '@stripe/stripe-js';
-import PaymentForm from "../PaymentForm/PaymentForm";
-
-const stripePromise = loadStripe(`${import.meta.env.STRIPE_PUBLISH_KEY}`);
+import PaymentForm from "../../components/PaymentForm/PaymentForm";
+ 
 
 const VehicleDetails = () => {
   const location = useLocation();
@@ -63,12 +59,12 @@ const VehicleDetails = () => {
               <span className="text-2xl font-bold">₹{vehicle?.price}</span>
               <span className="text-xs text-gray-500 ml-1">.06</span>
             </div>
-            <Elements stripe={stripePromise}>
+            
             <button className="mt-4 px-4 py-2 bg-blue-900 rounded-md flex items-center gap-2">
               <MdKeyboardArrowRight size="20" />
               <PaymentForm />
             </button>
-            </Elements>
+         
           </div>
         </div>
       </div>
