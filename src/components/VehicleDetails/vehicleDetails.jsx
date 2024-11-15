@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { TbCircleArrowRight } from "react-icons/tb";
 import { MdKeyboardArrowRight } from "react-icons/md";
@@ -16,10 +16,15 @@ const VehicleDetails = () => {
   const location = useLocation();
   //user vehicle?.price for payment
   const { vehicle } = location.state;  // Access the vehicle data from state
-
   if (!vehicle) {
     return <div>No vehicle details found!</div>;  // Fallback if no data is passed
   }
+
+  /*-------------state for handling no of passengers-------------------- */
+  const [numPeople, setNumPeople] = useState(1);
+
+
+  const totalPrice = Math.round(numPeople* vehicle.price);
 
   return (
     <div> 
@@ -56,15 +61,28 @@ const VehicleDetails = () => {
           <div className="flex flex-col justify-center items-center bg-black text-white p-4 rounded-b-lg lg:rounded-r-lg lg:rounded-bl-none lg:w-1/3">
             <h3 className="text-blue-600 text-xs font-semibold text-center">ONE WAY</h3>
             <div className="flex items-baseline pt-3">
-              <span className="text-2xl font-bold">₹{vehicle?.price}</span>
-              <span className="text-xs text-gray-500 ml-1">.06</span>
-            </div>
+              <span className="text-2xl font-bold">$-{totalPrice}</span>
+             </div>
             
             <button className="mt-4 px-4 py-2 bg-blue-900 rounded-md flex items-center gap-2">
               <MdKeyboardArrowRight size="20" />
-              <PaymentForm data={vehicle} />
+              <PaymentForm data={vehicle} numPeople={numPeople} price={totalPrice} />
             </button>
-         
+            <div className="flex items-center border rounded-md"> 
+            <button
+              className="px-4 py-2 text-gray-600 hover:bg-gray-200"
+              onClick={() => setNumPeople(numPeople - 1)}
+            >
+              -
+            </button>
+            <span className="px-4 py-2 border-l border-r">{numPeople}</span>
+            <button
+              className="px-4 py-2 text-gray-600 hover:bg-gray-200"
+              onClick={() => setNumPeople(numPeople + 1)}
+            >
+              +
+            </button>
+            </div>
           </div>
         </div>
       </div>

@@ -18,6 +18,8 @@ import VehicleListing from "./pages/VehicleListing/VehicleListing";
 import VehicleDetails from "./components/VehicleDetails/vehicleDetails";
 import ProfileData from "./components/ProfileData/ProfileData";
 import BookingsData from "./components/BookingsData/BookingsData";
+import BookingSuccess from "./pages/Booking/BookingSuccess";
+import BookingCancel from "./pages/Booking/BookingCancel";
 
 function App() {
   useEffect(() => {
@@ -66,6 +68,14 @@ function App() {
           path: "bookings",
           element: isUserLoggedIn ? <BookingsData /> : <Login />,
         },
+        {
+          path:"booking/success",
+          element:<BookingSuccess />
+        },
+        {
+          path:"booking/cancel",
+          element:<BookingCancel />
+        }
       ],
     },
     {
