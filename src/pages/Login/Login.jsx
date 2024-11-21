@@ -5,6 +5,7 @@ import { ClipLoader } from "react-spinners";
 import { Link, useNavigate } from "react-router-dom";
 import ErrorMessage from "../../components/Error/Error";
 import { userLogin } from "../../features/actions/authAction";
+import { getUserProfile } from "../../features/actions/userAction";
 
 const Login = () => {
   const { isLoading, isError, isSuccess, message, userInfo } = useSelector(
@@ -22,6 +23,7 @@ const Login = () => {
 
   useEffect(() => {
     if (userInfo) {
+      dispatch(getUserProfile())
       navigate("/");
     }
   }, [navigate, userInfo]);

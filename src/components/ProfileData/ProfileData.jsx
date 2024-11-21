@@ -1,107 +1,144 @@
 import React, { useState } from 'react';
-import Profile from "../../assets/images/profile/832.jpg";
 import { GoPlus } from "react-icons/go";
 import { AiTwotoneDelete } from "react-icons/ai";
 import { useSelector } from 'react-redux';
-import UpdateModal from '../UpdateModal/UpdateModal';
-// import axios from 'axios';
-
-
+import UpdateModal from "../../components/UpdateModal/UpdateModal"
+import Profile from "../../assets/images/profile/832.jpg";
 const ProfileData = () => {
+  const { userInfo } = useSelector(state => state.user);
+  const { name, email, mobileNumber } = userInfo;
+  const [edit, setEdit] = useState(false);
 
-  const { userInfo } = useSelector(state=> state.user);
-  const { name , email, mobileNumber } = userInfo
-  
-
-  // for updateProflie
-  const [edit, setEdit] = useState(false)
-  const handleEdit = ()=>{
+  const handleEdit = () => {
     setEdit(!edit);
-  }
- 
+  };
+
   return (
-  <>
-  <div className='flex flex-col justify-center items-center z-10 relative'>
-        <div className='flex flex-col justify-center items-center lg:h-max md:h-max h-auto'>
-           <img src={Profile}
-            width={200}
-            height={180}
-            className='' 
-            /> 
-          
-          <h1 className='text-4xl font-light pr-3 pl-3'>{email}</h1>
-          <p className='text-lg font-light pb-2 pt-3'>{email}</p>
-       
+    <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto">
+        {/* Profile Header */}
+        <div className="text-center mb-12">
+          <div className="relative inline-block">
+            <div className="w-32 h-32 rounded-full overflow-hidden ring-4 ring-white shadow-xl mx-auto">
+              <img
+                src={Profile}
+                alt="Profile"
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <button className="absolute bottom-0 right-0 bg-white rounded-full p-2 shadow-lg hover:bg-gray-50 transition-colors">
+              <GoPlus className="w-5 h-5 text-gray-600" />
+            </button>
+          </div>
+          <h1 className="mt-4 text-3xl font-bold text-gray-900">{name}</h1>
+          <p className="text-gray-500">{email}</p>
         </div>
-        <div className='flex flex-col lg:flex-row md:flex-col gap-2 justify-between w-[80%] mb-3'>
-          <div className='w-full lg:w-1/2 mt-3'>
-           <div className="bg-white p-8 rounded-lg shadow-2xl">
-            <h2 className="text-xl font-semibold mb-2 w-full flex flex-row justify-between">Your Profile <span className="text-sm text-red-600">* required</span>
-            </h2>
-            <p className="text-sm text-gray-500 mb-6">This information is used to pre-fill your details and make it quicker for you to complete a booking.</p>
 
-            <div>
-               <div className="mb-4">
-                <label for="given-name" className="block text-sm font-medium text-gray-700">Given Name *</label>
-                <input type="text" value={name} id="given-name" name="given-name" className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm h-12" 
-                // onChange={(e)=>setUserName(e.target.value)}
-                disabled />
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {/* Profile Information */}
+          <div className="bg-white rounded-xl shadow-lg overflow-hidden">
+            <div className="p-8">
+              <div className="flex justify-between items-center mb-2">
+                <h2 className="text-xl font-semibold text-gray-900">Your Profile</h2>
+                <span className="text-sm text-red-500">* required</span>
               </div>
+              <p className="text-sm text-gray-500 mb-8">
+                This information is used to pre-fill your details for faster booking.
+              </p>
 
-               <div className="mb-4">
-                <label for="mobile-number" className="block text-sm font-medium text-gray-700">Mobile Number *</label>
-                <div className="flex mt-1">
-                  <span className="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-sm">🇮🇳</span>
-                  <input type="text" value={mobileNumber} id="mobile-number" name="mobile-number" placeholder="081234 56789" className="block w-full px-3 py-2 border border-gray-300 rounded-r-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm h-12" 
-                  // onChange={(e)=>setMobile(e.target.value)}
-                   disabled />
+              <div className="space-y-6">
+                <div>
+                  <label htmlFor="given-name" className="block text-sm font-medium text-gray-700 mb-2">
+                    Given Name *
+                  </label>
+                  <input
+                    type="text"
+                    id="given-name"
+                    value={name}
+                    disabled
+                    className="w-full h-12 px-4 rounded-lg border border-gray-300 bg-gray-50 text-gray-700 focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:opacity-75 disabled:cursor-not-allowed"
+                  />
                 </div>
-              </div>
 
-               <div className="mb-4">
-                <label for="email" className="block text-sm font-medium text-gray-700">Email Address *</label>
-                <input type="email" id="email" value={email} name="email" placeholder="example@domain.com" className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm h-12"
-                // onChange={(e)=>setUserEmail(e.target.value)}
-                 disabled />
-              </div>
+                <div>
+                  <label htmlFor="mobile-number" className="block text-sm font-medium text-gray-700 mb-2">
+                    Mobile Number *
+                  </label>
+                  <div className="flex">
+                    <span className="inline-flex items-center px-4 rounded-l-lg border border-r-0 border-gray-300 bg-gray-50 text-gray-500">
+                      🇮🇳
+                    </span>
+                    <input
+                      type="text"
+                      id="mobile-number"
+                      value={mobileNumber}
+                      disabled
+                      className="w-full h-12 px-4 rounded-r-lg border border-gray-300 bg-gray-50 text-gray-700 focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:opacity-75 disabled:cursor-not-allowed"
+                    />
+                  </div>
+                </div>
 
-                
+                <div>
+                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                    Email Address *
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    value={email}
+                    disabled
+                    className="w-full h-12 px-4 rounded-lg border border-gray-300 bg-gray-50 text-gray-700 focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:opacity-75 disabled:cursor-not-allowed"
+                  />
+                </div>
 
-               <div className='flex justify-between'>
-                <button onClick={handleEdit} className="w-full bg-black hover:bg-blue-900 text-white h-14 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 text-2xl font-serif">
+                <button
+                  onClick={handleEdit}
+                  className="w-full h-12 bg-black hover:bg-gray-800 text-white rounded-lg font-medium transition-colors duration-200 ease-in-out shadow-sm"
+                >
                   Edit Profile
                 </button>
-                
-                
               </div>
             </div>
           </div>
-        </div>
-        <div className='w-full lg:w-1/2'> 
-          <div className="bg-white p-8 rounded-lg shadow-lg mt-3">
-            <h2 className="text-xl font-semibold mb-2 w-full flex flex-row justify-between">Saved Credit Cards<span className="text-sm text-red-600">* required</span></h2>
-            <p className="text-sm text-gray-500 mb-6">No cards have been saved yet. Either tick “Save Card” on your next booking or click “Add New Card +” now</p>
-              <button className='w-full p-3 bg-white border-2 border-black rounded-md font-semibold text-lg flex flex-row justify-center items-center'> <span>Add New Credit Card</span><span className="pl-1"><GoPlus size={24} /> </span> </button>
- 
-          </div>
-            <div className="bg-white p-8 rounded-lg shadow-lg mt-3">
-              <h2 className="text-xl font-semibold mb-2 w-full">Delete Account</h2>
-              <div className='flex flex-row pt-6 items-center justify-between'>
-                <p className="text-sm text-gray-500">Delete account for manishgupta@pearlorganisation.com</p>
-                <button className='w-max bg-white border-2 border-red-100 rounded-md font-semibold text-lg'><AiTwotoneDelete size={30} /></button>
-              </div>
-            
- 
-            </div>
-         </div>
-        </div>
-        {/* Modal */}
-        {edit && (
-          <UpdateModal email={email} mobileNumber={mobileNumber} name={name} handleEdit={handleEdit} /> 
-          )}
-  </div>
-  </>
-  )
-}
 
-export default ProfileData
+          {/* Right Column */}
+          <div className="space-y-8">
+            {/* Credit Cards */}
+            <div className="bg-white rounded-xl shadow-lg p-8">
+              <div className="flex justify-between items-center mb-2">
+                <h2 className="text-xl font-semibold text-gray-900">Saved Credit Cards</h2>
+                <span className="text-sm text-red-500">* required</span>
+              </div>
+              <p className="text-sm text-gray-500 mb-8">
+                No cards have been saved yet. Either tick "Save Card" on your next booking or click "Add New Card +" now
+              </p>
+              <button className="w-full h-12 border-2 border-black rounded-lg font-medium flex items-center justify-center space-x-2 hover:bg-gray-50 transition-colors duration-200 ease-in-out">
+                <span>Add New Credit Card</span>
+                <GoPlus className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* Delete Account */}
+            <div className="bg-white rounded-xl shadow-lg p-8">
+              <h2 className="text-xl font-semibold text-gray-900 mb-6">Delete Account</h2>
+              <div className="flex items-center justify-between">
+                <p className="text-sm text-gray-500">
+                  Delete account for {email}
+                </p>
+                <button className="p-2 text-red-500 hover:text-red-600 hover:bg-red-50 rounded-lg border border-red-100 transition-colors duration-200 ease-in-out">
+                  <AiTwotoneDelete className="w-6 h-6" />
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {edit && (
+          <UpdateModal email={email} mobileNumber={mobileNumber} name={name} handleEdit={handleEdit} />
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default ProfileData;
