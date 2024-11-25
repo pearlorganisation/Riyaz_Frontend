@@ -20,7 +20,7 @@ const PaymentForm = ({ data, numPeople, price}) => {
             "Content-Type": "application/json"
         }
 
-        const response = await fetch(`http://localhost:3000/api/v1/booking/book`, {
+        const response = await fetch(`http://localhost:3000/api/v1/bookings`, {
             method: "POST",
             headers: headers,
             body: JSON.stringify(body)

@@ -66,6 +66,7 @@ const VehicleDetails = () => {
             
             <button className="mt-4 px-4 py-2 bg-blue-900 rounded-md flex items-center gap-2">
               <MdKeyboardArrowRight size="20" />
+              {/** Payment form component **/}
               <PaymentForm data={vehicle} numPeople={numPeople} price={totalPrice} />
             </button>
             <div className="flex items-center border rounded-md"> 

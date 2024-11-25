@@ -25,7 +25,7 @@ const BookingSuccess = () => {
 
                 // Make the verification request
                 const response = await fetch(
-                    `http://localhost:3000/api/v1/booking/verify?sessionId=${sessionId}&bookingId=${bookingId}`,
+                    `http://localhost:3000/api/v1/bookings/verify?sessionId=${sessionId}&bookingId=${bookingId}`,
                     {
                         method: 'GET',
                         headers: {
