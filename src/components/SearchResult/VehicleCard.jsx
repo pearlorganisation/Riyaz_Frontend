@@ -1,9 +1,11 @@
 import { useNavigate } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { TbCircleArrowRight } from "react-icons/tb";
 import LearnMoreModal from "./LearnMoreModal";
+import { useDispatch } from "react-redux";
+import { getCarReview } from "../../features/actions/vehicleAction";
 
-const VehicleCard = ({ vehicle }) => {
+const VehicleCard = ({ key , vehicle }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -16,7 +18,7 @@ const VehicleCard = ({ vehicle }) => {
   const closeModal = () => {
     setIsModalOpen(false);
   };
-
+ 
   const handleSelect = (vehicle) => {
     navigate(`/vehicle-details`, { state: { vehicle } }); // Pass vehicle data through state
   };
