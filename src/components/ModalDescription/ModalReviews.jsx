@@ -8,7 +8,7 @@ const ModalReviews = ({ data }) => {
     if (data?._id) {
       const fetchReviews = async () => {
         try {
-          const response = await axios.get(`http://localhost:3000/api/v1/vehicles/${data._id}/reviews`);
+          const response = await axios.get(`${import.meta.env.VITE_APP_BACKEND_DEV_BASE_URL}/vehicles/${data._id}/reviews`);
           console.log("API Response:", response.data);
           // Access the nested data array
           setCarReview(response.data.data || []);
@@ -43,7 +43,7 @@ const ModalReviews = ({ data }) => {
       {/* Reviews display */}
       <div className="mt-4">
         {carReview.length > 0 ? (
-          carReview.map((review) => (
+          carReview?.map((review) => (
             <div key={review._id} className="border p-2 mb-2 rounded">
               <h1 className="font-semibold">Rating: {review.rating}</h1>
               <p>{review.content}</p>

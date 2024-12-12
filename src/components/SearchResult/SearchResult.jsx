@@ -7,12 +7,11 @@ import { getVehicles } from "../../features/actions/vehicleAction";
 const SearchResult = ({ date, returnDate }) => {
   const dispatch = useDispatch();
   const { vehicleInfo, isSuccess } = useSelector((state) => state.vehicle);
-  const [currentPage, setCurrentPage] = useState(1);
-
+ 
   useEffect(() => {
     // Fetch vehicles based on the current page
-    dispatch(getVehicles(currentPage));
-  }, [dispatch, currentPage]);
+    dispatch(getVehicles());
+  }, [dispatch]);
 
   // Filter vehicles based on availability and selected date range
   const filteredVehicles = vehicleInfo?.filter((vehicle) => {
@@ -28,8 +27,7 @@ const SearchResult = ({ date, returnDate }) => {
     return availableFrom <= selectedEndDate && availableTo >= selectedStartDate;
   });
 
-  // Pagination handler
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+   
 
   return (
     <div className="px-20 py-10">
@@ -60,18 +58,7 @@ const SearchResult = ({ date, returnDate }) => {
             </div>
           )}
 
-          <div className="flex justify-center mt-4">
-            {/* Render pagination buttons based on backend pagination data */}
-            {Array.from({ length: vehicleInfo?.pagination?.pages }, (_, i) => (
-              <button
-                key={i + 1}
-                onClick={() => paginate(i + 1)}
-                className={`px-4 py-2 border ${currentPage === i + 1 ? "bg-blue-500 text-white" : ""}`}
-              >
-                {i + 1}
-              </button>
-            ))}
-          </div>
+          
         </>
       )}
     </div>

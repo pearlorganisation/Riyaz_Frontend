@@ -2,8 +2,7 @@ import { useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { TbCircleArrowRight } from "react-icons/tb";
 import LearnMoreModal from "./LearnMoreModal";
-import { useDispatch } from "react-redux";
-import { getCarReview } from "../../features/actions/vehicleAction";
+ 
 
 const VehicleCard = ({ key , vehicle }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
