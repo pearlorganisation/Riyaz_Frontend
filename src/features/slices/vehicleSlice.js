@@ -23,7 +23,7 @@ const vehicleSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = false;
         state.isError = true;
-        state.message = action.payloadl;
+        state.message = action.payload ;
         toast.error(action.payload, {
           position: "top-center",
         });

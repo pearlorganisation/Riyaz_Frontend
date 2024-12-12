@@ -179,68 +179,82 @@ const SidebarFilter = () => {
   };
 
   // use effect to run on changing on different value
-  useEffect(() => {
-    const searchParams = new URLSearchParams(location.search);
-    const existingServiceTypes = searchParams.getAll("serviceType");
-    const existingVehicleTypes = searchParams.getAll("vehicleType");
-    const existingClassTypes = searchParams.getAll("vehicleClass");
-    const existingRatingTypes = searchParams.getAll("averageRating"); // Add existing average rating types
-    const existingReviewTypes = searchParams.getAll("numberOfRatings");
-    // Check if selected values differ from existing URL parameters
-    if (
-      selectedTypes.sort().join(",") !==
-        existingServiceTypes.sort().join(",") ||
-      selectedVehicleTypes.sort().join(",") !==
-        existingVehicleTypes.sort().join(",") ||
-      selectedClassTypes.sort().join(",") !==
-        existingClassTypes.sort().join(",") ||
-      selectedRatingTypes.sort().join(",") !==
-        existingRatingTypes.sort().join(",") ||
-      selectedReviewTypes.sort().join(",") !==
-        existingReviewTypes.sort().join(",")
-    ) {
-      // Reset URL parameters for updated filters
-      searchParams.delete("serviceType");
-      searchParams.delete("vehicleType");
-      searchParams.delete("vehicleClass");
-      searchParams.delete("averageRating");
-      searchParams.delete("numberOfRatings");
-      // Add each selected filter to the URL
-      selectedTypes.forEach((type) => searchParams.append("serviceType", type));
-      selectedVehicleTypes.forEach((type) =>
-        searchParams.append("vehicleType", type)
-      );
-      selectedClassTypes.forEach((type) =>
-        searchParams.append("vehicleClass", type)
-      );
+ 
 
-      // Add selected average ratings to the URL
-      selectedRatingTypes.forEach((rating) =>
-        searchParams.append("averageRating", rating)
-      );
-      selectedReviewTypes.forEach((review) =>
-        searchParams.append("numberOfRatings", review)
-      );
-      // Update URL with new filters
-      navigate(
-        {
-          pathname: location.pathname,
-          search: searchParams.toString(),
-        },
-        { replace: true }
+  useEffect(() => {
+    // Check if any filters are selected
+    if (
+      selectedTypes.length > 0 ||
+      selectedVehicleTypes.length > 0 ||
+      selectedClassTypes.length > 0 ||
+      selectedRatingTypes.length > 0 ||
+      selectedReviewTypes.length > 0
+    ) {
+      const searchParams = new URLSearchParams(location.search);
+      const existingServiceTypes = searchParams.getAll("serviceType");
+      const existingVehicleTypes = searchParams.getAll("vehicleType");
+      const existingClassTypes = searchParams.getAll("vehicleClass");
+      const existingRatingTypes = searchParams.getAll("averageRating"); // Add existing average rating types
+      const existingReviewTypes = searchParams.getAll("numberOfRatings");
+
+      // Check if selected values differ from existing URL parameters
+      if (
+        selectedTypes.sort().join(",") !==
+        existingServiceTypes.sort().join(",") ||
+        selectedVehicleTypes.sort().join(",") !==
+        existingVehicleTypes.sort().join(",") ||
+        selectedClassTypes.sort().join(",") !==
+        existingClassTypes.sort().join(",") ||
+        selectedRatingTypes.sort().join(",") !==
+        existingRatingTypes.sort().join(",") ||
+        selectedReviewTypes.sort().join(",") !==
+        existingReviewTypes.sort().join(",")
+      ) {
+        // Reset URL parameters for updated filters
+        searchParams.delete("serviceType");
+        searchParams.delete("vehicleType");
+        searchParams.delete("vehicleClass");
+        searchParams.delete("averageRating");
+        searchParams.delete("numberOfRatings");
+
+        // Add each selected filter to the URL
+        selectedTypes.forEach((type) => searchParams.append("serviceType", type));
+        selectedVehicleTypes.forEach((type) =>
+          searchParams.append("vehicleType", type)
+        );
+        selectedClassTypes.forEach((type) =>
+          searchParams.append("vehicleClass", type)
+        );
+
+        // Add selected average ratings to the URL
+        selectedRatingTypes.forEach((rating) =>
+          searchParams.append("averageRating", rating)
+        );
+        selectedReviewTypes.forEach((review) =>
+          searchParams.append("numberOfRatings", review)
+        );
+
+        // Update URL with new filters
+        navigate(
+          {
+            pathname: location.pathname,
+            search: searchParams.toString(),
+          },
+          { replace: true } // Uncomment if you want to replace the current entry in history
+        );
+      }
+
+      // Dispatch getVehicles with selected filters
+      dispatch(
+        getVehicles({
+          serviceType: selectedTypes,
+          vehicleType: selectedVehicleTypes,
+          vehicleClass: selectedClassTypes,
+          rating: selectedRatingTypes,
+          reviews: selectedReviewTypes, // Pass selected ratings as a parameter
+        })
       );
     }
-
-    // Dispatch getVehicles with selected filters, including average rating
-    dispatch(
-      getVehicles({
-        serviceType: selectedTypes,
-        vehicleType: selectedVehicleTypes,
-        vehicleClass: selectedClassTypes,
-        rating: selectedRatingTypes,
-        reviews: selectedReviewTypes, // Pass selected ratings as a parameter
-      })
-    );
   }, [
     selectedTypes,
     selectedVehicleTypes,
@@ -251,6 +265,7 @@ const SidebarFilter = () => {
     location,
     dispatch,
   ]);
+
   return (
     <div>
       <div className="px-20 py-10">
