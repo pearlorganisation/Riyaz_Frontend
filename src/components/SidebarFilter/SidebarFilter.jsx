@@ -183,13 +183,7 @@ const SidebarFilter = () => {
 
   useEffect(() => {
     // Check if any filters are selected
-    if (
-      selectedTypes.length > 0 ||
-      selectedVehicleTypes.length > 0 ||
-      selectedClassTypes.length > 0 ||
-      selectedRatingTypes.length > 0 ||
-      selectedReviewTypes.length > 0
-    ) {
+    
       const searchParams = new URLSearchParams(location.search);
       const existingServiceTypes = searchParams.getAll("serviceType");
       const existingVehicleTypes = searchParams.getAll("vehicleType");
@@ -242,7 +236,7 @@ const SidebarFilter = () => {
           },
           { replace: true } // Uncomment if you want to replace the current entry in history
         );
-      }
+      
 
       // Dispatch getVehicles with selected filters
       dispatch(
