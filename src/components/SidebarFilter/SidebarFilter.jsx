@@ -190,6 +190,10 @@ const SidebarFilter = () => {
       const existingClassTypes = searchParams.getAll("vehicleClass");
       const existingRatingTypes = searchParams.getAll("averageRating"); // Add existing average rating types
       const existingReviewTypes = searchParams.getAll("numberOfRatings");
+      /**-----------for testing-----------*/
+      const getPickupLocation = searchParams.get("pickupLocation")
+      const getDestinationLocation = searchParams.get("destination")
+      console.log('---------------pickup and drop', getPickupLocation, getDestinationLocation)
 
       // Check if selected values differ from existing URL parameters
       if (
@@ -227,14 +231,14 @@ const SidebarFilter = () => {
         selectedReviewTypes.forEach((review) =>
           searchParams.append("numberOfRatings", review)
         );
-
+        
         // Update URL with new filters
         navigate(
           {
             pathname: location.pathname,
             search: searchParams.toString(),
           },
-          { replace: true } // Uncomment if you want to replace the current entry in history
+          { replace: false } // Uncomment if you want to replace the current entry in history
         );
       
 
@@ -245,7 +249,9 @@ const SidebarFilter = () => {
           vehicleType: selectedVehicleTypes,
           vehicleClass: selectedClassTypes,
           rating: selectedRatingTypes,
-          reviews: selectedReviewTypes, // Pass selected ratings as a parameter
+          reviews: selectedReviewTypes,
+          pickupLocation: getPickupLocation,
+          destination: getDestinationLocation
         })
       );
     }

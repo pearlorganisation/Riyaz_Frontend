@@ -68,7 +68,8 @@ const SearchUpdate = ({ setDate, setReturnDate }) => {
     }, { replace: true });
 
     // Dispatch the getVehicles action after updating the searchParams
-    dispatch(getVehicles(searchParams)).then(
+    dispatch(getVehicles(searchParams))
+    .then(
       setPickupLocation(""),
       setDestination("")
     );
