@@ -111,7 +111,7 @@ const faqsList = [];
 const whyUsFeatures = [];
 
 const SidebarFilter = () => {
-  const [selectedVehicleTypes, setSelectedVehicleTypes] = useState([]); // for vehicle types
+   const [selectedVehicleTypes, setSelectedVehicleTypes] = useState([]); // for vehicle types
   const [selectedTypes, setSelectedTypes] = useState([]); // for types of ride
   const [selectedClassTypes, setSelectedClassTypes] = useState([]); // for selecting by class types of vehicles
   const [selectedRatingTypes, setSelectedRatingTypes] = useState([]); // for selecting vehicles on ratings type
@@ -193,9 +193,10 @@ const SidebarFilter = () => {
       /**-----------for testing-----------*/
       const getPickupLocation = searchParams.get("pickupLocation")
       const getDestinationLocation = searchParams.get("destination")
+      const sortByValue = searchParams.get("sortBy")
       console.log('---------------pickup and drop', getPickupLocation, getDestinationLocation)
-
-      // Check if selected values differ from existing URL parameters
+  
+       // Check if selected values differ from existing URL parameters
       if (
         selectedTypes.sort().join(",") !==
         existingServiceTypes.sort().join(",") ||
@@ -251,7 +252,8 @@ const SidebarFilter = () => {
           rating: selectedRatingTypes,
           reviews: selectedReviewTypes,
           pickupLocation: getPickupLocation,
-          destination: getDestinationLocation
+          destination: getDestinationLocation,
+          // sortBy:sortByValue
         })
       );
     }
@@ -264,6 +266,7 @@ const SidebarFilter = () => {
     navigate,
     location,
     dispatch,
+  
   ]);
 
   return (

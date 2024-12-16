@@ -11,9 +11,9 @@ import { useLocation, useNavigate } from "react-router-dom";
 const VehicleListing = () => {
   const [date, setDate] = useState("");
   const [returnDate, setReturnDate] = useState("");
-
+  /** sort by query is */
  
-
+ 
   return (
     <div>
       <div className="static z-10">
@@ -28,8 +28,8 @@ const VehicleListing = () => {
 
         {/* Sidebar and Search Results */}
         <div className="grid grid-cols-1 lg:grid-cols-[30%_auto] gap-8 mt-20">
-          <SidebarFilter />
-          <SearchResult date={date} returnDate={returnDate} />
+          <SidebarFilter  />
+          <SearchResult date={date} returnDate={returnDate}  />
         </div>
       </div>
     </div>
