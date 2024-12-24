@@ -26,26 +26,24 @@ const PaymentForm = ({ data, numPeople, price}) => {
             body: JSON.stringify(body)
         });
 
-    //wait for the server res for the session
-    const session = await response.json();
+        //wait for the server res for the session
+        const session = await response.json();
 
-    // redirect to checkout
-    const result = stripe.redirectToCheckout({
-      sessionId: session.id,
-    });
-    if (result.error) {
-      console.log(result.error, "the error is");
+        // redirect to checkout
+        const result = stripe.redirectToCheckout({
+            sessionId: session.id
+        })
+        if (result.error) {
+            console.log(result.error, "the error is")
+        }
     }
-  };
-  return (
-    <div>
-      <div className="flex justify-center items-center">
-        <button className="text-red-600" onClick={makePayment}>
-          Pay
-        </button>
-      </div>
-    </div>
-  );
-};
+    return (
+        <div>
+            <div className='flex justify-center items-center'>
+                <button className='text-red-600' onClick={makePayment}>Pay</button>
+            </div>
+        </div>
+    )
+}
 
-export default PaymentForm;
+export default PaymentForm
