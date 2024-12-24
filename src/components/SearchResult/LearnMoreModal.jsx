@@ -1,11 +1,16 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { TbCircleArrowRight } from "react-icons/tb";
 import ModalDescription from "../ModalDescription/ModalDescription";
 import ModalReviews from "../ModalDescription/ModalReviews";
 import ModalAbout from "../ModalDescription/ModalAbout";
-/* eslint-disable react/prop-types */
+import { useDispatch, useSelector } from "react-redux";
+ /* eslint-disable react/prop-types */
 const LearnMoreModal = ({ isOpen, onClose, data }) => {
+  const dispatch = useDispatch();
   const [activeIndex, setActiveIndex] = useState(0);
+  const { carReview } = useSelector((state)=>state.vehicle);
+
+ 
   return (
     <div
       className={`fixed mt-40 inset-0 flex items-center justify-center z-50 ${
@@ -91,7 +96,7 @@ const LearnMoreModal = ({ isOpen, onClose, data }) => {
 
         {activeIndex == 1 && (
           <div className="mt-3">
-            <ModalReviews data={data} />
+            <ModalReviews review={carReview} data={data} />
           </div>
         )}
 

@@ -3,17 +3,67 @@ import React, { useEffect, useState } from "react";
 import VehicleCard from "./VehicleCard";
 import { useDispatch, useSelector } from "react-redux";
 import { getVehicles } from "../../features/actions/vehicleAction";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 
+const sortBY =[
+  {
+    id:1,
+    value: "price-asc"
+  },
+  {
+    id: 2,
+    value: "price-desc"
+  },
+  {
+    id: 3,
+    value: "rating-asc"
+  },
+  {
+    id: 4,
+    value: "rating-desc"
+  },
+
+]
 const SearchResult = ({ date, returnDate }) => {
   const dispatch = useDispatch();
+  const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
+  const location = useLocation();
+  // const searchParams = new URLSearchParams()
   const { vehicleInfo, isSuccess } = useSelector((state) => state.vehicle);
-  const [currentPage, setCurrentPage] = useState(1);
-
+  const [sortBy, setSortBy] = useState("")
+ 
+const allparams = searchParams.forEach((val,key)=>{
+  console.log('the key and value is', key,val)
+})
+  const handleSelect =async (sortValue) => {
+    setSortBy(sortValue)
+    // searchParams.append("sortBy",sortValue)
+  }  
+ 
+   console.log("-------------sortby", sortBy)
   useEffect(() => {
     // Fetch vehicles based on the current page
-    dispatch(getVehicles(currentPage));
-  }, [dispatch, currentPage]);
+    searchParams.append("sortBy",sortBy)
+    dispatch(getVehicles({sortBy:sortBy}));
+  }, [dispatch, sortBy]);
+  // useEffect(() => {
+  //   const updatedSearchParams = new URLSearchParams(searchParams);
 
+  //   if (sortBy) {
+  //     // Add or update the "sortBy" query parameter
+  //     updatedSearchParams.set("sortBy", sortBy);
+  //   } else {
+  //     // Remove the "sortBy" query parameter if the selection is empty
+  //     updatedSearchParams.delete("sortBy");
+  //   }
+
+  //   // Update the URL only if the parameters have changed
+  //   navigate(`?${updatedSearchParams.toString()}`, { replace: true });
+
+  //   // Fetch vehicles based on the current
+  //   dispatch(getVehicles({ sortBy }));
+  // }, [dispatch, sortBy, navigate, searchParams]);
   // Filter vehicles based on availability and selected date range
   const filteredVehicles = vehicleInfo?.filter((vehicle) => {
     if (!date && !returnDate) {
@@ -28,8 +78,7 @@ const SearchResult = ({ date, returnDate }) => {
     return availableFrom <= selectedEndDate && availableTo >= selectedStartDate;
   });
 
-  // Pagination handler
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+ 
 
   return (
     <div className="px-20 py-10">
@@ -37,11 +86,13 @@ const SearchResult = ({ date, returnDate }) => {
         <h1 className="mt-5">{ !isSuccess ? "No" : filteredVehicles?.length} Results</h1>
         <div className="flex flex-row gap-4 items-center">
           <h1>Sort By</h1>
-          <select className="px-5 py-4 border border-blue-500 rounded-md text-lg font-semibold" defaultValue="vh-lp">
-            <option value="price-lth">Pricing - Low to High</option>
-            <option value="price-htl">Pricing - High to Low</option>
-            <option value="rating-h">Rating - Highest</option>
-            <option value="rating-l">Rating - Lowest</option>
+          <select className="px-5 py-4 border border-blue-500 rounded-md text-lg font-semibold" onChange={(e)=>handleSelect(e.target.value)}>
+          <option value="">Choose a Value</option>
+           {sortBY.map((val)=>(
+            <option value={val.value} key={val.id}>
+              {val.value}
+            </option>
+           ))}
           </select>
         </div>
       </div>
@@ -60,18 +111,7 @@ const SearchResult = ({ date, returnDate }) => {
             </div>
           )}
 
-          <div className="flex justify-center mt-4">
-            {/* Render pagination buttons based on backend pagination data */}
-            {Array.from({ length: vehicleInfo?.pagination?.pages }, (_, i) => (
-              <button
-                key={i + 1}
-                onClick={() => paginate(i + 1)}
-                className={`px-4 py-2 border ${currentPage === i + 1 ? "bg-blue-500 text-white" : ""}`}
-              >
-                {i + 1}
-              </button>
-            ))}
-          </div>
+          
         </>
       )}
     </div>
